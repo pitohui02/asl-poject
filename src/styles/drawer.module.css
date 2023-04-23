@@ -1,0 +1,25 @@
+
+
+.buttonstyle {
+    width: 32vh;
+    background-color: #495057;
+    color: #e9ecef;
+    font-weight: 'bold';
+    align-items: center;
+
+    margin-top: 88vh;
+}
+
+.buttonstyle:hover {
+    background-color: #343a40;
+}
+
+.drawerbox {
+    text-align: center;
+    padding : 20px;    
+}
+
+.drawerdesign {
+    background-color: #bde0fe;
+    height: 100%;
+}
