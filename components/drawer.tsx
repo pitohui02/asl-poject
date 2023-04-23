@@ -12,9 +12,15 @@ class DrawerComponent extends React.Component<any, any> {
 
     }
 
-    handleClick = () => {
+    handleLogOut = () => {
 
         this.props.router.push('/login')
+
+    }
+
+    handleRegister = () => {
+
+        this.props.router.push('/registration')
 
     }
 
@@ -33,13 +39,30 @@ class DrawerComponent extends React.Component<any, any> {
                         <Box  className = {styles.drawerbox}>
 
                         <Typography variant = "h4">BARANGAY 15</Typography>
+                        
+
+                        <Box className = {styles.groupButton}>
+
+                        <Button
+                        variant= "contained" 
+                        type = "submit"
+                        className = {styles.registerButton}
+                        onClick={this.handleRegister}
+                        >
+                            REGISTER A RESIDENT
+
+                        </Button>
 
                         <Button 
                         variant= "contained" 
                         type = "submit"
-                        className = {styles.buttonstyle}
-                        onClick={this.handleClick}> LOG OUT
+                        className = {styles.logoutButton}
+                        onClick={this.handleLogOut}> LOG OUT
                         </Button>
+
+                        </Box>
+
+
 
                         </Box>
 

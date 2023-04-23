@@ -89,5 +89,4 @@ class TableComponent extends Component {
     }
 }
 
-
 export default TableComponent

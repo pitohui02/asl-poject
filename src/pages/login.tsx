@@ -7,9 +7,8 @@ import LockIcon from '@mui/icons-material/Lock'
 
 
 import styles from '../styles/login.module.css'
-import Dashboard from "./dashboard"
 
-import { Router, withRouter } from "next/router"
+import {withRouter } from "next/router"
 
 
 
@@ -64,7 +63,7 @@ class LoginPage extends React.Component<any, any >{
             <>
                     <Box className = {styles.centerscreen}>
 
-                        <Paper className = {styles.paperdesign} elevation={5}>
+                        <Paper className = {styles.paperdesign} elevation={12}>
                             
                             <Box className = {styles.mainbox}>
 
