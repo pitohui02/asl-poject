@@ -3,7 +3,20 @@ import { Drawer, Box, Typography, Paper, Button } from "@mui/material"
 
 import styles from '../src/styles/drawer.module.css'
 
-export default class DrawerComponent extends React.Component {
+import { withRouter } from "next/router"
+
+class DrawerComponent extends React.Component<any, any> {
+
+    constructor(props: any) {
+        super(props)
+
+    }
+
+    handleClick = () => {
+
+        this.props.router.push('/login')
+
+    }
 
     render() {
 
@@ -19,12 +32,13 @@ export default class DrawerComponent extends React.Component {
 
                         <Box  className = {styles.drawerbox}>
 
-                        <Typography variant = "h4">BARANGGAY 15</Typography>
+                        <Typography variant = "h4">BARANGAY 15</Typography>
 
                         <Button 
                         variant= "contained" 
                         type = "submit"
-                        className = {styles.buttonstyle}> LOG OUT
+                        className = {styles.buttonstyle}
+                        onClick={this.handleClick}> LOG OUT
                         </Button>
 
                         </Box>
@@ -42,3 +56,5 @@ export default class DrawerComponent extends React.Component {
         )
     }
 }
+
+export default withRouter(DrawerComponent)

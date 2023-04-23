@@ -9,18 +9,13 @@ import LockIcon from '@mui/icons-material/Lock'
 import styles from '../styles/login.module.css'
 import Dashboard from "./dashboard"
 
-import { NextRouter, withRouter } from "next/router"
-
-interface routerProps {
-
-    router: NextRouter
-
-}
+import { Router, withRouter } from "next/router"
 
 
-class LoginPage extends React.Component<any, any, routerProps>{
 
-    constructor(props: routerProps) {
+class LoginPage extends React.Component<any, any >{
+
+    constructor(props: any) {
         super(props);
 
         this.state = {
@@ -30,7 +25,6 @@ class LoginPage extends React.Component<any, any, routerProps>{
 
             userCreds: new Map([['admin', '1234']]),
 
-            isLoggedIn: false
         }
     }
 
@@ -40,7 +34,7 @@ class LoginPage extends React.Component<any, any, routerProps>{
 
         if(userCreds.get(username) ===  password) {
 
-            this.setState({isLoggedIn: true})
+            return this.props.router.push('/dashboard')
   
         }
 
@@ -62,14 +56,7 @@ class LoginPage extends React.Component<any, any, routerProps>{
 
     render() {
 
-        const { isLoggedIn } = this.state
-
-
-            if(isLoggedIn){     
-
-                return this.props.router.push('/dashboard') 
-
-            }
+        
         
 
         return(
@@ -95,7 +82,7 @@ class LoginPage extends React.Component<any, any, routerProps>{
                                     
                                     <Box>
 
-                                        <Typography variant = "h4" className = {styles.titledesign}>BARANGGAY 15</Typography>
+                                        <Typography variant = "h4" className = {styles.titledesign}>BARANGAY 15</Typography>
                                         <Typography variant = "h6" className = {styles.subdesign}>Certificate Issuance System</Typography>
 
                                     </Box>
