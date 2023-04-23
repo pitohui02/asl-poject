@@ -1,0 +1,9 @@
+.dashboardDesign {
+
+    display: flex;
+    flex-direction: row;
+
+    row-gap: 50px;
+
+
+}

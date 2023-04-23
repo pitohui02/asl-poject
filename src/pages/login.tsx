@@ -1,5 +1,5 @@
 import React from "react"
-import { Typography, Box, Paper, TextField, Button } from "@mui/material"
+import { Typography, Box, Paper, TextField, Button, Divider } from "@mui/material"
 import Image from "next/image"
 
 import PersonIcon from '@mui/icons-material/Person'
@@ -83,7 +83,11 @@ class LoginPage extends React.Component<any, any >{
                                     <Box>
 
                                         <Typography variant = "h4" className = {styles.titledesign}>BARANGAY 15</Typography>
+                                        
+                                        <Divider variant = "middle"/>
+                                        
                                         <Typography variant = "h6" className = {styles.subdesign}>Certificate Issuance System</Typography>
+
 
                                     </Box>
 
