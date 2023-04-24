@@ -1,9 +1,21 @@
 .tabledesign {
 
     height: 85vh;
-    width: 100vh;
-    margin-left: 50vh;
+    width: 140vh;
+    
     margin-top: 5vh;
+    margin-left: 390px;
 
+}
 
+.tableheadDesign {
+
+    font-weight: bold;
+
+}
+
+.avatarDesign {
+
+    height: 75px;
+    width: 75px;
 }

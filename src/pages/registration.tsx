@@ -1,14 +1,37 @@
 import React from "react"
 
-import { Box, Typography } from "@mui/material"
-
+import { Box, Typography, Paper } from "@mui/material"
+import styles from '../styles/registration.module.css'
 
 class Registration extends React.Component {
 
     render() {
 
         return(
-            <Typography variant = "h6">Registration</Typography>
+            
+            <>
+            
+                <Box>
+
+                <Paper>
+
+                    <Box className = {styles.gridParent}>
+
+                        <Box></Box>
+
+                        <Box></Box>
+
+                        <Box></Box>
+
+
+                    </Box>
+
+                </Paper>
+
+            </Box>
+            
+            
+            </>
         )
     }
 }

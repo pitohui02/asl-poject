@@ -8,7 +8,7 @@ import LockIcon from '@mui/icons-material/Lock'
 
 import styles from '../styles/login.module.css'
 
-import {withRouter } from "next/router"
+import { withRouter } from "next/router"
 
 
 
@@ -69,10 +69,11 @@ class LoginPage extends React.Component<any, any >{
 
                                 <Box className = {styles.gridchild1}>
                                     <Image 
-                                    src = "/placeholder.svg"
+                                    src = "/barangay_logo.png"
                                     alt = "placeholder"
-                                    width = {500}
-                                    height = {500}
+                                    width = {250}
+                                    height = {250}
+                                    className = {styles.imageDesign}
                                     />
                                 </Box>
 

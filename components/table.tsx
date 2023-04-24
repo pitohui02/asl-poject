@@ -1,5 +1,5 @@
 
-import { Table, TableHead, TableBody, TableCell, TableContainer, Paper, TableRow  } from "@mui/material"
+import { Table, TableHead, TableBody, TableCell, TableContainer, Paper, TableRow, Avatar  } from "@mui/material"
 
 
 import tableData from '../record-demo/recordData.json'
@@ -11,19 +11,7 @@ import styles from '../src/styles/table.module.css'
 class TableComponent extends Component {
     render() {
 
-        const thDesign = {
-            fontWeight: 'bold'
-        }
 
-        const trDesign = {
-            width: '150%',
-            maxHeight: '700px'
-        }
-
-        const photoDesign = {
-            width: '50px',
-            height: '50px'
-        }
 
 
         return (
@@ -36,15 +24,16 @@ class TableComponent extends Component {
                         
                         <TableRow>
 
-                            <TableCell sx = {thDesign}>ID</TableCell>
-                            <TableCell sx = {thDesign}>First Name</TableCell>
-                            <TableCell sx = {thDesign}>Middle Name</TableCell>
-                            <TableCell sx = {thDesign}>Last Name</TableCell>
-                            <TableCell sx = {thDesign}>Marital Status</TableCell>
-                            <TableCell sx = {thDesign}>Home Address</TableCell>
-                            <TableCell sx = {thDesign}>Telephone Number</TableCell>
-                            <TableCell sx = {thDesign}>Mobile Number</TableCell>
-                            <TableCell sx = {thDesign}>Birth Date</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>ID</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Photo ID</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>First Name</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Middle Name</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Last Name</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Marital Status</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Home Address</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Telephone Number</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Mobile Number</TableCell>
+                            <TableCell className = {styles.tableheadDesign}>Birth Date</TableCell>
 
                         </TableRow>
 
@@ -58,6 +47,7 @@ class TableComponent extends Component {
                             <TableRow key ={row.id}>
 
                                 <TableCell>{row.id}</TableCell>
+                                <TableCell><Avatar variant = "square" src = {row.profilePhoto!} className = {styles.avatarDesign}/></TableCell>
                                 <TableCell>{row.firstName}</TableCell>
                                 <TableCell>{row.middleName}</TableCell>
                                 <TableCell>{row.lastName}</TableCell>
@@ -75,13 +65,7 @@ class TableComponent extends Component {
                     
                     </TableBody>
 
-
-
-
-
-
-                </Table>
-                
+                </Table>              
 
             </TableContainer>
 
