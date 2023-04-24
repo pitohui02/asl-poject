@@ -1,0 +1,37 @@
+.centerscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+
+
+.gridParent {
+
+    display: grid;
+}
+
+
+.gridChild1 {
+
+}
+
+.gridChild-2 {
+
+
+}
+
+.gridChild-3 {
+
+
+}
+
+
+.dropdownDesign {
+
+    width: 150px;
+
+}

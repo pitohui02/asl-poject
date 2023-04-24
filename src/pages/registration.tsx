@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Box, Typography, Paper } from "@mui/material"
+import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem } from "@mui/material"
 import styles from '../styles/registration.module.css'
 
 class Registration extends React.Component {
@@ -11,17 +11,40 @@ class Registration extends React.Component {
             
             <>
             
-                <Box>
+                <Box className = {styles.centerscreen}>
 
                 <Paper>
 
                     <Box className = {styles.gridParent}>
 
-                        <Box></Box>
+                        <Box className = {styles.gridChild1}>
 
-                        <Box></Box>
+                            <TextField  required variant="outlined" label = "First Name" />
 
-                        <Box></Box>
+                            <TextField  required variant="outlined" label = "Middle Name" />
+
+                            <TextField  required variant="outlined" label = "Last Name" />
+
+                        </Box>
+
+                        <Box>
+                            
+                            <InputLabel>Age</InputLabel>
+
+                            <Select label = "Gender" className = {styles.dropdownDesign}>
+
+                                <MenuItem>Male</MenuItem>
+                                <MenuItem>Female</MenuItem>
+                                <MenuItem>Others</MenuItem>
+
+                            </Select>
+
+
+                        </Box>
+
+                        <Box>
+
+                        </Box>
 
 
                     </Box>
