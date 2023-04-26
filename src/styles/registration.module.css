@@ -5,33 +5,83 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
-  }
+}
 
+
+.paperdesign {
+
+    height: 500px;
+
+}
 
 
 .gridParent {
 
+    padding: 40px;
+
+    height: 250px;
+    width: 70em;
+
     display: grid;
+    grid-template-rows: 80px;
 }
 
+
+
+
+.titleDesign {
+
+    font-weight: bold;
+}
+
+.gridTitle {
+    margin-bottom: -10px;
+}
 
 .gridChild1 {
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+
+.gridChild1_TextField {
+    width: 300px;
+}
+
+.gridChild2 {
+
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    justify-content: center;
 
 }
 
-.gridChild-2 {
+.gridChild3_Numberfields {
 
+    width: 250px;
+
+}
+
+.gridChild3 {
+
+    
 
 }
 
-.gridChild-3 {
 
+.gridChild3_address {
 
+    width: 500px;
 }
+
 
 
 .dropdownDesign {
 
-    width: 150px;
+    width: 200px;
 
 }

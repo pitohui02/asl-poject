@@ -1,7 +1,14 @@
 :root {
 
-  --red-color: #f4acb7;
-  --blue-color: #90e0ef;
+  /* Shadess of Red */
+
+  --red-shade-1: #CC444B;
+  --red-shade-2: #DA5552;
+  --red-shade-3: #DF7373;
+  --red-shade-4: #E39695;
+  --red-shade-5: #E4B1AB;
+  
+  /* Shades of Blue */
 
 }
 
@@ -9,5 +16,5 @@
 
 
 body {
-  background-color: var(--red-color);
+  background-color: var(--red-shade-1);
 }

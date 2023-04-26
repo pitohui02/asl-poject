@@ -38,7 +38,7 @@ class DrawerComponent extends React.Component<any, any> {
 
                         <Box  className = {styles.drawerbox}>
 
-                        <Typography variant = "h4">BARANGAY 15</Typography>
+                        <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
                         
 
                         <Box className = {styles.groupButton}>

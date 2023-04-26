@@ -1,9 +1,5 @@
 
 
-
-
-
-
 .centerscreen {
     display: flex;
     flex-direction: column;
@@ -26,7 +22,7 @@
 
 .gridchild1 {
     grid-area: left-side;
-    background-color: #bde0fe;
+    background-color: var(--red-shade-5);
 }
 
 .gridchild2 {

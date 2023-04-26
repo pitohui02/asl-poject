@@ -1,13 +1,20 @@
 
 
 .logoutButton {
-    width: 32vh;
+    width: 24vh;
     background-color: #495057;
     color: #e9ecef;
     font-weight: 'bold';
     align-items: center;
 
 }
+
+.drawerTitle {
+
+    font-weight: bold;
+
+}
+
 
 .logoutButton:hover {
     background-color: #343a40;
@@ -16,7 +23,7 @@
 
 .registerButton {
 
-    width: 32vh;
+    width: 24vh;
     background-color: #495057;
     color: #e9ecef;
     font-weight: 'bold';
