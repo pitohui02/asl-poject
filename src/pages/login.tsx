@@ -5,7 +5,6 @@ import Image from "next/image"
 import PersonIcon from '@mui/icons-material/Person'
 import LockIcon from '@mui/icons-material/Lock'
 
-
 import styles from '../styles/login.module.css'
 
 import { withRouter } from "next/router"
@@ -99,6 +98,7 @@ class LoginPage extends React.Component<any, any >{
                                             label="Username" 
                                             variant="outlined"
                                             onChange={this.handleUsernameData}
+                                            size="small"
                                         />
 
                                     </Box>
@@ -113,6 +113,7 @@ class LoginPage extends React.Component<any, any >{
                                             variant="outlined" 
                                             type="password" 
                                             onChange={this.handlePasswordData}
+                                            size = "small"
                                         /> 
                                         
                                     </Box>

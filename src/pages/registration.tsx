@@ -3,6 +3,11 @@ import React from "react"
 import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider } from "@mui/material"
 import styles from '../styles/registration.module.css'
 
+import { DateField } from "@mui/x-date-pickers"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
 class Registration extends React.Component<any, any>{
 
     constructor(props: any){
@@ -45,11 +50,9 @@ class Registration extends React.Component<any, any>{
 
                         <Box className = {styles.gridTitle}>
 
-                            <Typography variant = "h4" className = {styles.titleDesign}>Registration Page</Typography>
+                            <Typography variant = "h4" className = {styles.titleDesign}>REGISTRATION PAGE</Typography>
 
                         </Box>
-
-                        
 
                         <Box className = {styles.gridChild1}>
 
@@ -97,13 +100,14 @@ class Registration extends React.Component<any, any>{
                                         <MenuItem value = "Widowed">Widowed</MenuItem>
                                         <MenuItem value = "Annulled">Annulled</MenuItem>
 
-
                                     </Select>
 
                                 </FormControl>
 
                             </Box>
 
+                                
+                                
                             <Box>
 
                             <TextField variant="outlined" label = "Contact Number" size = "small" className = {styles.gridChild3_Numberfields}/>
@@ -122,13 +126,35 @@ class Registration extends React.Component<any, any>{
 
                         <Box className = {styles.gridChild3}>
 
-                            <Box><TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/></Box>
-
                             <Box>
+                                
+                                <TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/>
 
                             </Box>
 
-                            
+                            <Box>
+
+                                <FormControl>
+
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                    <DateField label = "Birth Date" size="small" />
+
+                                    </LocalizationProvider>
+
+                                </FormControl>
+
+                            </Box>
+
+                            <Box>
+
+                                <TextField variant="outlined" label = "Guardian" size = "small"/>
+
+                            </Box>
+
+                            <Box>
+                                
+                            </Box>
 
                         </Box>
 

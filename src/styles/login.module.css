@@ -6,7 +6,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
+    min-height: 99vh;
+
+    border-radius: 24px;    
   }
 
 .mainbox {
@@ -22,7 +24,6 @@
 
 .gridchild1 {
     grid-area: left-side;
-    background-color: var(--red-shade-5);
 }
 
 .gridchild2 {
@@ -37,7 +38,7 @@
     font-weight: bold;
 
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 10px;    
 }
 
 .subdesign {
@@ -49,18 +50,17 @@
     
     height: 500px;
     width: 100vh;
-    
-    border-radius: 10px;
+
+        
     
 } 
 
 
 .iconstyle {
-    font-size: 40px;
+    font-size: 35px;
     margin-right: 10px;
     text-align: center;
 
-    margin-top: 10px;
 }
 
 .fieldDesign {
