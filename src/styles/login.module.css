@@ -23,6 +23,7 @@
 }
 
 .gridchild1 {
+    background-color: var(--blue-shade-4);
     grid-area: left-side;
 }
 
