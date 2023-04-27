@@ -19,14 +19,12 @@
 
     padding: 40px;
 
-    height: 250px;
+    height: 350px;
     width: 70em;
 
     display: grid;
     grid-template-rows: 80px;
 }
-
-
 
 
 .titleDesign {
@@ -68,16 +66,42 @@
 
 .gridChild3 {
 
-    
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    justify-content: center;
+
 
 }
 
 
 .gridChild3_address {
 
-    width: 500px;
+    width: 470px;
 }
 
+.gridChild4 {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    justify-content: center;
+}
+
+.gridChil4_buttonStyle {
+    width: 24vh;
+    height: 40px;
+
+    background-color: #495057;
+    color: #e9ecef;
+    font-weight: 'bold';
+    align-items: center;
+}
+
+.gridChil4_buttonStyle:hover {
+
+    background-color: #343a40;
+    
+}
 
 
 .dropdownDesign {

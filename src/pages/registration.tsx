@@ -1,6 +1,11 @@
 import React from "react"
 
-import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider } from "@mui/material"
+import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider, Button } from "@mui/material"
+
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
 import styles from '../styles/registration.module.css'
 
 class Registration extends React.Component<any, any>{
@@ -45,7 +50,7 @@ class Registration extends React.Component<any, any>{
 
                         <Box className = {styles.gridTitle}>
 
-                            <Typography variant = "h4" className = {styles.titleDesign}>Registration Page</Typography>
+                            <Typography variant = "h4" className = {styles.titleDesign}>REGISTRATION PAGE</Typography>
 
                         </Box>
 
@@ -112,7 +117,7 @@ class Registration extends React.Component<any, any>{
 
                             <Box>
 
-                            <TextField variant="outlined" label = "Telepohne Number" size = "small" className = {styles.gridChild3_Numberfields}/>
+                            <TextField variant="outlined" label = "Telephone Number" size = "small" className = {styles.gridChild3_Numberfields}/>
 
                             </Box>
 
@@ -122,13 +127,39 @@ class Registration extends React.Component<any, any>{
 
                         <Box className = {styles.gridChild3}>
 
-                            <Box><TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/></Box>
-
                             <Box>
+                                
+                                <TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/>
 
                             </Box>
 
+                            <Box>
+
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                    <DateField label = "Birth Date"  size = "small" />
+
+                                </LocalizationProvider>
+
+                            </Box>
+
+                            <Box>
+
+                            <TextField  variant="outlined" label = "Guardian (Optional)" size = "small"/>                                
+                                
+                            </Box>
+
                             
+                        </Box>
+
+                        <Box className = {styles.gridChild4}>
+
+                        <Button 
+                        variant= "contained" 
+                        type = "submit"
+                        className= {styles.gridChil4_buttonStyle}
+                        > REGISTER A RESIDENT
+                        </Button>
 
                         </Box>
 
