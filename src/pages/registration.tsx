@@ -5,8 +5,9 @@ import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormCo
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-
 import styles from '../styles/registration.module.css'
+
+
 
 class Registration extends React.Component<any, any>{
 
@@ -54,8 +55,6 @@ class Registration extends React.Component<any, any>{
 
                         </Box>
 
-                        
-
                         <Box className = {styles.gridChild1}>
 
                             <TextField  required variant="outlined" label = "First Name" size = "small" className = {styles.gridChild1_TextField}/>
@@ -102,13 +101,14 @@ class Registration extends React.Component<any, any>{
                                         <MenuItem value = "Widowed">Widowed</MenuItem>
                                         <MenuItem value = "Annulled">Annulled</MenuItem>
 
-
                                     </Select>
 
                                 </FormControl>
 
                             </Box>
 
+                                
+                                
                             <Box>
 
                             <TextField variant="outlined" label = "Contact Number" size = "small" className = {styles.gridChild3_Numberfields}/>
@@ -129,6 +129,8 @@ class Registration extends React.Component<any, any>{
 
                             <Box>
                                 
+                                
+                                
                                 <TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/>
 
                             </Box>
@@ -141,11 +143,31 @@ class Registration extends React.Component<any, any>{
 
                                 </LocalizationProvider>
 
+                            
+
                             </Box>
 
                             <Box>
 
-                            <TextField  variant="outlined" label = "Guardian (Optional)" size = "small"/>                                
+                                <FormControl>
+
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                    <DateField label = "Birth Date" size="small" />
+
+                                    </LocalizationProvider>
+
+                                </FormControl>
+
+                            </Box>
+
+                            <Box>
+
+                                <TextField variant="outlined" label = "Guardian" size = "small"/>
+
+                            </Box>
+
+                            <Box>
                                 
                             </Box>
 

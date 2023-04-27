@@ -14,7 +14,6 @@
 
 }
 
-
 .gridParent {
 
     padding: 40px;
@@ -25,7 +24,6 @@
     display: grid;
     grid-template-rows: 80px;
 }
-
 
 .titleDesign {
 
@@ -58,26 +56,27 @@
 
 }
 
-.gridChild3_Numberfields {
-
-    width: 250px;
-
-}
 
 .gridChild3 {
 
     display: flex;
     flex-direction: row;
     column-gap: 20px;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 80px;
 
+}
+
+.gridChild3_Numberfields {
+
+    width: 250px;
 
 }
 
 
 .gridChild3_address {
 
-    width: 470px;
+    width: 475px;
 }
 
 .gridChild4 {
