@@ -1,11 +1,12 @@
 import React from "react"
 
-import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider } from "@mui/material"
+import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider, Button } from "@mui/material"
+
+import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import styles from '../styles/registration.module.css'
 
-import { DateField } from "@mui/x-date-pickers"
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 class Registration extends React.Component<any, any>{
@@ -116,7 +117,7 @@ class Registration extends React.Component<any, any>{
 
                             <Box>
 
-                            <TextField variant="outlined" label = "Telepohne Number" size = "small" className = {styles.gridChild3_Numberfields}/>
+                            <TextField variant="outlined" label = "Telephone Number" size = "small" className = {styles.gridChild3_Numberfields}/>
 
                             </Box>
 
@@ -128,7 +129,21 @@ class Registration extends React.Component<any, any>{
 
                             <Box>
                                 
+                                
+                                
                                 <TextField  required variant="outlined" label = "Home Address" size = "small" className = {styles.gridChild3_address}/>
+
+                            </Box>
+
+                            <Box>
+
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                                    <DateField label = "Birth Date"  size = "small" />
+
+                                </LocalizationProvider>
+
+                            
 
                             </Box>
 
@@ -155,6 +170,18 @@ class Registration extends React.Component<any, any>{
                             <Box>
                                 
                             </Box>
+
+                            
+                        </Box>
+
+                        <Box className = {styles.gridChild4}>
+
+                        <Button 
+                        variant= "contained" 
+                        type = "submit"
+                        className= {styles.gridChil4_buttonStyle}
+                        > REGISTER A RESIDENT
+                        </Button>
 
                         </Box>
 

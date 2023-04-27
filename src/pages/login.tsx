@@ -9,7 +9,6 @@ import styles from '../styles/login.module.css'
 
 import { withRouter } from "next/router"
 
-
 class LoginPage extends React.Component<any, any >{
 
     constructor(props: any) {
@@ -132,14 +131,9 @@ class LoginPage extends React.Component<any, any >{
                                 </Box>
 
 
-
                             </Box>
-
-                            
+  
                         </Paper>
-
-
-
 
                     </Box>
                     
