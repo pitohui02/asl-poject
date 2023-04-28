@@ -38,31 +38,29 @@ class DrawerComponent extends React.Component<any, any> {
 
                         <Box  className = {styles.drawerbox}>
 
-                        <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
-                        
+                            <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
+                            
 
-                        <Box className = {styles.groupButton}>
+                            <Box className = {styles.groupButton}>
 
-                        <Button
-                        variant= "contained" 
-                        type = "submit"
-                        className = {styles.registerButton}
-                        onClick={this.handleRegister}
-                        >
-                            REGISTER A RESIDENT
+                            <Button
+                            variant= "contained" 
+                            type = "submit"
+                            className = {styles.registerButton}
+                            onClick={this.handleRegister}
+                            >
+                                REGISTER A RESIDENT
 
-                        </Button>
+                            </Button>
 
-                        <Button 
-                        variant= "contained" 
-                        type = "submit"
-                        className = {styles.logoutButton}
-                        onClick={this.handleLogOut}> LOG OUT
-                        </Button>
+                            <Button 
+                            variant= "contained" 
+                            type = "submit"
+                            className = {styles.logoutButton}
+                            onClick={this.handleLogOut}> LOG OUT
+                            </Button>
 
-                        </Box>
-
-
+                            </Box>
 
                         </Box>
 

@@ -1,5 +1,5 @@
 
-import { Table, TableHead, TableBody, TableCell, TableContainer, Paper, TableRow, Avatar  } from "@mui/material"
+import { Table, TableHead, TableBody, TableCell, TableContainer, Paper, TableRow, Avatar, Box, FormControl, TextField, Button  } from "@mui/material"
 
 
 import tableData from '../record-demo/recordData.json'
@@ -16,7 +16,9 @@ class TableComponent extends Component {
 
         return (
 
-            <TableContainer component = {Paper} className = {styles.tabledesign}>
+            <Box>
+
+                <TableContainer component = {Paper} className = {styles.tabledesign}>
 
                 <Table aria-label='sample table' stickyHeader>
 
@@ -68,6 +70,8 @@ class TableComponent extends Component {
                 </Table>              
 
             </TableContainer>
+
+            </Box>
 
         )
     }
