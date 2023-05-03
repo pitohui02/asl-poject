@@ -1,17 +1,49 @@
 
 
+.drawerTitle {
+
+    font-weight: bold;
+
+}
+
+
+.drawerdesign {
+
+    background-color: #2C74B3;
+
+}
+
+.drawerbox {
+    text-align: center;
+    padding : 20px;
+  
+}
+
+
+
+
+/* Buttons */
+
+
+
+
+.groupButton {
+
+    display: grid;
+    row-gap: 20px;
+    
+}
+
+
+
 .logoutButton {
     width: 24vh;
-    background-color: #495057;
+    background-color: #393E46;
     color: #e9ecef;
     font-weight: 'bold';
     align-items: center;
 
-}
-
-.drawerTitle {
-
-    font-weight: bold;
+   margin-top: 75vh;
 
 }
 
@@ -24,7 +56,7 @@
 .registerButton {
 
     width: 24vh;
-    background-color: #495057;
+    background-color: #393E46;
     color: #e9ecef;
     font-weight: 'bold';
     align-items: center;
@@ -36,19 +68,23 @@
     background-color: #343a40;
 }
 
-.groupButton {
 
-    display: grid;
-    row-gap: 82vh;
+.printButton {
+
+    width: 24vh;
+    background-color: #393E46;
+    color: #e9ecef;
+    font-weight: 'bold';
+    align-items: center;
+
+}
+
+.printButton:hover {
+
+    background-color: #343a40;
+
 }
 
 
-.drawerbox {
-    text-align: center;
-    padding : 20px;    
-}
 
-.drawerdesign {
-    background-color: #bde0fe;
-    height: 100%;
-}
+

@@ -28,20 +28,16 @@ class DrawerComponent extends React.Component<any, any> {
 
         return (
 
-
-
-            <Box>
+            <Box >
                     
-                <Drawer anchor = "left" variant = "permanent" >
+                <Drawer anchor = "left" variant = "permanent">
+                        
+                    <Box className = {styles.drawerbox}>
 
-                    <Paper className = {styles.drawerdesign}>
-
-                        <Box  className = {styles.drawerbox}>
-
-                            <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
+                        <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
                             
 
-                            <Box className = {styles.groupButton}>
+                        <Box className = {styles.groupButton}>
 
                             <Button
                             variant= "contained" 
@@ -53,6 +49,16 @@ class DrawerComponent extends React.Component<any, any> {
 
                             </Button>
 
+
+                            <Button
+                            variant= "contained" 
+                            type = "submit"
+                            className = {styles.printButton}
+                            >
+                                PRINT CERTIFICATE
+
+                            </Button>
+
                             <Button 
                             variant= "contained" 
                             type = "submit"
@@ -60,13 +66,13 @@ class DrawerComponent extends React.Component<any, any> {
                             onClick={this.handleLogOut}> LOG OUT
                             </Button>
 
-                            </Box>
-
                         </Box>
-
-                    </Paper>
-
+    
+                    </Box>  
+                    
                 </Drawer>
+
+      
                 
             </Box>
 

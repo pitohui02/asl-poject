@@ -1,10 +1,21 @@
+
+.mainbox {
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+
+}
+
 .tabledesign {
 
-    height: 85vh;
+    height: 95vh;
     width: 140vh;
     
-    margin-top: 5vh;
     margin-left: 340px;
+    margin-top: 20px;
+
+    justify-content: center;
 
 }
 
@@ -18,4 +29,36 @@
 
     height: 75px;
     width: 75px;
+}
+
+.searchbox {
+
+    display: flex;
+    justify-content: center;
+    
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    
+}
+
+.searchbar {
+
+    width: 110vh;
+    
+}
+
+.searchicon {
+
+    font-size: 30px;
+    margin-right: 5px;
+    margin-top: 10px;
+
+
+}
+
+
+.actionbuttons {
+
+    font-size: 20px;
 }
