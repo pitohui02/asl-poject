@@ -7,7 +7,10 @@ import LockIcon from '@mui/icons-material/Lock'
 
 import styles from '../styles/login.module.css'
 
+import axios from 'axios';
+
 import { withRouter } from "next/router"
+
 
 class LoginPage extends React.Component<any, any >{
 
@@ -19,26 +22,32 @@ class LoginPage extends React.Component<any, any >{
             username: '',
             password: '',
 
-            userCreds: new Map([['admin', '1234']]),
+            userCreds: new Map([['TestUser', 'MyVeryOwnTestPassword123$']]),
 
         }
     }
 
     handleLogin = () => {
+        const { username, password } = this.state;
 
-        const { username, password, userCreds } = this.state
-
-        if(userCreds.get(username) ===  password) {
-
-            return this.props.router.push('/dashboard')
-  
-        }
-
-        else {
-            
-            alert('Invalid username or password')
-        }
-
+        axios.post(`${process.env.apiUrl}/account/login`, { username, password }).then(res => {
+            localStorage.setItem("jwt", `Bearer ${res.data}`);
+            axios.interceptors.request.use(
+                config => {
+                //   const {origin} = new URL(config.url);
+                  const allowedOrigins = [process.env.apiUrl];
+          
+                  if (allowedOrigins.includes(origin)) {
+                    config.headers["Authorization"] = `Bearer ${res.data}`
+                  }
+                  return config;
+                },
+                error => {
+                  return Promise.reject(error);
+                }
+              );
+            this.props.router.push('/dashboard')
+        }).catch(e => console.log(e));
     }
 
     handleUsernameData = (event: any) => {
@@ -51,15 +60,9 @@ class LoginPage extends React.Component<any, any >{
 
 
     render() {
-
-        
-        
-
         return(
-
             <>
                     <Box className = {styles.centerscreen}>
-
                         <Paper className = {styles.paperdesign} elevation={12}>
                             
                             <Box className = {styles.mainbox}>

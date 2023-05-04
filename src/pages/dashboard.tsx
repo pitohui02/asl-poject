@@ -6,6 +6,7 @@ import DrawerComponent from '../../components/drawer'
 import TableComponent from "../../components/table"
 
 import styles from '../styles/dashboard.module.css'
+import ResidentContainer from "../../functions/ResidentContainer"
 
 export default class Dashboard extends React.Component {
 
@@ -17,7 +18,8 @@ export default class Dashboard extends React.Component {
                 <Box className = {styles.dashboardDesign}>
 
 
-                    <TableComponent />
+                    {/* <TableComponent /> */}
+                    <ResidentContainer/>
 
                     <DrawerComponent />
 
