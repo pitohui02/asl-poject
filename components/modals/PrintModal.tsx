@@ -24,7 +24,7 @@ export default function CreateModal() {
 
   return (
     <div>
-      <Button className={styles.registerButton} onClick={handleOpen}>
+      <Button className={styles.registerButton} onClick={handleOpen} variant="contained">
         PRINT CERTIFICATE
       </Button>
       <Modal

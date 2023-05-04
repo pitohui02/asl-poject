@@ -24,7 +24,7 @@ export default function CreateModal() {
   return (
     <div>
       <Button className={styles.registerButton} onClick={handleOpen}>
-        REGISTER A RECORD
+        REGISTER
       </Button>
       <Modal
         open={open}

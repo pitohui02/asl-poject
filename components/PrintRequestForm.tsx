@@ -81,7 +81,7 @@ function PrintRequestForm() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Button onClick={handleSubmit}>Get Certificate </Button>
+          <Button onClick={handleSubmit} variant="contained">Get Certificate </Button>
         </a>
       </a>
     </Box>
