@@ -11,6 +11,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    apiUrl: "https://localhost:7132"
+  },
   reactStrictMode: true,
 }
 
