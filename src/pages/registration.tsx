@@ -3,9 +3,10 @@ import React from "react"
 import { Box, Typography, Paper, TextField, Select, InputLabel, MenuItem, FormControl, Divider, Button } from "@mui/material"
 
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import styles from '../styles/registration.module.css'
+
 
 
 
