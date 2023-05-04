@@ -34,7 +34,6 @@ class LoginPage extends React.Component<any, any >{
             localStorage.setItem("jwt", `Bearer ${res.data}`);
             axios.interceptors.request.use(
                 config => {
-                //   const {origin} = new URL(config.url);
                   const allowedOrigins = [process.env.apiUrl];
           
                   if (allowedOrigins.includes(origin)) {
