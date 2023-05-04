@@ -5,12 +5,34 @@ import styles from '../src/styles/drawer.module.css'
 
 import { withRouter } from "next/router"
 
+import RegistrationModal from '../components/registration'
+
 class DrawerComponent extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props)
+        this.state = {
+
+            open: false
+        }
 
     }
+
+
+    dialogOpen  = () => {
+
+        this.setState({open: true})
+
+    }
+
+    dialogClose = () => {
+
+        this.setState({open: true})
+
+    }   
+
+
+    
 
     handleLogOut = () => {
 
@@ -18,11 +40,7 @@ class DrawerComponent extends React.Component<any, any> {
 
     }
 
-    handleRegister = () => {
 
-        this.props.router.push('/registration')
-
-    }
 
     render() {
 
@@ -39,15 +57,26 @@ class DrawerComponent extends React.Component<any, any> {
 
                         <Box className = {styles.groupButton}>
 
-                            <Button
-                            variant= "contained" 
-                            type = "submit"
-                            className = {styles.registerButton}
-                            onClick={this.handleRegister}
-                            >
-                                REGISTER A RESIDENT
+                            <Box>
 
-                            </Button>
+                                <Button
+                                variant= "contained" 
+                                type = "submit"
+                                className = {styles.registerButton}
+                                onClick={this.dialogOpen}
+                                >
+                                    REGISTER A RESIDENT
+
+                                </Button>
+
+                                <RegistrationModal 
+                                open = {this.state.open}
+                                onClose = {this.dialogClose}
+                                
+                                />
+
+                            </Box>
+
 
 
                             <Button
@@ -66,6 +95,7 @@ class DrawerComponent extends React.Component<any, any> {
                             onClick={this.handleLogOut}> LOG OUT
                             </Button>
 
+                            
                         </Box>
     
                     </Box>  
