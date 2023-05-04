@@ -20,11 +20,7 @@
 }
 
 
-
-
 /* Buttons */
-
-
 
 
 .groupButton {
@@ -33,8 +29,6 @@
     row-gap: 20px;
     
 }
-
-
 
 .logoutButton {
     width: 24vh;
@@ -46,7 +40,6 @@
    margin-top: 70vh;
 
 }
-
 
 .logoutButton:hover {
     background-color: #343a40;

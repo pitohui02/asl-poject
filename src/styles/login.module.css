@@ -23,8 +23,32 @@
 }
 
 .gridchild1 {
-    background-color: var(--blue-shade-4);
+    background-color: var(--primary-blue-color);
     grid-area: left-side;
+}
+
+.titletext {
+
+    margin-top: 10px;
+}
+
+.subtext, .titletext {
+    color: var(--text-color);
+}
+
+.titledesign {
+
+    font-weight: bold;
+
+    font-size: 50px;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+    
+}
+
+.titledesign, .titletext, .subtext {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .gridchild2 {
@@ -34,18 +58,6 @@
 
 }
 
-.titledesign {
-
-    font-weight: bold;
-
-    margin-top: 30px;
-    margin-bottom: 10px;    
-}
-
-.subdesign {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
 
 .paperdesign {
     
@@ -62,6 +74,7 @@
 }
 
 .fieldDesign {
+    margin-top: 90px;
     margin-bottom: 25px;
 }
 
