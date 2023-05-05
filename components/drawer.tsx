@@ -8,14 +8,9 @@ import EditModal from './modals/EditModal';
 import CreateModal from './modals/CreateModal';
 import PrintModal from './modals/PrintModal';
 
-import RegistrationModal from '../components/registration'
-
 class DrawerComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-      this.state = {
-        open: false
-      }
   }
 
   handleLogOut = () => {
@@ -23,80 +18,34 @@ class DrawerComponent extends React.Component<any, any> {
     this.props.router.push('/login');
   };
 
-    dialogOpen  = () => {
+  render() {
+    return (
+      <Box>
+        <Drawer anchor="left" variant="permanent">
+          <Box className={styles.drawerbox}>
+            <Typography variant="h5" className={styles.drawerTitle}>
+              BARANGAY 15
+            </Typography>
 
-        this.setState({open: true})
+            <Box className={styles.groupButton}>
+              <CreateModal />
 
-    }
+              <PrintModal />
 
-    dialogClose = () =>  {
-
-        this.setState({open: true})
-
-    }   
-
-
-    render() {
-
-        return (
-
-            <Box >
-                    
-                <Drawer anchor = "left" variant = "permanent">
-                        
-                    <Box className = {styles.drawerbox}>
-
-                        <Typography variant = "h5" className = {styles.drawerTitle}>BARANGAY 15</Typography>
-                            
-
-                        <Box className = {styles.groupButton}>
-
-                            <Box>
-
-                                <Button
-                                variant= "contained" 
-                                type = "submit"
-                                className = {styles.registerButton}
-                                onClick={this.dialogOpen}
-                                >
-                                    REGISTER A RESIDENT
-
-                                </Button>
-
-                                <RegistrationModal 
-                                open = {this.state.open}
-                                onClose = {this.dialogClose}
-                                
-                                />
-
-                            </Box>
-
-
-
-                            <Button
-                            variant= "contained" 
-                            type = "submit"
-                            className = {styles.printButton}
-                            >
-                                PRINT CERTIFICATE
-
-                            </Button>
-
-                            <Button 
-                            variant= "contained" 
-                            type = "submit"
-                            className = {styles.logoutButton}
-                            onClick={this.handleLogOut}> LOG OUT
-                            </Button>
-
-                            
-                        </Box>
-    
-                    </Box>  
-                    
-                </Drawer>
+              <Button
+                variant="contained"
+                type="submit"
+                className={styles.logoutButton}
+                onClick={this.handleLogOut}
+              >
+                {' '}
+                LOG OUT
+              </Button>
             </Box>
-    )
+          </Box>
+        </Drawer>
+      </Box>
+    );
   }
 }
 
