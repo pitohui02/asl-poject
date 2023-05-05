@@ -20,9 +20,33 @@
   --blue-shade-8: #ade8f4ff;
   --blue-shade-9: #caf0f8ff;
 
+  --primary-blue-color: #2C74B3;
+
+  /* Button color shades */
+
+--button-shade-1: #453a3bff;
+--button-shade-2: #372e2fff;
+--button-shade-3: #211c1cff;
+--button-shade-4: #573334ff;
+--button-shade-5: #673d3eff;
+--button-shade-6: #784748ff;
+--button-shade-7: #875152ff;
+--button-shade-8: #d4b9b9ff;
+--button-shade-9: #dec9c9ff;
+--button-shade-10: #e6e1e1ff;
+
+--primary-button-color: #393E46;
+--primary-button-color-hover: #372e2fff;
+
+
+--success-button-color: #f9dc5c;
+--error-button-color: #a31621;
+
+--text-color: #e9ecef;
 }
 
 
 body {
   background-color: var(--red-shade-3);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }

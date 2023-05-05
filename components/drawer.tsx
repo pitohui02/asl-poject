@@ -1,23 +1,27 @@
-import React from "react"
-import { Drawer, Box, Typography, Paper, Button } from "@mui/material"
+import React from 'react';
+import { Drawer, Box, Typography, Paper, Button } from '@mui/material';
 
-import styles from '../src/styles/drawer.module.css'
+import styles from '../src/styles/drawer.module.css';
 
-import { withRouter } from "next/router"
+import { withRouter } from 'next/router';
+import EditModal from './modals/EditModal';
+import CreateModal from './modals/CreateModal';
+import PrintModal from './modals/PrintModal';
 
 import RegistrationModal from '../components/registration'
 
 class DrawerComponent extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+      this.state = {
+        open: false
+      }
+  }
 
-    constructor(props: any) {
-        super(props)
-        this.state = {
-
-            open: false
-        }
-
-    }
-
+  handleLogOut = () => {
+    localStorage.removeItem('jwt');
+    this.props.router.push('/login');
+  };
 
     dialogOpen  = () => {
 
@@ -25,21 +29,11 @@ class DrawerComponent extends React.Component<any, any> {
 
     }
 
-    dialogClose = () => {
+    dialogClose = () =>  {
 
         this.setState({open: true})
 
     }   
-
-
-    
-
-    handleLogOut = () => {
-
-        this.props.router.push('/login')
-
-    }
-
 
 
     render() {
@@ -101,17 +95,9 @@ class DrawerComponent extends React.Component<any, any> {
                     </Box>  
                     
                 </Drawer>
-
-      
-                
             </Box>
-
-
-
-
-
-        )
-    }
+    )
+  }
 }
 
-export default withRouter(DrawerComponent)
+export default withRouter(DrawerComponent);

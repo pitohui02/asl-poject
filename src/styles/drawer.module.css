@@ -20,11 +20,7 @@
 }
 
 
-
-
 /* Buttons */
-
-
 
 
 .groupButton {
@@ -34,8 +30,6 @@
     
 }
 
-
-
 .logoutButton {
     width: 24vh;
     background-color: #393E46;
@@ -43,10 +37,9 @@
     font-weight: 'bold';
     align-items: center;
 
-   margin-top: 75vh;
+   margin-top: 70vh;
 
 }
-
 
 .logoutButton:hover {
     background-color: #343a40;

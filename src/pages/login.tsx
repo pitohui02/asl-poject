@@ -34,7 +34,6 @@ class LoginPage extends React.Component<any, any >{
             localStorage.setItem("jwt", `Bearer ${res.data}`);
             axios.interceptors.request.use(
                 config => {
-                //   const {origin} = new URL(config.url);
                   const allowedOrigins = [process.env.apiUrl];
           
                   if (allowedOrigins.includes(origin)) {
@@ -68,13 +67,18 @@ class LoginPage extends React.Component<any, any >{
                             <Box className = {styles.mainbox}>
 
                                 <Box className = {styles.gridchild1}>
-                                    <Image 
-                                    src = "/barangay_logo.png"
-                                    alt = "placeholder"
-                                    width = {250}
-                                    height = {250}
-                                    className = {styles.imageDesign}
-                                    />
+                                    <Box>
+                                        <Image 
+                                        src = "/logo_upscaled.png"
+                                        alt = "placeholder"
+                                        width = {250}
+                                        height = {250}
+                                        className = {styles.imageDesign}
+                                        />
+                                    </Box>
+
+                                    <Typography variant = "h6" className = {styles.titletext}>Barangay 15 Zone 1 District 1</Typography>
+                                    <Typography variant = "subtitle1" className = {styles.subtext} gutterBottom>Resident Issuance System</Typography>
                                 </Box>
 
 
@@ -82,11 +86,11 @@ class LoginPage extends React.Component<any, any >{
                                     
                                     <Box>
 
-                                        <Typography variant = "h4" className = {styles.titledesign}>BARANGAY 15</Typography>
+                                        <Typography variant = "h4" className = {styles.titledesign}>SIGN IN</Typography>
                                         
                                         <Divider variant = "middle"/>
                                         
-                                        <Typography variant = "h6" className = {styles.subdesign}>Certificate Issuance System</Typography>
+                                        
 
 
                                     </Box>
