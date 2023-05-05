@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Table,
   TableHead,
@@ -10,6 +11,7 @@ import {
   Box,
   TextField,
   IconButton,
+  Button,
   Checkbox,
 } from '@mui/material';
 
@@ -24,6 +26,8 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import { Resident } from './ResidentContainer';
 import DeleteIconModal from './modals/DeleteModal';
+import UpdateModal from './modals/UpdateModal';
+import axios from 'axios';
 
 type tableProps = {
   tableData: Resident[];
@@ -37,20 +41,10 @@ export default function TableComponent({ tableData }: tableProps) {
   function handleUpdateResident(e) {
     console.log(e.currentTarget.id);
   }
+
   return (
     <Box className={styles.mainbox}>
       <TableContainer component={Paper} className={styles.tabledesign}>
-        <Box className={styles.searchbox}>
-          <SearchIcon className={styles.searchicon} />
-
-          <TextField
-            label="Search Resident"
-            size="small"
-            variant="outlined"
-            className={styles.searchbar}
-          />
-        </Box>
-
         <Table aria-label="sample table" stickyHeader>
           <TableHead>
             <TableRow>
@@ -110,13 +104,8 @@ export default function TableComponent({ tableData }: tableProps) {
                 <TableCell>{row.birthDate}</TableCell>
 
                 <TableCell>
-                  <IconButton id={`${row.id}`} onClick={handleUpdateResident}>
-                    <ModeEditOutlineIcon className={styles.actionbuttons} />
-                  </IconButton>
+                  <UpdateModal residentId={row.id} />
                   <DeleteIconModal residentId={row.id} />
-                  {/* <IconButton id={`${row.id}`} onClick={handleDeleteResident}>
-                    <CloseIcon className={styles.actionbuttons} />
-                  </IconButton> */}
                 </TableCell>
               </TableRow>
             ))}
