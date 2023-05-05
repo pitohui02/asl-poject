@@ -11,7 +11,8 @@
 
 .paperdesign {
 
-    height: 500px;
+    height: auto;
+    width: auto;
     padding: 40px;
 
 
