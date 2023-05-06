@@ -45,7 +45,7 @@ class LoginPage extends React.Component<any, any >{
                   return Promise.reject(error);
                 }
               );
-            this.props.router.push('/dashboard')
+            this.props.router.push('/landing')
         }).catch(e => console.log(e));
     }
 

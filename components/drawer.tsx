@@ -14,13 +14,11 @@ class DrawerComponent extends React.Component<any, any> {
   }
 
   handleLogOut = () => {
-    localStorage.removeItem('jwt');
-    this.props.router.push('/login');
+    this.props.router.push('/landing');
   };
 
   render() {
     return (
-      <Box>
         <Drawer anchor="left" variant="permanent">
           <Box className={styles.drawerbox}>
             <Typography variant="h5" className={styles.drawerTitle}>
@@ -39,12 +37,11 @@ class DrawerComponent extends React.Component<any, any> {
                 onClick={this.handleLogOut}
               >
                 {' '}
-                LOG OUT
+                BACK
               </Button>
             </Box>
           </Box>
         </Drawer>
-      </Box>
     );
   }
 }
