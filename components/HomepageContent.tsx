@@ -18,10 +18,6 @@ class Content extends React.Component <any, any> {
         this.props.router.push('/login')
     }
 
-    openRegister = () => {
-        
-    }
-
     render() {
         return (
             <>
@@ -48,8 +44,8 @@ class Content extends React.Component <any, any> {
                             <Image 
                             src = "/logo_upscaled.png"
                             alt = "placeholder"
-                            width = {400}
-                            height = {400}
+                            width = {500}
+                            height = {500}
                             />
                         </Box>
                     </Box>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 import styles from '../../src/styles/drawer.module.css';
@@ -24,7 +23,7 @@ export default function CreateModal() {
 
   return (
     <div>
-      <Button className={styles.registerButton} onClick={handleOpen} variant="contained">
+      <Button className={styles.contentbtn} onClick={handleOpen} variant="contained">
         PRINT CERTIFICATE
       </Button>
       <Modal

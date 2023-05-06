@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 
 
 import styles from '../../src/styles/homepage.module.css'
-import Registration from '@/pages/registration';
+import ResidentForm from '@/pages/registration';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -36,7 +36,7 @@ export default function CreateModalHome() {
         aria-describedby="modal-modal-description"
       >
         <Box sx = {style}>
-          <Registration />
+        <ResidentForm operation="create" />
         </Box>
       </Modal>
     </div>

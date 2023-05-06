@@ -7,26 +7,12 @@ import Content from '../../components/HomepageContent'
 
 import { withRouter } from "next/router";
 
-class Homepage extends React.Component <any, any> {
-    constructor(props: any) {
-        super(props)
-        
-    }
-    
-    handleLogin = () => {
-        this.props.router.push('/login')
-    }
-
-    openRegister = () => {
-        
-    }
-
+class Homepage extends React.Component<any, any>{
     render() {
         return (
             <>
-            
-            <Appbar />
-            <Content />
+                <Appbar />
+                <Content />
             </>
         )
     }
