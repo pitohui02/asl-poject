@@ -1,10 +1,17 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 import styles from '../../src/styles/drawer.module.css';
+import Registration from '@/pages/registration';
+import PrintRequestForm from '../PrintRequestForm';
+import { IconButton } from '@mui/material';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import axios from 'axios';
+import { Resident } from '../ResidentContainer';
+import ResidentRecord from '../ResidentRecord';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -13,21 +20,24 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
-export default function EditModal() {
-  const [open, setOpen] = React.useState(false);
+type ViewProps = {
+  residentDetails: Resident;
+};
+
+export default function ViewRecordModal({ residentDetails }: ViewProps) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button className={styles.registerButton} onClick={handleOpen}>
-        EDIT A RECORD
-      </Button>
+      <IconButton onClick={handleOpen}>
+        <AssignmentIndIcon className={styles.actionbuttons} />
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -35,12 +45,7 @@ export default function EditModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <ResidentRecord recordData={residentDetails} />
         </Box>
       </Modal>
     </div>

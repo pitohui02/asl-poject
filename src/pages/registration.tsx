@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -15,24 +15,30 @@ import {
 
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-import {
-  DateField,
-  DatePicker,
-  LocalizationProvider,
-} from '@mui/x-date-pickers';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import styles from '../styles/registration.module.css';
 import { Resident } from '../../components/ResidentContainer';
 import axios from 'axios';
 import { Avatar, IconButton } from '@mui/material';
+import dayjs from 'dayjs';
 
-class Registration extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
+type FormProps = {
+  data?: Resident;
+  operation: string;
+  residentId?: number;
+};
 
-    this.state = {
-      profilePhoto: '',
+export default function Registration({
+  data,
+  operation,
+  residentId,
+}: FormProps) {
+  const [residentFields, setResidentFields] = useState<Resident>(
+    data ?? {
+      id: 0,
+      profilePhotoUrl: '',
       firstName: '',
       middleName: '',
       lastName: '',
@@ -47,351 +53,390 @@ class Registration extends React.Component<any, any> {
       telephoneNumber: '',
       mobileNumber: '',
       birthDate: '',
-    };
-  }
+      createdAt: '',
+      updatedAt: '',
+      isArchived: false,
+    }
+  );
 
-  handleFieldChange(e: any) {
-    this.setState((prev: any) => ({
+  function handleFieldChange(e: any) {
+    setResidentFields((prev: any) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   }
 
-  handlePhotoChange(e: any) {
+  function handlePhotoChange(e: any) {
     e.preventDefault();
 
     if (e.target.files[0]) {
       console.log(e.target.files);
-      this.setState((prev: any) => ({
+      setResidentFields((prev: any) => ({
         ...prev,
         profilePhoto: e.target.files[0],
       }));
     }
   }
 
-  handleBirthDateChange(dateValue: any) {
+  function handleBirthDateChange(dateValue: any) {
     const formattedDate = `${dateValue['$d'].getMonth() + 1}/${dateValue[
       '$d'
     ].getDate()}/${dateValue['$d'].getFullYear()}`;
 
-    this.setState((prev: any) => ({
+    setResidentFields((prev: any) => ({
       ...prev,
       birthDate: formattedDate,
     }));
   }
 
-  handleSubmit() {
+  function handleCancel() {}
+
+  function handleSubmit() {
     let formData = new FormData();
 
-    for (let key in this.state) {
-      if (this.state.hasOwnProperty(key)) {
-        formData.append(key, this.state[key]);
+    for (let key in residentFields) {
+      if (residentFields.hasOwnProperty(key)) {
+        formData.append(key, residentFields[key]);
       }
     }
 
-    // console.log(formData._boundary);
+    if (operation === 'create') {
+      return axios
+        .post(`${process.env.apiUrl}/resident`, formData, {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        })
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
 
-    axios
-      .post(`${process.env.apiUrl}/resident`, formData, {
-        headers: {
-          Authorization: localStorage.getItem('jwt'),
-        },
-      })
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
+    if (operation === 'update') {
+      return axios
+        .put(`${process.env.apiUrl}/resident/${residentId}`, formData, {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        })
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
   }
 
-  render() {
-    return (
-      <>
-        <Box className={styles.centerscreen}>
-          
-          <Paper className={styles.paperdesign} elevation={12}>
+  return (
+    <>
+      <Box className={styles.centerscreen}>
+        <Paper className={styles.paperdesign} elevation={12}>
+          <Box className={styles.gridTitle}>
+            <Typography variant="h4" className={styles.titleDesign}>
+              RESIDENT FORM{' '}
+            </Typography>
+          </Box>
 
-             <Box className={styles.gridTitle}>
-                <Typography variant="h4" className={styles.titleDesign}>
-                  REGISTRATION PORTAL{' '}
+          <Box className={styles.gridParent}>
+            <Box>
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  First Name
                 </Typography>
-              </Box>   
 
-            <Box className={styles.gridParent}>
-              
-
-              <Box>                 
-
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>First Name</Typography>
-
-                  <TextField
+                <TextField
                   name="firstName"
                   required
                   variant="filled"
                   label="First Name"
                   size="small"
-                  onChange={this.handleFieldChange.bind(this)}
+                  value={residentFields.firstName}
+                  onChange={handleFieldChange}
                   className={styles.gridChild1_TextField}
-                  />
-                </Box>
-                  
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Middle Name</Typography>
+                />
+              </Box>
 
-                  <TextField
-                    name="middleName"
-                    required
-                    variant="filled"
-                    label="Middle Name"
-                    size="small"
-                    className={styles.gridChild1_TextField}
-                    onChange={this.handleFieldChange.bind(this)}
-                    />
-                </Box>
-              
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Last Name</Typography>
-                  
-                  <TextField
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Middle Name
+                </Typography>
+
+                <TextField
+                  name="middleName"
+                  required
+                  variant="filled"
+                  label="Middle Name"
+                  size="small"
+                  value={residentFields.middleName}
+                  className={styles.gridChild1_TextField}
+                  onChange={handleFieldChange}
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Last Name
+                </Typography>
+
+                <TextField
                   name="lastName"
                   required
                   variant="filled"
                   label="Last Name"
                   size="small"
+                  value={residentFields.lastName}
                   className={styles.gridChild1_TextField}
-                  onChange={this.handleFieldChange.bind(this)}
-                  />
-                </Box>
-
+                  onChange={handleFieldChange}
+                />
               </Box>
-              <Divider orientation='vertical' flexItem></Divider>
-              <Box>
-
-                <Box>
-                <Typography variant="h6" className= {styles.gridchild_text}>Gender</Typography>
-                  <FormControl variant="filled">
-                    <InputLabel size="small">Gender</InputLabel>
-
-                    <Select
-                      name="gender"
-                      required
-
-                      className={styles.dropdownDesign}
-                      onChange={this.handleFieldChange.bind(this)}
-                      value={this.state.Gender}
-                      size="small"
-                      variant= "filled"
-                    >
-                      <MenuItem value="">
-                        <em>Select</em>
-                      </MenuItem>
-                      <MenuItem value="Male">Male</MenuItem>
-                      <MenuItem value="Female">Female</MenuItem>
-                      <MenuItem value="Others">Others</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-
-                <Box>
-                <Typography variant="h6" className= {styles.gridchild_text}>Marital Status</Typography>
-
-                  <FormControl variant = "filled">
-                    <InputLabel size="small">Marital Status</InputLabel>
-
-                    <Select
-                      name="maritalStatus"
-                      required
-                      label="Marital Status"
-                      className={styles.dropdownDesign}
-                      onChange={this.handleFieldChange.bind(this)}
-                      value={this.state.MaritalStatus}
-                      size="small"
-                    >
-                      <MenuItem value="">
-                        <em>Select</em>
-                      </MenuItem>
-                      <MenuItem value="Single">Single</MenuItem>
-                      <MenuItem value="Married">Married</MenuItem>
-                      <MenuItem value="Widowed">Widowed</MenuItem>
-                      <MenuItem value="Annulled">Annulled</MenuItem>
-                    </Select>
-                  </FormControl>
-
-                </Box>
-
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Birth Date</Typography>
-
-                  <FormControl variant="filled">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateField
-                      onChange={this.handleBirthDateChange.bind(this)}
-                      label="Birth Date"
-                      size="small"
-                      variant="filled"
-                      className= {styles.birthdatebox}
-                    />
-                  </LocalizationProvider>
-                  </FormControl>
-                </Box>
-
-
-              </Box>
-              <Divider orientation='vertical' flexItem></Divider>
-              <Box>             
-                <Box>
-                    <Typography variant="h6" className= {styles.gridchild_text}>Contact Number</Typography>
-                    <TextField
-                      name="contactNumber"
-                      variant="filled"
-                      label="Contact Number"
-                      onChange={this.handleFieldChange.bind(this)}
-                      size="small"
-                      className={styles.gridChild3_Numberfields}
-                    />
-                </Box>
-
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Telephone Number</Typography>
-                  <TextField
-                    name="telephoneNumber"
-                    variant="filled"
-                    label="Telephone Number"
-                    onChange={this.handleFieldChange.bind(this)}
-                    size="small"
-                    className={styles.gridChild3_Numberfields}
-                  />
-                </Box>
-
-                <Box >
-
-                <Typography variant="h6" className= {styles.gridchild_text}>Upload Photo</Typography>
-
-                  <Box className = {styles.uploadbox}>
-                    
-                    <Avatar variant= "square" src = {this.state.profilePhoto} />
-
-                    <Button variant="contained" component="label" className = {styles.uploadbtn} startIcon={<CameraAltIcon />}>
-                      Upload
-                      <input
-                        hidden
-                        onChange={this.handlePhotoChange.bind(this)}
-                        accept="image/*"
-                        multiple
-                        type="file"
-                      />
-                    </Button>
-
-                  </Box>
-                
-                </Box>
-
-              </Box>
-              <Divider orientation='vertical' flexItem></Divider>
-              <Box>
-                <Box>
-                    <Typography variant="h6" className= {styles.gridchild_text}>Mother's Full Name</Typography>
-                    <TextField
-                      name="mother"
-                      onChange={this.handleFieldChange.bind(this)}
-                      variant="filled"
-                      label="Mother"
-                      size="small"
-                    />
-                </Box>
-
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Father's Full Name</Typography>
-                  <TextField
-                    name="father"
-                    onChange={this.handleFieldChange.bind(this)}
-                    variant="filled"
-                    label="Father"
-                    size="small"
-                  />
-                </Box>
-
-                <Box>
-                <Typography variant="h6" className= {styles.gridchild_text}>Guardian's Full Name</Typography>
-                  <TextField
-                    name="guardian"
-                    onChange={this.handleFieldChange.bind(this)}
-                    variant="filled"
-                    label="Guardian (optional)"
-                    size="small"
-                  />
-                </Box>
-
-              </Box>
-              <Divider orientation='vertical' flexItem></Divider>
-              <Box>
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>ADDRESS</Typography>
-                    <TextField
-                      name="homeAddress"
-                      required
-                      variant="filled"
-                      label="Home Address"
-                      onChange={this.handleFieldChange.bind(this)}
-                      size="small"
-                      multiline
-                      rows = {5}
-                      className= {styles.addressfield}
-                    />
-                </Box>
-
-                <Box>
-                  <Typography variant="h6" className= {styles.gridchild_text}>Postal Code</Typography>
-                  <TextField
-                    name="postalCode"
-                    required
-                    variant="filled"
-                    label="Postal Code"
-                    onChange={this.handleFieldChange.bind(this)}
-                    size="small"
-                    className= {styles.postalfield}
-                    
-                  />
-                </Box>
-              </Box>
-
             </Box>
-
-            <Box className = {styles.registerbox}>
-
+            <Divider orientation="vertical" flexItem></Divider>
             <Box>
-                <Button
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Gender
+                </Typography>
+                <FormControl variant="filled">
+                  <InputLabel size="small">Gender</InputLabel>
+
+                  <Select
+                    name="gender"
+                    required
+                    className={styles.dropdownDesign}
+                    onChange={handleFieldChange}
+                    value={residentFields.gender}
+                    size="small"
+                    variant="filled"
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                    <MenuItem value="Others">Others</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Marital Status
+                </Typography>
+
+                <FormControl variant="filled">
+                  <InputLabel size="small">Civil Status</InputLabel>
+
+                  <Select
+                    name="maritalStatus"
+                    required
+                    label="Marital Status"
+                    className={styles.dropdownDesign}
+                    onChange={handleFieldChange}
+                    value={residentFields.maritalStatus}
+                    size="small"
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    <MenuItem value="Single">Single</MenuItem>
+                    <MenuItem value="Married">Married</MenuItem>
+                    <MenuItem value="Widowed">Widowed</MenuItem>
+                    <MenuItem value="Annulled">Annulled</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Birth Date
+                </Typography>
+
+                <FormControl variant="filled">
+                  {residentFields.birthDate === '' && (
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        onChange={handleBirthDateChange}
+                        label="Birth Date"
+                        value={residentFields.birthDate}
+                        className={styles.birthdatebox}
+                      />
+                    </LocalizationProvider>
+                  )}
+                  {residentFields.birthDate !== '' && (
+                    <TextField
+                      label="Birth Date"
+                      disabled
+                      value={residentFields.birthDate}
+                      // className={styles.birthdatebox}
+                    />
+                  )}
+                </FormControl>
+              </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem></Divider>
+            <Box>
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Mobile Number
+                </Typography>
+                <TextField
+                  name="mobileNumber"
+                  variant="filled"
+                  label="Contact Number"
+                  value={residentFields.mobileNumber}
+                  onChange={handleFieldChange}
+                  size="small"
+                  className={styles.gridChild3_Numberfields}
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Telephone Number
+                </Typography>
+                <TextField
+                  name="telephoneNumber"
+                  variant="filled"
+                  label="Telephone Number"
+                  value={residentFields.telephoneNumber}
+                  onChange={handleFieldChange}
+                  size="small"
+                  className={styles.gridChild3_Numberfields}
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Upload Photo
+                </Typography>
+
+                <Box className={styles.uploadbox}>
+                  <Avatar
+                    variant="square"
+                    src={residentFields.profilePhotoUrl}
+                  />
+
+                  <Button
+                    variant="contained"
+                    component="label"
+                    className={styles.uploadbtn}
+                    startIcon={<CameraAltIcon />}
+                  >
+                    Upload
+                    <input
+                      hidden
+                      onChange={handlePhotoChange}
+                      accept="image/*"
+                      multiple
+                      type="file"
+                    />
+                  </Button>
+                </Box>
+              </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem></Divider>
+            <Box>
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  {`Mother\'s`} Full Name
+                </Typography>
+                <TextField
+                  name="mother"
+                  value={residentFields.mother}
+                  onChange={handleFieldChange}
+                  variant="filled"
+                  label="Mother"
+                  size="small"
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  {`Father\'s`} Full Name
+                </Typography>
+                <TextField
+                  name="father"
+                  value={residentFields.father}
+                  onChange={handleFieldChange}
+                  variant="filled"
+                  label="Father"
+                  size="small"
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  {`Guardian\'s`} Full Name
+                </Typography>
+                <TextField
+                  name="guardian"
+                  value={residentFields.guardian}
+                  onChange={handleFieldChange}
+                  variant="filled"
+                  label="Guardian (optional)"
+                  size="small"
+                />
+              </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem></Divider>
+            <Box>
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  ADDRESS
+                </Typography>
+                <TextField
+                  name="homeAddress"
+                  required
+                  variant="filled"
+                  label="Home Address"
+                  onChange={handleFieldChange}
+                  value={residentFields.homeAddress}
+                  size="small"
+                  multiline
+                  rows={5}
+                  className={styles.addressfield}
+                />
+              </Box>
+
+              <Box>
+                <Typography variant="h6" className={styles.gridchild_text}>
+                  Postal Code
+                </Typography>
+                <TextField
+                  name="postalCode"
+                  required
+                  variant="filled"
+                  label="Postal Code"
+                  onChange={handleFieldChange}
+                  size="small"
+                  className={styles.postalfield}
+                />
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className={styles.registerbox}>
+            <Box>
+              <Button
                 variant="outlined"
                 type="submit"
-                onClick={this.handleSubmit.bind(this)}
+                onClick={handleCancel}
                 className={styles.cancelbtn}
-                color= "error"
-                >
-                      {' '}
-                      CANCEL
-                </Button>
-              </Box>
-
-              <Box>
-                <Button
-                variant="contained"
-                type="submit"
-                onClick={this.handleSubmit.bind(this)}
-                className={styles.registerbtn}
-                >
-                      {' '}
-                      REGISTER
-                </Button>
-              </Box>
-
-              
-
+                color="error"
+              >
+                CANCEL
+              </Button>
             </Box>
 
-          </Paper>
-
-        </Box>
-      </>
-    );
-  }
+            <Box>
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={handleSubmit}
+                className={styles.registerbtn}
+              >
+                SAVE
+              </Button>
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
+    </>
+  );
 }
-
-export default Registration;
