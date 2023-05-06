@@ -77,8 +77,8 @@ class LoginPage extends React.Component<any, any >{
                                         />
                                     </Box>
 
-                                    <Typography variant = "h6" className = {styles.titletext}>Barangay 15 Zone 1 District 1</Typography>
-                                    <Typography variant = "subtitle1" className = {styles.subtext} gutterBottom>Resident Issuance System</Typography>
+                                    <Typography variant = "h6" className = {styles.titletext}>Barangay 15 Zone 01 District 01</Typography>
+                                    <Typography variant = "subtitle1" className = {styles.subtext} gutterBottom>Certificate Issuance System</Typography>
                                 </Box>
 
 
