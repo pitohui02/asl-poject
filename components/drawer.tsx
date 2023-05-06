@@ -7,6 +7,7 @@ import { withRouter } from 'next/router';
 import EditModal from './modals/EditModal';
 import CreateModal from './modals/CreateModal';
 import PrintModal from './modals/PrintModal';
+import { Component } from 'react';
 
 class DrawerComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -19,7 +20,7 @@ class DrawerComponent extends React.Component<any, any> {
 
   render() {
     return (
-        <Drawer anchor="left" variant="permanent">
+        <Drawer anchor="left" variant="permanent" PaperProps = {{sx: {backgroundColor: '#2C74B3'}}}>
           <Box className={styles.drawerbox}>
             <Typography variant="h5" className={styles.drawerTitle}>
               BARANGAY 15

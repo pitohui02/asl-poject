@@ -126,12 +126,14 @@ export default function Registration({
   return (
     <>
       <Box className={styles.centerscreen}>
-        <Paper className={styles.paperdesign} elevation={12}>
+        <Paper className={styles.paperdesign} elevation={24}>
           <Box className={styles.gridTitle}>
             <Typography variant="h4" className={styles.titleDesign}>
               RESIDENT FORM{' '}
             </Typography>
           </Box>
+          
+          <Divider orientation="horizontal" flexItem/>
 
           <Box className={styles.gridParent}>
             <Box>
@@ -186,7 +188,7 @@ export default function Registration({
                 />
               </Box>
             </Box>
-            <Divider orientation="vertical" flexItem></Divider>
+            <Divider orientation="vertical" flexItem />
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -269,7 +271,7 @@ export default function Registration({
                 </FormControl>
               </Box>
             </Box>
-            <Divider orientation="vertical" flexItem></Divider>
+            <Divider orientation="vertical" flexItem/>
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -330,7 +332,7 @@ export default function Registration({
                 </Box>
               </Box>
             </Box>
-            <Divider orientation="vertical" flexItem></Divider>
+            <Divider orientation="vertical" flexItem />
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -343,6 +345,7 @@ export default function Registration({
                   variant="filled"
                   label="Mother"
                   size="small"
+                  className ={styles.gridchild4_textfield}
                 />
               </Box>
 
@@ -357,6 +360,7 @@ export default function Registration({
                   variant="filled"
                   label="Father"
                   size="small"
+                  className ={styles.gridchild4_textfield}
                 />
               </Box>
 
@@ -371,6 +375,7 @@ export default function Registration({
                   variant="filled"
                   label="Guardian (optional)"
                   size="small"
+                  className ={styles.gridchild4_textfield}
                 />
               </Box>
             </Box>
