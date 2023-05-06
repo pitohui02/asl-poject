@@ -28,27 +28,20 @@ import { Resident } from './ResidentContainer';
 import DeleteIconModal from './modals/DeleteModal';
 import UpdateModal from './modals/UpdateModal';
 import axios from 'axios';
+import ViewRecordModal from './modals/ViewModal';
 
 type tableProps = {
   tableData: Resident[];
 };
 
 export default function TableComponent({ tableData }: tableProps) {
-  function handleDeleteResident(e) {
-    console.log(e.currentTarget.id);
-  }
-
-  function handleUpdateResident(e) {
-    console.log(e.currentTarget.id);
-  }
-
   return (
     <Box className={styles.mainbox}>
       <TableContainer component={Paper} className={styles.tabledesign}>
         <Table aria-label="sample table" stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell className={styles.tableheadDesign}>PRINT</TableCell>
+              <TableCell className={styles.tableheadDesign}></TableCell>
               <TableCell className={styles.tableheadDesign}>ID</TableCell>
               <TableCell className={styles.tableheadDesign}>Photo ID</TableCell>
               <TableCell className={styles.tableheadDesign}>
@@ -75,15 +68,27 @@ export default function TableComponent({ tableData }: tableProps) {
               <TableCell className={styles.tableheadDesign}>
                 Birth Date
               </TableCell>
+              <TableCell className={styles.tableheadDesign}>
+                Created At
+              </TableCell>
+              <TableCell className={styles.tableheadDesign}>
+                Last Updated
+              </TableCell>
               <TableCell className={styles.tableheadDesign}>Actions</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {tableData.map((row: Resident) => (
-              <TableRow key={row.id}>
+              <TableRow
+                // onClick={() => (
+                //   <ViewRecordModal isOpen residentDetails={tableData[row.id]} />
+                // )}
+                hover
+                key={row.id}
+              >
                 <TableCell>
-                  <Checkbox />
+                  <ViewRecordModal residentDetails={tableData[row.id]} />
                 </TableCell>
 
                 <TableCell>{row.id}</TableCell>
@@ -102,10 +107,15 @@ export default function TableComponent({ tableData }: tableProps) {
                 <TableCell>{row.telephoneNumber}</TableCell>
                 <TableCell>{row.mobileNumber}</TableCell>
                 <TableCell>{row.birthDate}</TableCell>
+                <TableCell>{row.createdAt}</TableCell>
+                <TableCell>{row.updatedAt}</TableCell>
 
                 <TableCell>
                   <UpdateModal residentId={row.id} />
-                  <DeleteIconModal residentId={row.id} />
+                  <DeleteIconModal
+                    residentDetails={tableData[row.id]}
+                    residentId={row.id}
+                  />
                 </TableCell>
               </TableRow>
             ))}

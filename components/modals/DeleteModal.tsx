@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import PrintRequestForm from '../PrintRequestForm';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
+import { Resident } from '../ResidentContainer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -24,10 +25,14 @@ const style = {
 
 type DeleteProps = {
   residentId: number;
+  residentDetails: Resident;
 };
 
-export default function DeleteIconModal({ residentId }: DeleteProps) {
-  const [open, setOpen] = React.useState(false);
+export default function DeleteIconModal({
+  residentId,
+  residentDetails,
+}: DeleteProps) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -49,7 +54,9 @@ export default function DeleteIconModal({ residentId }: DeleteProps) {
       >
         <Box sx={style}>
           <Typography>
-            Remove Resident {`${residentId}`} from the records?
+            Remove{' '}
+            {`${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName[0]}.`}{' '}
+            from the records?
           </Typography>
           <Button onClick={handleDeleteResident}>Remove</Button>
         </Box>

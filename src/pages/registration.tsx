@@ -22,33 +22,42 @@ import styles from '../styles/registration.module.css';
 import { Resident } from '../../components/ResidentContainer';
 import axios from 'axios';
 import { Avatar, IconButton } from '@mui/material';
+import dayjs from 'dayjs';
 
 type FormProps = {
-  data: Resident[];
+  data?: Resident;
+  operation: string;
+  residentId?: number;
 };
 
-export default function Registration({ data }: FormProps) {
-  const [residentFields, setResidentFields] = useState<Resident>({
-    id: 0,
-    profilePhotoUrl: '',
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    maritalStatus: '',
-    homeAddress: '',
-    gender: '',
-    postalCode: '',
-    guardian: '',
-    age: 0,
-    mother: '',
-    father: '',
-    telephoneNumber: '',
-    mobileNumber: '',
-    birthDate: '',
-    createdAt: '',
-    updatedAt: '',
-    isArchived: false,
-  });
+export default function Registration({
+  data,
+  operation,
+  residentId,
+}: FormProps) {
+  const [residentFields, setResidentFields] = useState<Resident>(
+    data ?? {
+      id: 0,
+      profilePhotoUrl: '',
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      maritalStatus: '',
+      homeAddress: '',
+      gender: '',
+      postalCode: '',
+      guardian: '',
+      age: 0,
+      mother: '',
+      father: '',
+      telephoneNumber: '',
+      mobileNumber: '',
+      birthDate: '',
+      createdAt: '',
+      updatedAt: '',
+      isArchived: false,
+    }
+  );
 
   function handleFieldChange(e: any) {
     setResidentFields((prev: any) => ({
@@ -91,14 +100,27 @@ export default function Registration({ data }: FormProps) {
       }
     }
 
-    axios
-      .post(`${process.env.apiUrl}/resident`, formData, {
-        headers: {
-          Authorization: localStorage.getItem('jwt'),
-        },
-      })
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
+    if (operation === 'create') {
+      return axios
+        .post(`${process.env.apiUrl}/resident`, formData, {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        })
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
+
+    if (operation === 'update') {
+      return axios
+        .put(`${process.env.apiUrl}/resident/${residentId}`, formData, {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        })
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    }
   }
 
   return (
@@ -107,7 +129,7 @@ export default function Registration({ data }: FormProps) {
         <Paper className={styles.paperdesign} elevation={12}>
           <Box className={styles.gridTitle}>
             <Typography variant="h4" className={styles.titleDesign}>
-              REGISTRATION PORTAL{' '}
+              RESIDENT FORM{' '}
             </Typography>
           </Box>
 
@@ -198,7 +220,7 @@ export default function Registration({ data }: FormProps) {
                 </Typography>
 
                 <FormControl variant="filled">
-                  <InputLabel size="small">Marital Status</InputLabel>
+                  <InputLabel size="small">Civil Status</InputLabel>
 
                   <Select
                     name="maritalStatus"
@@ -226,14 +248,24 @@ export default function Registration({ data }: FormProps) {
                 </Typography>
 
                 <FormControl variant="filled">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      onChange={handleBirthDateChange}
+                  {residentFields.birthDate === '' && (
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        onChange={handleBirthDateChange}
+                        label="Birth Date"
+                        value={residentFields.birthDate}
+                        className={styles.birthdatebox}
+                      />
+                    </LocalizationProvider>
+                  )}
+                  {residentFields.birthDate !== '' && (
+                    <TextField
                       label="Birth Date"
+                      disabled
                       value={residentFields.birthDate}
-                      className={styles.birthdatebox}
+                      // className={styles.birthdatebox}
                     />
-                  </LocalizationProvider>
+                  )}
                 </FormControl>
               </Box>
             </Box>
@@ -241,10 +273,10 @@ export default function Registration({ data }: FormProps) {
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Contact Number
+                  Mobile Number
                 </Typography>
                 <TextField
-                  name="contactNumber"
+                  name="mobileNumber"
                   variant="filled"
                   label="Contact Number"
                   value={residentFields.mobileNumber}
@@ -399,7 +431,7 @@ export default function Registration({ data }: FormProps) {
                 onClick={handleSubmit}
                 className={styles.registerbtn}
               >
-                REGISTER
+                SAVE
               </Button>
             </Box>
           </Box>
