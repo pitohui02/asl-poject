@@ -26,7 +26,7 @@ export default function CreateModalHome() {
 
   return (
     <div>
-      <Button className={styles.btnstyle} onClick={handleOpen}>
+      <Button className={styles.contentbtn } onClick={handleOpen}>
         REGISTER
       </Button>
       <Modal
