@@ -106,76 +106,77 @@ export default function ResidentContainer() {
 
   return (
     <>
-        <Box className = {styles.mainbox}>
-              
-
-          <Box className = {styles.searchbox}>
-
-            <Box className = {styles.selectorbox}>
-              <Select
-                name="searchbox"
-                required
-                onChange={handleSearchOptionChange}
-                value={searchOption}
-                size="small"
-                variant="outlined"
-                className = {styles.selector}
-              >
-                  <MenuItem value="id">Search by ID</MenuItem>
-                  <MenuItem value="name">Search by Full Name</MenuItem>
-              </Select>
-            </Box>
-
-            <Box className = {styles.optionID}>
-              {searchOption === 'id' && (
-                <TextField
-                  label="Search"
-                  size="small"
-                  variant="filled"
-                  onChange={handleSearchResident}
-                  className= {styles.idstyle}
-                  
-                />
-              )}
-
-              {searchOption === 'name' && (
-                <Box className = {styles.optionName}>
-                  <TextField
-                    label="First Name"
-                    size="small"
-                    variant="filled"
-                    name="firstName"
-                    value={fullNameSearch.firstName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-                  <TextField
-                    label="Middle Name"
-                    size="small"
-                    variant="filled"
-                    name="middleName"
-                    value={fullNameSearch.middleName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-                  <TextField
-                    label="Last Name"
-                    size="small"
-                    variant="filled"
-                    name="lastName"
-                    value={fullNameSearch.lastName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-                </Box>
-              )}
-            </Box>
+      <Box className={styles.mainbox}>
+        <Box className={styles.searchbox}>
+          <Box className={styles.selectorbox}>
+            <Select
+              name="searchbox"
+              required
+              onChange={handleSearchOptionChange}
+              value={searchOption}
+              size="small"
+              variant="outlined"
+              className={styles.selector}
+            >
+              <MenuItem value="id">Search by ID</MenuItem>
+              <MenuItem value="name">Search by Full Name</MenuItem>
+            </Select>
           </Box>
 
-          <Presenter tableData={residents} />
+          <Box className={styles.optionID}>
+            {searchOption === 'id' && (
+              <TextField
+                label="Search"
+                size="small"
+                variant="filled"
+                onChange={handleSearchResident}
+                className={styles.idstyle}
+              />
+            )}
+
+            {searchOption === 'name' && (
+              <Box className={styles.optionName}>
+                <TextField
+                  label="First Name"
+                  size="small"
+                  variant="filled"
+                  name="firstName"
+                  value={fullNameSearch.firstName}
+                  onChange={handleFullNameSearch}
+                />
+                <TextField
+                  label="Middle Name"
+                  size="small"
+                  variant="filled"
+                  name="middleName"
+                  value={fullNameSearch.middleName}
+                  onChange={handleFullNameSearch}
+                />
+                <TextField
+                  label="Last Name"
+                  size="small"
+                  variant="filled"
+                  name="lastName"
+                  value={fullNameSearch.lastName}
+                  onChange={handleFullNameSearch}
+                />
+              </Box>
+            )}
+          </Box>
+          <Button className={styles.flexchild2_btn} onClick={handleSearchClick}>
+            Search{' '}
+          </Button>
+          <Button
+            className={styles.flexchild2_btn}
+            onClick={handleAllResidents}
+          >
+            {' '}
+            All Residents{' '}
+          </Button>
         </Box>
 
-      
+        <Presenter tableData={residents} />
+      </Box>
     </>
   );
 }
