@@ -1,34 +1,17 @@
 import React from "react";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import Image from "next/image";
-
-import styles from '../styles/homepage.module.css'
-import CreateModalHome from '../../components/modals/CreateModalHome'
 
 import AppbarLanding from "../../components/AppbarLanding";
+import LandingContent from "../../components/LandingContent";
 
-import { withRouter } from "next/router";
 
-class Landing extends React.Component <any, any> {
-    constructor(props: any) {
-        super(props)
-        
-    }
-    
-    handleLogout = () => {
-        localStorage.removeItem('jwt');
-        this.props.router.push('/login')
-    }
-
-    handleDashboard = () => {
-        this.props.router.push('./dashboard')
-    }
-
+class Landing extends React.Component{
+ 
     render() {
         return (
 
             <>
                 <AppbarLanding/>
+                <LandingContent />
             </>
         )
     }
@@ -36,4 +19,4 @@ class Landing extends React.Component <any, any> {
 
 }
 
-export default withRouter(Landing)
+export default Landing

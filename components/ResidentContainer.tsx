@@ -3,7 +3,7 @@ import axios from 'axios';
 import Presenter from './table';
 import SearchIcon from '@mui/icons-material/Search';
 import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
-import styles from '../src/styles/table.module.css';
+import styles from '../src/styles/searchbox.module.css';
 
 export type Resident = {
   id: number;
@@ -96,84 +96,86 @@ export default function ResidentContainer() {
       });
   }
 
-  function handleSearchOptionChange(e) {
+  function handleSearchOptionChange(e: any) {
     setSearchOption(e.target.value);
   }
 
-  function handleFullNameSearch(e) {
+  function handleFullNameSearch(e: any) {
     setFullNameSearch(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   return (
     <>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContext: '100%',
-          width: '100%',
-        }}
-      >
-        <Box className={styles.searchbox}>
-          <Select
-            name="gender"
-            required
-            className={styles.dropdownDesign}
-            onChange={handleSearchOptionChange}
-            value={searchOption}
-            size="small"
-            variant="filled"
-          >
-            <MenuItem value="id">Search by Id</MenuItem>
-            <MenuItem value="name">Search by Full Name</MenuItem>
-          </Select>
-          {searchOption === 'id' && (
-            <TextField
-              label="Search"
-              size="small"
-              variant="outlined"
-              onChange={handleSearchResident}
-              className={styles.searchbar}
-            />
-          )}
+        <Box className = {styles.mainbox}>
+              
 
-          {searchOption === 'name' && (
-            <Box sx={{ width: '50%' }}>
-              <TextField
-                label="First Name"
+          <Box className = {styles.searchbox}>
+
+            <Box className = {styles.selectorbox}>
+              <Select
+                name="searchbox"
+                required
+                onChange={handleSearchOptionChange}
+                value={searchOption}
                 size="small"
                 variant="outlined"
-                name="firstName"
-                value={fullNameSearch.firstName}
-                onChange={handleFullNameSearch}
-                className={styles.searchbar}
-              />
-              <TextField
-                label="Middle Name"
-                size="small"
-                variant="outlined"
-                name="middleName"
-                value={fullNameSearch.middleName}
-                onChange={handleFullNameSearch}
-                className={styles.searchbar}
-              />
-              <TextField
-                label="Last Name"
-                size="small"
-                variant="outlined"
-                name="lastName"
-                value={fullNameSearch.lastName}
-                onChange={handleFullNameSearch}
-                className={styles.searchbar}
-              />
+                className = {styles.selector}
+              >
+                  <MenuItem value="id">Search by ID</MenuItem>
+                  <MenuItem value="name">Search by Full Name</MenuItem>
+              </Select>
             </Box>
-          )}
+
+            <Box className = {styles.optionID}>
+              {searchOption === 'id' && (
+                <TextField
+                  label="Search"
+                  size="small"
+                  variant="filled"
+                  onChange={handleSearchResident}
+                  className= {styles.idstyle}
+                  
+                />
+              )}
+
+              {searchOption === 'name' && (
+                <Box className = {styles.optionName}>
+                  <TextField
+                    label="First Name"
+                    size="small"
+                    variant="filled"
+                    name="firstName"
+                    value={fullNameSearch.firstName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Middle Name"
+                    size="small"
+                    variant="filled"
+                    name="middleName"
+                    value={fullNameSearch.middleName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Last Name"
+                    size="small"
+                    variant="filled"
+                    name="lastName"
+                    value={fullNameSearch.lastName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                </Box>
+              )}
+            </Box>
+          </Box>
+
+          <Presenter tableData={residents} />
         </Box>
-        <Button onClick={handleSearchClick}> Search </Button>
-        <Button onClick={handleAllResidents}> All Residents </Button>
-        <Presenter tableData={residents} />
-      </Box>
+
+      
     </>
   );
 }

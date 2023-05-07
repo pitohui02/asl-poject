@@ -1,48 +1,103 @@
 import React from 'react';
-import { Drawer, Box, Typography, Paper, Button } from '@mui/material';
+import { Drawer, Box, Typography, Divider, Button, IconButton } from '@mui/material';
 
-import styles from '../src/styles/drawer.module.css';
+import MenuIcon from '@mui/icons-material/Menu';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+import styles from '../src/styles/drawer.module.css'
+import Image from 'next/image';
 
 import { withRouter } from 'next/router';
-import EditModal from './modals/EditModal';
+// import EditModal from './modals/EditModal';
 import CreateModal from './modals/CreateModal';
 import PrintModal from './modals/PrintModal';
-import { Component } from 'react';
 
 class DrawerComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      open: false
+    }
   }
 
-  handleLogOut = () => {
-    this.props.router.push('/landing');
-  };
+  drawerOpen = () => {
+    this.setState({open: true})
+  }
+
+  drawerClose = () => {
+    this.setState({open: false})
+  }
+
+  handleLogout = () => {
+    localStorage.removeItem('jwt');
+    this.props.router.push('/login')
+  }
+
+  handleBack = () => {
+    this.props.router.push('/landing')
+  }
 
   render() {
     return (
-        <Drawer anchor="left" variant="permanent" PaperProps = {{sx: {backgroundColor: '#2C74B3'}}}>
-          <Box className={styles.drawerbox}>
-            <Typography variant="h5" className={styles.drawerTitle}>
-              BARANGAY 15
-            </Typography>
+      <>
+          <IconButton onClick={this.drawerOpen} className= {styles.menuicon}> <MenuIcon className= {styles.iconsize}/> </IconButton>
+          <Drawer  anchor="left" PaperProps = {{sx: {backgroundColor: '#2C74B3'}}}
+          open = {this.state.open}
+          onClose={this.drawerClose}>
+              <Box className = {styles.iconbuttonbox}>
+                  <IconButton className = {styles.iconbutton} onClick={this.drawerClose}>
+                      <KeyboardDoubleArrowLeftIcon/>
+                  </IconButton>
+                </Box>
+              <Box className = {styles.drawerdesign}>
+                <Box className = {styles.flexchild1}>
+                  <Box>
+                    <Typography variant="h5" className={styles.drawerTitle}>
+                    DASHBOARD
+                    </Typography>
+                  </Box>
 
-            <Box className={styles.groupButton}>
-              <CreateModal />
+                  <Box>
+                    <Image 
+                    src = "/logo_upscaled.png"
+                    alt = "placeholder"
+                    width = {150}
+                    height = {150}
+                    />
+                  </Box>
 
-              <PrintModal />
+                  <Divider className ={styles.dividerstyle} flexItem/>
 
-              <Button
-                variant="contained"
-                type="submit"
-                className={styles.logoutButton}
-                onClick={this.handleLogOut}
-              >
-                {' '}
-                BACK
-              </Button>
-            </Box>
-          </Box>
-        </Drawer>
+                  <Box className = {styles.flexchild1_btn}>
+                    <CreateModal />
+
+                    <PrintModal />
+                  </Box>  
+
+                </Box>
+
+                <Box className = {styles.flexchild2}>
+                    <Button
+                    variant= "contained" 
+                    type = "submit"
+                    className = {styles.flexchild2_btn}
+                    onClick={this.handleBack}
+                    > BACK 
+                    </Button>
+
+                    <Button
+                    variant= "contained" 
+                    type = "submit"
+                    className = {styles.flexchild2_btn}
+                    onClick={this.handleLogout}
+                    > LOG OUT
+                    </Button>  
+                </Box>
+                
+              </Box>
+          </Drawer>
+      </>
     );
   }
 }

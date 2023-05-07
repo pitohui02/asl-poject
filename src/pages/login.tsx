@@ -1,9 +1,10 @@
 import React from "react"
-import { Typography, Box, Paper, TextField, Button, Divider } from "@mui/material"
+import { Typography, Box, Paper, TextField, Button, Divider, IconButton } from "@mui/material"
 import Image from "next/image"
 
 import PersonIcon from '@mui/icons-material/Person'
 import LockIcon from '@mui/icons-material/Lock'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import styles from '../styles/login.module.css'
 
@@ -57,6 +58,10 @@ class LoginPage extends React.Component<any, any >{
         this.setState({password: event.target.value })
     }
 
+    handleBack = () => {
+        this.props.router.push('/')
+    }
+
 
     render() {
         return(
@@ -65,9 +70,14 @@ class LoginPage extends React.Component<any, any >{
                         <Paper className = {styles.paperdesign} elevation={12}>
                             
                             <Box className = {styles.mainbox}>
-
+                                
                                 <Box className = {styles.gridchild1}>
-                                    <Box>
+
+                                    <Box className = {styles.iconbox}>
+                                        <IconButton className ={styles.removeraduis} onClick={this.handleBack}><ArrowBackIcon className={styles.backIcon}/></IconButton>
+                                    </Box>
+                                    
+                                    <Box className = {styles.leftsidecontent}>
                                         <Image 
                                         src = "/logo_upscaled.png"
                                         alt = "placeholder"
@@ -75,10 +85,15 @@ class LoginPage extends React.Component<any, any >{
                                         height = {250}
                                         className = {styles.imageDesign}
                                         />
+                                        
+                                        <Box>
+                                            <Typography variant = "h6" className = {styles.titletext}>Barangay 15 Zone 01 District 01</Typography>
+                                            <Typography variant = "subtitle1" className = {styles.subtext} gutterBottom>Certificate Issuance System</Typography>
+                                        </Box>
+                                        
                                     </Box>
 
-                                    <Typography variant = "h6" className = {styles.titletext}>Barangay 15 Zone 01 District 01</Typography>
-                                    <Typography variant = "subtitle1" className = {styles.subtext} gutterBottom>Certificate Issuance System</Typography>
+                                    
                                 </Box>
 
 
@@ -90,9 +105,6 @@ class LoginPage extends React.Component<any, any >{
                                         
                                         <Divider variant = "middle"/>
                                         
-                                        
-
-
                                     </Box>
 
                                     <Box className ={styles.fieldDesign}>
@@ -136,7 +148,6 @@ class LoginPage extends React.Component<any, any >{
                                     </Box>
 
                                 </Box>
-
 
                             </Box>
   

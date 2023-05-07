@@ -13,18 +13,47 @@
 
 .mainbox {
 
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-template-rows: 500px;
-    
-    grid-template-areas: 
-    "left-side right-side";
+    height: 500px;
+    width: auto;
+
+    display: flex;
+    flex-flow: row nowrap;
 
 }
 
 .gridchild1 {
+    flex-grow: 2;
+
+    display: flex;
+    flex-flow: column nowrap;
     background-color: var(--primary-blue-color);
-    grid-area: left-side;
+    
+}
+
+.leftsidecontent {
+    display: flex;
+    flex-flow: column nowrap;
+    
+    align-items: center;
+
+    margin-top: 50px;
+}
+
+.iconbox {
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.backIcon {
+    color: var(--text-color);
+    padding: 5px;
+
+    
+}
+
+.removeraduis {
+    border-radius: 0;
 }
 
 .titletext {
@@ -53,7 +82,8 @@
 
 .gridchild2 {
     
-    grid-area: right-side;
+    flex-grow: 1;
+    
     align-content: center;
 
 }
@@ -98,7 +128,3 @@
     font-weight: bold;
 }
 
-.imageDesign {
-
-    margin-top: 25%;
-}

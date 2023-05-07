@@ -1,31 +1,21 @@
-import React from 'react';
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-import Image from 'next/image';
 
-import Appbar from '../../components/AppbarHome';
-import Content from '../../components/HomepageContent';
+import React from "react";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import Image from "next/image";
 
-import { withRouter } from 'next/router';
+import Appbar from "../../components/AppbarHome";
+import Content from '../../components/HomepageContent'
 
-class Homepage extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
+import { withRouter } from "next/router";
 
-  handleLogin = () => {
-    this.props.router.push('/login');
-  };
-
-  openRegister = () => {};
-
-  render() {
-    return (
-      <>
-        <Appbar />
-        <Content />
-      </>
-    );
-  }
-}
+class Homepage extends React.Component<any, any>{
+    render() {
+        return (
+            <>
+                <Appbar />
+                <Content />
+            </>
+        )
+    }
 
 export default withRouter(Homepage);

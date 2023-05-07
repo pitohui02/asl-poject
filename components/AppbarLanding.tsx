@@ -14,8 +14,10 @@ class AppbarLanding extends React.Component <any, any> {
     }
     
     handleLogout = () => {
+        localStorage.removeItem('jwt');
         this.props.router.push('/login')
     }
+
 
    handleDashboard = () => {
         this.props.router.push('/dashboard')
@@ -38,7 +40,8 @@ class AppbarLanding extends React.Component <any, any> {
                                 </Box>
 
                                 <Box className = {styles.titlebox}>
-                                    <Typography variant = "h4" className = {styles.appbartitle}> WELCOME TO HOMEPAGE</Typography>
+                                    <Typography variant = "h4" className = {styles.appbartitle}>BARANGAY 15 ZONE 01 DISTRICT 01 </Typography>
+                                    <Typography variant = "subtitle1" className = {styles.appbarsubtitle}>Certificate Issuance System</Typography>
                                 </Box>
                             </Box>
 

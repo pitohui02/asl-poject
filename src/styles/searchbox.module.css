@@ -1,0 +1,34 @@
+.mainbox {
+    display: flex;
+    flex-flow: column nowrap;
+    row-gap: 20px;
+
+    justify-content: center;
+}
+
+
+.searchbox {
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+}
+
+.selectorbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.selector {
+    width: 200px;
+    text-align: center;
+}
+
+.optionName {
+    display: flex;
+    column-gap: 20px;
+}
+
+.idstyle {
+    width: 73vh;
+}
