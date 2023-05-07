@@ -1,3 +1,4 @@
+
 import React from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import Image from "next/image";
@@ -17,7 +18,4 @@ class Homepage extends React.Component<any, any>{
         )
     }
 
-
-}
-
-export default withRouter(Homepage)
+export default withRouter(Homepage);

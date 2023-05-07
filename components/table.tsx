@@ -60,10 +60,10 @@ export default function TableComponent({ tableData }: tableProps) {
                 Home Address
               </TableCell>
               <TableCell className={styles.tableheadDesign}>
-                Telephone Number
+                Mobile Number
               </TableCell>
               <TableCell className={styles.tableheadDesign}>
-                Mobile Number
+                Telephone Number
               </TableCell>
               <TableCell className={styles.tableheadDesign}>
                 Birth Date
@@ -104,8 +104,8 @@ export default function TableComponent({ tableData }: tableProps) {
                 <TableCell>{row.lastName}</TableCell>
                 <TableCell>{row.maritalStatus}</TableCell>
                 <TableCell>{row.homeAddress}</TableCell>
-                <TableCell>{row.telephoneNumber}</TableCell>
                 <TableCell>{row.mobileNumber}</TableCell>
+                <TableCell>{row.telephoneNumber}</TableCell>
                 <TableCell>{row.birthDate}</TableCell>
                 <TableCell>{row.createdAt}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 import {
   Box,
@@ -28,12 +28,14 @@ type FormProps = {
   data?: Resident;
   operation: string;
   residentId?: number;
+  closeModal: any;
 };
 
 export default function Registration({
   data,
   operation,
   residentId,
+  closeModal,
 }: FormProps) {
   const [residentFields, setResidentFields] = useState<Resident>(
     data ?? {
@@ -107,7 +109,10 @@ export default function Registration({
             Authorization: localStorage.getItem('jwt'),
           },
         })
-        .then(res => console.log(res))
+        .then(res => {
+          closeModal();
+          console.log(res);
+        })
         .catch(e => console.log(e));
     }
 
@@ -118,7 +123,10 @@ export default function Registration({
             Authorization: localStorage.getItem('jwt'),
           },
         })
-        .then(res => console.log(res))
+        .then(res => {
+          closeModal();
+          console.log(res);
+        })
         .catch(e => console.log(e));
     }
   }
@@ -132,21 +140,20 @@ export default function Registration({
               RESIDENT FORM{' '}
             </Typography>
           </Box>
-          
-          <Divider orientation="horizontal" flexItem/>
+
+          <Divider orientation="horizontal" flexItem />
 
           <Box className={styles.gridParent}>
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  First Name
+                  First Name *
                 </Typography>
 
                 <TextField
                   name="firstName"
                   required
                   variant="filled"
-                  label="First Name"
                   size="small"
                   value={residentFields.firstName}
                   onChange={handleFieldChange}
@@ -156,14 +163,13 @@ export default function Registration({
 
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Middle Name
+                  Middle Name *
                 </Typography>
 
                 <TextField
                   name="middleName"
                   required
                   variant="filled"
-                  label="Middle Name"
                   size="small"
                   value={residentFields.middleName}
                   className={styles.gridChild1_TextField}
@@ -173,14 +179,13 @@ export default function Registration({
 
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Last Name
+                  Last Name *
                 </Typography>
 
                 <TextField
                   name="lastName"
                   required
                   variant="filled"
-                  label="Last Name"
                   size="small"
                   value={residentFields.lastName}
                   className={styles.gridChild1_TextField}
@@ -192,11 +197,9 @@ export default function Registration({
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Gender
+                  Gender *
                 </Typography>
                 <FormControl variant="filled">
-                  <InputLabel size="small">Gender</InputLabel>
-
                   <Select
                     name="gender"
                     required
@@ -218,16 +221,13 @@ export default function Registration({
 
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Marital Status
+                  Civil Status *
                 </Typography>
 
                 <FormControl variant="filled">
-                  <InputLabel size="small">Civil Status</InputLabel>
-
                   <Select
                     name="maritalStatus"
                     required
-                    label="Marital Status"
                     className={styles.dropdownDesign}
                     onChange={handleFieldChange}
                     value={residentFields.maritalStatus}
@@ -246,23 +246,21 @@ export default function Registration({
 
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Birth Date
+                  Birth Date *
                 </Typography>
 
                 <FormControl variant="filled">
-                  {residentFields.birthDate === '' && (
+                  {operation === 'create' && (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DatePicker
                         onChange={handleBirthDateChange}
-                        label="Birth Date"
                         value={residentFields.birthDate}
                         className={styles.birthdatebox}
                       />
                     </LocalizationProvider>
                   )}
-                  {residentFields.birthDate !== '' && (
+                  {operation === 'update' && (
                     <TextField
-                      label="Birth Date"
                       disabled
                       value={residentFields.birthDate}
                       // className={styles.birthdatebox}
@@ -271,7 +269,7 @@ export default function Registration({
                 </FormControl>
               </Box>
             </Box>
-            <Divider orientation="vertical" flexItem/>
+            <Divider orientation="vertical" flexItem />
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -280,7 +278,6 @@ export default function Registration({
                 <TextField
                   name="mobileNumber"
                   variant="filled"
-                  label="Contact Number"
                   value={residentFields.mobileNumber}
                   onChange={handleFieldChange}
                   size="small"
@@ -295,7 +292,6 @@ export default function Registration({
                 <TextField
                   name="telephoneNumber"
                   variant="filled"
-                  label="Telephone Number"
                   value={residentFields.telephoneNumber}
                   onChange={handleFieldChange}
                   size="small"
@@ -336,16 +332,15 @@ export default function Registration({
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  {`Mother\'s`} Full Name
+                  {`Mother\'s`} Full Name *
                 </Typography>
                 <TextField
                   name="mother"
                   value={residentFields.mother}
                   onChange={handleFieldChange}
                   variant="filled"
-                  label="Mother"
                   size="small"
-                  className ={styles.gridchild4_textfield}
+                  className={styles.gridchild4_textfield}
                 />
               </Box>
 
@@ -358,9 +353,8 @@ export default function Registration({
                   value={residentFields.father}
                   onChange={handleFieldChange}
                   variant="filled"
-                  label="Father"
                   size="small"
-                  className ={styles.gridchild4_textfield}
+                  className={styles.gridchild4_textfield}
                 />
               </Box>
 
@@ -373,9 +367,8 @@ export default function Registration({
                   value={residentFields.guardian}
                   onChange={handleFieldChange}
                   variant="filled"
-                  label="Guardian (optional)"
                   size="small"
-                  className ={styles.gridchild4_textfield}
+                  className={styles.gridchild4_textfield}
                 />
               </Box>
             </Box>
@@ -383,13 +376,12 @@ export default function Registration({
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  ADDRESS
+                  ADDRESS *
                 </Typography>
                 <TextField
                   name="homeAddress"
                   required
                   variant="filled"
-                  label="Home Address"
                   onChange={handleFieldChange}
                   value={residentFields.homeAddress}
                   size="small"
@@ -401,13 +393,12 @@ export default function Registration({
 
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
-                  Postal Code
+                  Postal Code *
                 </Typography>
                 <TextField
                   name="postalCode"
                   required
                   variant="filled"
-                  label="Postal Code"
                   onChange={handleFieldChange}
                   size="small"
                   className={styles.postalfield}
