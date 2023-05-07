@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -45,7 +45,7 @@ export default function UpdateModal({ residentId }: UpdateProps) {
         setResidentDetails(res.data);
       })
       .catch(e => console.log(e));
-  }, [residentId]);
+  }, [residentId, open]);
 
   return (
     <div>
@@ -60,6 +60,7 @@ export default function UpdateModal({ residentId }: UpdateProps) {
       >
         <Box sx={style}>
           <ResidentForm
+            closeModal={handleClose}
             operation="update"
             residentId={residentId}
             data={residentDetails}

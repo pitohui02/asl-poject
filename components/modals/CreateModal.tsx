@@ -33,7 +33,7 @@ export default function CreateModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ResidentForm operation="create" />
+          <ResidentForm closeModal={handleClose} operation="create" />
         </Box>
       </Modal>
     </div>
