@@ -126,17 +126,27 @@ export default function ResidentContainer() {
               </Select>
             </Box>
 
-            <Box className = {styles.optionID}>
+            <Box className = {styles.optionbox}>
               {searchOption === 'id' && (
-                <TextField
+                <Box className = {styles.optionId}> 
+                  <TextField
                   label="Search"
                   size="small"
                   variant="filled"
                   onChange={handleSearchResident}
-                  className= {styles.idstyle}
-                  
-                />
+                  className= {styles.idstyle}  
+                  />
+
+                  <Box className = {styles.IDBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
+
+                </Box>
               )}
+
+
 
               {searchOption === 'name' && (
                 <Box className = {styles.optionName}>
@@ -167,6 +177,12 @@ export default function ResidentContainer() {
                     onChange={handleFullNameSearch}
                     
                   />
+
+                  <Box className = {styles.FNBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
                 </Box>
               )}
             </Box>
