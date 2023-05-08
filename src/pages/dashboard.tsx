@@ -6,15 +6,20 @@ import TableComponent from '../../components/table';
 import ResidentContainer from '../../components/ResidentContainer';
 
 import styles from '../styles/dashboard.module.css';
+import AppbarLanding from '../../components/AppbarLanding';
 
 
-export default class Dashboard extends React.Component {
+export default class Dashboard extends React.Component<any, any> {
   render() {
     return (
       <>
 
-        <Box>
-            <DrawerComponent />
+        <Box>    
+            <AppbarLanding>
+            
+              <DrawerComponent />
+              
+            </AppbarLanding>
         </Box>
 
         <Box>

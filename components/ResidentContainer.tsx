@@ -190,8 +190,6 @@ export default function ResidentContainer() {
 
           <Presenter tableData={residents} />
         </Box>
-
-      
     </>
   );
 }

@@ -4,12 +4,22 @@ import Image from "next/image";
 
 import styles from '../src/styles/homepage.module.css'
 
+interface fields  {
+    HomeButton?: boolean
+
+}
+
 
 import { withRouter } from "next/router";
 
 class AppbarLanding extends React.Component <any, any> {
     constructor(props: any) {
         super(props)
+
+        this.state = {
+
+        }
+
         
     }
     
@@ -28,6 +38,7 @@ class AppbarLanding extends React.Component <any, any> {
             <>
                 <AppBar position="static" className = {styles.appbar}>
 
+                        {this.props.children}
                     
                         <Box className = {styles.leftside}>
                                 <Box>
@@ -56,6 +67,7 @@ class AppbarLanding extends React.Component <any, any> {
                                     </Button> 
                                 </Box>
 
+                                
                                 <Box>
                                     <Button
                                     className = {styles.btnstyle}
