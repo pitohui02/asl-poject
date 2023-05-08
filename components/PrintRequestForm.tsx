@@ -4,18 +4,17 @@ import { useState } from 'react';
 
 import styles from '../src/styles/printmodal.module.css';
 
-type PrintRequestForm = {
-  findings: string;
-  purpose: string;
-};
+// type PrintRequestForm = {
+//   findings: string;
+//   purpose: string;
+// };
 
-function PrintRequestForm() {
+export default function PrintRequestForm(): JSX.Element {
   const [residentId, setResidentId] = useState<number>();
-  const [printRequestFormDetails, setPrintRequestFormDetails] =
-    useState<PrintRequestForm>({
-      findings: '',
-      purpose: '',
-    });
+  const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
+    findings: '',
+    purpose: '',
+  });
 
   function handleIdChange(e: any) {
     setResidentId(parseInt(e.target.value));
@@ -34,7 +33,7 @@ function PrintRequestForm() {
       method: 'POST',
       responseType: 'arraybuffer', // set the response type to arraybuffer
     })
-      .then(response => {
+      .then((response: AxiosResponse) => {
         // convert the response data to a blob
         const blob = new Blob([response.data], { type: 'application/pdf' });
 
@@ -131,5 +130,3 @@ function PrintRequestForm() {
     </>
   );
 }
-
-export default PrintRequestForm;

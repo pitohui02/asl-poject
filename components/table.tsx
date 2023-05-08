@@ -68,6 +68,7 @@ export default function TableComponent({ tableData }: tableProps) {
               <TableCell className={styles.tableheadDesign}>
                 Birth Date
               </TableCell>
+              <TableCell className={styles.tableheadDesign}>Age</TableCell>
               <TableCell className={styles.tableheadDesign}>
                 Created At
               </TableCell>
@@ -107,6 +108,7 @@ export default function TableComponent({ tableData }: tableProps) {
                 <TableCell>{row.mobileNumber}</TableCell>
                 <TableCell>{row.telephoneNumber}</TableCell>
                 <TableCell>{row.birthDate}</TableCell>
+                <TableCell>{row.age}</TableCell>
                 <TableCell>{row.createdAt}</TableCell>
                 <TableCell>{row.updatedAt}</TableCell>
 

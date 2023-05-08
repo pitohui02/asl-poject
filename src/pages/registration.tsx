@@ -266,9 +266,20 @@ export default function Registration({
                     <TextField
                       disabled
                       value={residentFields.birthDate}
+                      variant="filled"
+                      size="small"
                       // className={styles.birthdatebox}
                     />
                   )}
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                    Age *
+                  </Typography>
+                  <TextField
+                    type="number"
+                    name="age"
+                    value={residentFields.age}
+                    onChange={handleFieldChange}
+                  />
                 </FormControl>
               </Box>
             </Box>
