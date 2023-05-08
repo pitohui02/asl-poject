@@ -17,7 +17,8 @@ class DrawerComponent extends React.Component<any, any> {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      openRegisterModal: false
     }
   }
 
@@ -27,6 +28,14 @@ class DrawerComponent extends React.Component<any, any> {
 
   drawerClose = () => {
     this.setState({open: false})
+  }
+
+  openRegister = () => {
+    this.setState({openRegisterModal: true})
+  }
+
+  closeRegister = () => {
+    this.setState({openRegisterModal: false})
   }
 
   handleLogout = () => {

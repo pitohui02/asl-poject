@@ -128,40 +128,74 @@ export default function ResidentContainer() {
               <TextField
                 label="Search"
                 size="small"
-                variant="filled"
-                onChange={handleSearchResident}
-                className={styles.idstyle}
-              />
-            )}
+                variant="outlined"
+                className = {styles.selector}
+              >
+                  <MenuItem value="id">Search by ID</MenuItem>
+                  <MenuItem value="name">Search by Full Name</MenuItem>
+              </Select>
+            </Box>
 
-            {searchOption === 'name' && (
-              <Box className={styles.optionName}>
-                <TextField
-                  label="First Name"
+            <Box className = {styles.optionbox}>
+              {searchOption === 'id' && (
+                <Box className = {styles.optionId}> 
+                  <TextField
+                  label="Search"
                   size="small"
                   variant="filled"
-                  name="firstName"
-                  value={fullNameSearch.firstName}
-                  onChange={handleFullNameSearch}
-                />
-                <TextField
-                  label="Middle Name"
-                  size="small"
-                  variant="filled"
-                  name="middleName"
-                  value={fullNameSearch.middleName}
-                  onChange={handleFullNameSearch}
-                />
-                <TextField
-                  label="Last Name"
-                  size="small"
-                  variant="filled"
-                  name="lastName"
-                  value={fullNameSearch.lastName}
-                  onChange={handleFullNameSearch}
-                />
-              </Box>
-            )}
+                  onChange={handleSearchResident}
+                  className= {styles.idstyle}  
+                  />
+
+                  <Box className = {styles.IDBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
+
+                </Box>
+              )}
+
+
+
+              {searchOption === 'name' && (
+                <Box className = {styles.optionName}>
+                  <TextField
+                    label="First Name"
+                    size="small"
+                    variant="filled"
+                    name="firstName"
+                    value={fullNameSearch.firstName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Middle Name"
+                    size="small"
+                    variant="filled"
+                    name="middleName"
+                    value={fullNameSearch.middleName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Last Name"
+                    size="small"
+                    variant="filled"
+                    name="lastName"
+                    value={fullNameSearch.lastName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+
+                  <Box className = {styles.FNBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
+                </Box>
+              )}
+            </Box>
           </Box>
           <Button className={styles.flexchild2_btn} onClick={handleSearchClick}>
             Search{' '}
