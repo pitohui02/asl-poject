@@ -26,17 +26,17 @@ export default function CreateModalHome() {
 
   return (
     <div>
-      <Button className={styles.contentbtn } onClick={handleOpen}>
+      <Button className={styles.contentbtn } onClick={handleOpen} variant = "text">
         REGISTER
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        
       >
         <Box sx = {style}>
-        <ResidentForm operation="create" />
+        <ResidentForm operation="create" closeModal = {handleClose}/>
         </Box>
       </Modal>
     </div>

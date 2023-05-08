@@ -61,6 +61,7 @@ export default function Registration({
     }
   );
 
+
   function handleFieldChange(e: any) {
     setResidentFields((prev: any) => ({
       ...prev,
@@ -91,7 +92,9 @@ export default function Registration({
     }));
   }
 
-  function handleCancel() {}
+  function handleCancel() {
+
+  }
 
   function handleSubmit() {
     let formData = new FormData();
