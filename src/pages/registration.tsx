@@ -91,7 +91,9 @@ export default function Registration({
     }));
   }
 
-  function handleCancel() {}
+  function handleCancel() {
+    closeModal();
+  }
 
   function handleSubmit() {
     let formData = new FormData();

@@ -123,15 +123,17 @@ export default function ResidentContainer() {
             </Select>
           </Box>
 
-          <Box className={styles.optionID}>
+          <Box className={styles.optionbox}>
             {searchOption === 'id' && (
-              <TextField
-                label="Search"
-                size="small"
-                variant="filled"
-                onChange={handleSearchResident}
-                className={styles.idstyle}
-              />
+              <Box className={styles.optionId}>
+                <TextField
+                  label="Search"
+                  size="small"
+                  variant="filled"
+                  onChange={handleSearchResident}
+                  className={styles.idstyle}
+                />
+              </Box>
             )}
 
             {searchOption === 'name' && (
@@ -163,16 +165,23 @@ export default function ResidentContainer() {
               </Box>
             )}
           </Box>
-          <Button className={styles.flexchild2_btn} onClick={handleSearchClick}>
-            Search{' '}
-          </Button>
-          <Button
-            className={styles.flexchild2_btn}
-            onClick={handleAllResidents}
-          >
-            {' '}
-            All Residents{' '}
-          </Button>
+          <Box className={styles.IDBtn}>
+            <Button
+              variant="contained"
+              className={styles.searchbtn}
+              onClick={handleSearchClick}
+            >
+              SEARCH
+            </Button>
+
+            <Button
+              variant="contained"
+              className={styles.allres}
+              onClick={handleAllResidents}
+            >
+              All Residents
+            </Button>
+          </Box>
         </Box>
 
         <Presenter tableData={residents} />
