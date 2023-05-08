@@ -61,6 +61,7 @@ export default function Registration({
     }
   );
 
+
   function handleFieldChange(e: any) {
     setResidentFields((prev: any) => ({
       ...prev,

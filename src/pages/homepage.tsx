@@ -12,6 +12,8 @@ class Homepage extends React.Component<any, any> {
     super(props);
   }
 
+class Homepage extends React.Component<any, any>{
+    
   handleLogin = () => {
     this.props.router.push('/login');
   };
