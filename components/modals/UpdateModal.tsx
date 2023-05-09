@@ -22,17 +22,23 @@ const style = {
 
 type UpdateProps = {
   residentId: number;
+  closeParentModal: any;
 };
 
-export default function UpdateModal({ residentId }: UpdateProps) {
+export default function UpdateModal({
+  residentId,
+  closeParentModal,
+}: UpdateProps) {
   const [open, setOpen] = useState(false);
   const [residentDetails, setResidentDetails] = useState<Resident | any>({});
   const handleOpen = () => {
     setOpen(true);
     console.log(residentDetails);
   };
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    setOpen(false);
+    closeParentModal();
+  };
   useEffect(() => {
     axios
       .get(`${process.env.apiUrl}/resident/${residentId}`, {
@@ -49,9 +55,10 @@ export default function UpdateModal({ residentId }: UpdateProps) {
 
   return (
     <div>
-      <IconButton id={`${residentId}`} onClick={handleOpen}>
-        <ModeEditOutlineIcon className={styles.actionbuttons} />
-      </IconButton>
+      <Button id={`${residentId}`} onClick={handleOpen}>
+        {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
+        update
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
