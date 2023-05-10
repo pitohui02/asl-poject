@@ -76,12 +76,19 @@
 
 /* Grid Child 3 */
 
+.gridchild3 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+
 .uploadbox{
     display: flex;
     flex-direction: row;
     column-gap: 25px;
 }
-
 
 .uploadbtn {
     width: 160px;
@@ -104,13 +111,14 @@
 /* Grid Child 5 */
 
 .addressfield {
-    margin-right: 20px;
+    margin-right: 50px;
+    width: 250px;
 
-    width: 250px
 }
 
 .postalfield {
     margin-right: 50px;
+    width: 250px;
 }
 
 
