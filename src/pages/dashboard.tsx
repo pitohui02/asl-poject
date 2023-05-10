@@ -14,11 +14,13 @@ export default class Dashboard extends React.Component {
       <>
 
         <Box>
+          <Box>
             <DrawerComponent />
-        </Box>
+          </Box>
 
-        <Box>
-          <ResidentContainer />
+          <Box>
+            <ResidentContainer />
+          </Box>
         </Box>
       </>
     );

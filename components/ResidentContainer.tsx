@@ -123,19 +123,6 @@ export default function ResidentContainer() {
             </Select>
           </Box>
 
-          <Box className={styles.optionID}>
-            {searchOption === 'id' && (
-              <TextField
-                label="Search"
-                size="small"
-                variant="outlined"
-                className = {styles.selector}
-              >
-                  <MenuItem value="id">Search by ID</MenuItem>
-                  <MenuItem value="name">Search by Full Name</MenuItem>
-              </Select>
-            </Box>
-
             <Box className = {styles.optionbox}>
               {searchOption === 'id' && (
                 <Box className = {styles.optionId}> 
@@ -155,8 +142,6 @@ export default function ResidentContainer() {
 
                 </Box>
               )}
-
-
 
               {searchOption === 'name' && (
                 <Box className = {styles.optionName}>
@@ -197,20 +182,14 @@ export default function ResidentContainer() {
               )}
             </Box>
           </Box>
-          <Button className={styles.flexchild2_btn} onClick={handleSearchClick}>
-            Search{' '}
-          </Button>
-          <Button
-            className={styles.flexchild2_btn}
-            onClick={handleAllResidents}
-          >
-            {' '}
-            All Residents{' '}
-          </Button>
+          
+          <Box>
+            <Presenter tableData={residents} />
+          </Box>
+          
         </Box>
-
-        <Presenter tableData={residents} />
-      </Box>
+        
+        
     </>
   );
 }
