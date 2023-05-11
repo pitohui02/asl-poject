@@ -21,8 +21,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '../styles/registration.module.css';
 import { Resident } from '../../components/ResidentContainer';
 import axios from 'axios';
-import { Avatar, IconButton } from '@mui/material';
-import dayjs from 'dayjs';
+import { Avatar } from '@mui/material';
 
 type FormProps = {
   data?: Resident;
@@ -62,11 +61,21 @@ export default function Registration({
   );
 
 
+  const [disableSpouse, setdisableSpouse] = useState(true)
+
   function handleFieldChange(e: any) {
     setResidentFields((prev: any) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+
+    if(residentFields.maritalStatus === "Single") {
+      setdisableSpouse(false)
+    }
+
+    else {
+      setdisableSpouse(true)
+    }
   }
 
   function handlePhotoChange(e: any) {
@@ -281,15 +290,16 @@ export default function Registration({
                 </Typography>
 
                 <FormControl variant="filled">
-                  <Select
-                    name=""
+                <Select
+                    name="civil status"
                     required
                     className={styles.dropdownDesign}
                     onChange={handleFieldChange}
                     value={residentFields.maritalStatus}
                     size="small"
+                    variant="filled"
                   >
-                    <MenuItem value=" ">
+                    <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
                     <MenuItem value="Single">Single</MenuItem>
@@ -300,7 +310,7 @@ export default function Registration({
                 </FormControl>
               </Box>
 
-              <Box>
+                <Box>
                     <Typography variant="h6" className={styles.gridchild_text}>
                     Spouse *
                     </Typography>
@@ -311,8 +321,9 @@ export default function Registration({
                       onChange={handleFieldChange}
                       size = "small"
                       className = {styles.spousebox}
+                      disabled = {disableSpouse}
                     />
-                  </Box>
+                </Box>
                   
             </Box>
             <Divider orientation="vertical" flexItem />
