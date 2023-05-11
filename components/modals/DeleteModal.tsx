@@ -26,15 +26,22 @@ const style = {
 type DeleteProps = {
   residentId: number;
   residentDetails: Resident;
+  closeParentModal: any;
 };
 
 export default function DeleteIconModal({
   residentId,
   residentDetails,
+  closeParentModal,
 }: DeleteProps) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    closeParentModal();
+  };
 
   function handleDeleteResident() {
     axios.delete(`${process.env.apiUrl}/resident/${residentId}`, {
@@ -43,13 +50,20 @@ export default function DeleteIconModal({
       },
     });
     handleClose();
+    closeParentModal();
+  }
+
+  function handleCancel() {
+    handleClose();
+    closeParentModal();
   }
 
   return (
     <div>
-      <IconButton id={`${residentId}`} onClick={handleOpen}>
-        <CloseIcon className={styles.actionbuttons} />
-      </IconButton>
+      <Button id={`${residentId}`} onClick={handleOpen}>
+        {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
+        delete
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -62,6 +76,7 @@ export default function DeleteIconModal({
             {`${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName[0]}.`}{' '}
             from the records?
           </Typography>
+          <Button onClick={handleCancel}>Cancel</Button>
           <Button onClick={handleDeleteResident}>Remove</Button>
         </Box>
       </Modal>

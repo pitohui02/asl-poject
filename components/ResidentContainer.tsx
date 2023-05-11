@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Presenter from './table';
+// import Presenter from './table';
+import Presenter from './ResidentTable';
 import SearchIcon from '@mui/icons-material/Search';
 import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
 import styles from '../src/styles/searchbox.module.css';

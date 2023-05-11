@@ -81,13 +81,7 @@ export default function TableComponent({ tableData }: tableProps) {
 
           <TableBody>
             {tableData.map((row: Resident) => (
-              <TableRow
-                // onClick={() => (
-                //   <ViewRecordModal isOpen residentDetails={tableData[row.id]} />
-                // )}
-                hover
-                key={row.id}
-              >
+              <TableRow hover key={row.id}>
                 <TableCell>
                   <ViewRecordModal residentDetails={tableData[row.id]} />
                 </TableCell>
