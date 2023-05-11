@@ -229,7 +229,7 @@ export default function Registration({
 
                 <FormControl variant="filled">
                   <Select
-                    name="maritalStatus"
+                    name="  "
                     required
                     className={styles.dropdownDesign}
                     onChange={handleFieldChange}
@@ -277,17 +277,17 @@ export default function Registration({
                   <TextField
                     type="number"
                     name="age"
+                    variant = "filled"
                     value={residentFields.age}
                     onChange={handleFieldChange}
-                    variant= "filled"
-                    size = "small"
+                    // className= {}
                   />
                 </FormControl>
               </Box>
             </Box>
             <Divider orientation="vertical" flexItem />
             <Box>
-              <Box>
+              <Box className = {styles.gridchild3}>
                 <Typography variant="h6" className={styles.gridchild_text}>
                   Mobile Number
                 </Typography>
@@ -301,7 +301,7 @@ export default function Registration({
                 />
               </Box>
 
-              <Box>
+              <Box className = {styles.gridchild3}>
                 <Typography variant="h6" className={styles.gridchild_text}>
                   Telephone Number
                 </Typography>

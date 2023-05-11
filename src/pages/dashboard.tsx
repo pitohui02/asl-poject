@@ -11,16 +11,14 @@ export default class Dashboard extends React.Component<any, any> {
     return (
       <>
 
-        <Box>    
-            {/*<AppbarLanding>*/}
-            
-              <DrawerComponent />
-              
-            {/*</AppbarLanding> */}
-        </Box>
-
         <Box>
-          <ResidentContainer />
+          <Box>
+            <DrawerComponent />
+          </Box>
+
+          <Box>
+            <ResidentContainer />
+          </Box>
         </Box>
       </>
     );

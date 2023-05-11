@@ -123,10 +123,10 @@ export default function ResidentContainer() {
             </Select>
           </Box>
 
-          <Box className={styles.optionbox}>
-            {searchOption === 'id' && (
-              <Box className={styles.optionId}>
-                <TextField
+            <Box className = {styles.optionbox}>
+              {searchOption === 'id' && (
+                <Box className = {styles.optionId}> 
+                  <TextField
                   label="Search"
                   size="small"
                   variant="filled"
@@ -136,59 +136,60 @@ export default function ResidentContainer() {
               </Box>
             )}
 
-            {searchOption === 'name' && (
-              <Box className={styles.optionName}>
-                <TextField
-                  label="First Name"
-                  size="small"
-                  variant="filled"
-                  name="firstName"
-                  value={fullNameSearch.firstName}
-                  onChange={handleFullNameSearch}
-                />
-                <TextField
-                  label="Middle Name"
-                  size="small"
-                  variant="filled"
-                  name="middleName"
-                  value={fullNameSearch.middleName}
-                  onChange={handleFullNameSearch}
-                />
-                <TextField
-                  label="Last Name"
-                  size="small"
-                  variant="filled"
-                  name="lastName"
-                  value={fullNameSearch.lastName}
-                  onChange={handleFullNameSearch}
-                />
-              </Box>
-            )}
+                  <Box className = {styles.IDBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
+
+                </Box>
+
+              {searchOption === 'name' && (
+                <Box className = {styles.optionName}>
+                  <TextField
+                    label="First Name"
+                    size="small"
+                    variant="filled"
+                    name="firstName"
+                    value={fullNameSearch.firstName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Middle Name"
+                    size="small"
+                    variant="filled"
+                    name="middleName"
+                    value={fullNameSearch.middleName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+                  <TextField
+                    label="Last Name"
+                    size="small"
+                    variant="filled"
+                    name="lastName"
+                    value={fullNameSearch.lastName}
+                    onChange={handleFullNameSearch}
+                    
+                  />
+
+                  <Box className = {styles.FNBtn}> 
+                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
+
+                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
+                  </Box>
+                </Box>
+              )}
+            </Box>
           </Box>
-
-          <Box className={styles.IDBtn}>
-            <Button
-              variant="contained"
-              className={styles.searchbtn}
-              onClick={handleSearchClick}
-            >
-              SEARCH
-            </Button>
-
-            <Button
-              variant="contained"
-              className={styles.allres}
-              onClick={handleAllResidents}
-            >
-              All Residents
-            </Button>
+          
+          <Box>
+            <Presenter tableData={residents} />
           </Box>
-        </Box>
-      </Box>
+          
 
-      <Box>
-        <Presenter tableData={residents} />
-      </Box>
+        
     </>
   );
 }
