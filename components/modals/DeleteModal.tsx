@@ -37,7 +37,11 @@ export default function DeleteIconModal({
   const handleClose = () => setOpen(false);
 
   function handleDeleteResident() {
-    axios.delete(`${process.env.apiUrl}/resident/${residentId}`);
+    axios.delete(`${process.env.apiUrl}/resident/${residentId}`, {
+      headers: {
+        Authorization: localStorage.getItem('jwt'),
+      },
+    });
     handleClose();
   }
 

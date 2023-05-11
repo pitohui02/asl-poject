@@ -33,6 +33,7 @@
 .menuicon {
     margin: 0;
     padding: 20px;
+    border-radius: 0;
 }
 
 .iconsize {

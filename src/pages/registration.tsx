@@ -93,7 +93,7 @@ export default function Registration({
   }
 
   function handleCancel() {
-
+    closeModal();
   }
 
   function handleSubmit() {
@@ -266,9 +266,22 @@ export default function Registration({
                     <TextField
                       disabled
                       value={residentFields.birthDate}
+                      variant="filled"
+                      size="small"
                       // className={styles.birthdatebox}
                     />
                   )}
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                    Age *
+                  </Typography>
+                  <TextField
+                    type="number"
+                    name="age"
+                    value={residentFields.age}
+                    onChange={handleFieldChange}
+                    variant= "filled"
+                    size = "small"
+                  />
                 </FormControl>
               </Box>
             </Box>
