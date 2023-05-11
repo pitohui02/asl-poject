@@ -134,16 +134,16 @@ export default function ResidentContainer() {
                   onChange={handleSearchResident}
                   className={styles.idstyle}
                 />
-              </Box>
-            )}
 
-                  <Box className = {styles.IDBtn}> 
+                <Box className = {styles.FNBtn}> 
                     <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
 
                     <Button variant = "contained" className = {styles.allres}>All Residents</Button>
-                  </Box>
-
                 </Box>
+              </Box>
+            )}
+
+            </Box>
 
               {searchOption === 'name' && (
                 <Box className = {styles.optionName}>

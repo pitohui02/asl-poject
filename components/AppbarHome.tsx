@@ -27,7 +27,7 @@ class Appbar extends React.Component <any, any> {
                         <Box className = {styles.leftside}>
                                 <Box>
                                     <Image 
-                                    src = "/logo_upscaled.png"
+                                    src = "/logo-barangay.png"
                                     alt = "placeholder"
                                     width = {90}
                                     height = {90}

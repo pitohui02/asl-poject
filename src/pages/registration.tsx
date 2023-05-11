@@ -134,6 +134,7 @@ export default function Registration({
     }
   }
 
+  
   return (
     <>
       <Box className={styles.centerscreen}>
@@ -195,8 +196,60 @@ export default function Registration({
                   onChange={handleFieldChange}
                 />
               </Box>
+
             </Box>
             <Divider orientation="vertical" flexItem />
+            
+            <Box>
+
+              <Box>
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                    Birth Date *
+                  </Typography>
+
+                  <FormControl variant="filled">
+                    {operation === 'create' && (
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          onChange={handleBirthDateChange}
+                          value={residentFields.birthDate}
+                          className={styles.birthdatebox}
+                          
+                        />
+                      </LocalizationProvider>
+                    )}
+                    {operation === 'update' && (
+                      <TextField
+                        disabled
+                        value={residentFields.birthDate}
+                        variant="filled"
+                        size="small"
+                        // className={styles.birthdatebox}
+                      />
+                    )}
+  
+                  </FormControl>
+                </Box>
+                
+                <Box>
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                      Age *
+                    </Typography>
+                    <TextField
+                      type="number"
+                      name="age"
+                      variant = "filled"
+                      value={residentFields.age}
+                      onChange={handleFieldChange}
+                      size = "small"
+                      className = {styles.agebox}
+                    />
+              </Box>
+
+            </Box>
+
+            <Divider orientation="vertical" flexItem />
+
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -229,14 +282,14 @@ export default function Registration({
 
                 <FormControl variant="filled">
                   <Select
-                    name="  "
+                    name=""
                     required
                     className={styles.dropdownDesign}
                     onChange={handleFieldChange}
                     value={residentFields.maritalStatus}
                     size="small"
                   >
-                    <MenuItem value="">
+                    <MenuItem value=" ">
                       <em>Select</em>
                     </MenuItem>
                     <MenuItem value="Single">Single</MenuItem>
@@ -248,42 +301,19 @@ export default function Registration({
               </Box>
 
               <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
-                  Birth Date *
-                </Typography>
-
-                <FormControl variant="filled">
-                  {operation === 'create' && (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        onChange={handleBirthDateChange}
-                        value={residentFields.birthDate}
-                        className={styles.birthdatebox}
-                      />
-                    </LocalizationProvider>
-                  )}
-                  {operation === 'update' && (
+                    <Typography variant="h6" className={styles.gridchild_text}>
+                    Spouse *
+                    </Typography>
                     <TextField
-                      disabled
-                      value={residentFields.birthDate}
-                      variant="filled"
-                      size="small"
-                      // className={styles.birthdatebox}
+                      name="spouse"
+                      variant = "filled"
+                      // value={residentFields.age}
+                      onChange={handleFieldChange}
+                      size = "small"
+                      className = {styles.spousebox}
                     />
-                  )}
-                  <Typography variant="h6" className={styles.gridchild_text}>
-                    Age *
-                  </Typography>
-                  <TextField
-                    type="number"
-                    name="age"
-                    variant = "filled"
-                    value={residentFields.age}
-                    onChange={handleFieldChange}
-                    // className= {}
-                  />
-                </FormControl>
-              </Box>
+                  </Box>
+                  
             </Box>
             <Divider orientation="vertical" flexItem />
             <Box>

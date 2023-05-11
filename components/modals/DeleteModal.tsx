@@ -4,11 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import styles from '../../src/styles/drawer.module.css';
-import Registration from '@/pages/registration';
-import PrintRequestForm from '../PrintRequestForm';
-import { IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import styles from '../../src/styles/modals.module.css'
+
 import axios from 'axios';
 import { Resident } from '../ResidentContainer';
 
@@ -60,9 +57,9 @@ export default function DeleteIconModal({
 
   return (
     <div>
-      <Button id={`${residentId}`} onClick={handleOpen}>
+      <Button id={`${residentId}`} onClick={handleOpen} variant = "contained" className= {styles.buttondesign}>
         {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
-        delete
+        DELETE
       </Button>
       <Modal
         open={open}
@@ -70,14 +67,16 @@ export default function DeleteIconModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography>
+        <Box className = {styles.deletecenterscreen}>
+          <Typography className = {styles.deletemodaltext}>
             Remove{' '}
             {`${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName[0]}.`}{' '}
             from the records?
           </Typography>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleDeleteResident}>Remove</Button>
+          <Box className = {styles.deleteBtngroup}>
+            <Button onClick={handleCancel} className= {styles.buttondesign}>Cancel</Button>
+            <Button onClick={handleDeleteResident} className= {styles.buttondesign}>Remove</Button>
+          </Box>
         </Box>
       </Modal>
     </div>

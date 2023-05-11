@@ -9,7 +9,11 @@ import styles from '../src/styles/printmodal.module.css';
 //   purpose: string;
 // };
 
-export default function PrintRequestForm(): JSX.Element {
+type formProps = {
+  closeModal: any;
+}
+
+export default function PrintRequestForm({closeModal}: formProps): JSX.Element {
   const [residentId, setResidentId] = useState<number>();
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
     findings: '',
@@ -50,6 +54,10 @@ export default function PrintRequestForm(): JSX.Element {
       .catch(error => {
         console.error(error);
       });
+  }
+
+  function handleCancel() {
+    closeModal();
   }
 
   return (
@@ -108,7 +116,7 @@ export default function PrintRequestForm(): JSX.Element {
 
           <Box className={styles.buttonbox}>
             <Box>
-              <Button onClick={handleSubmit} variant="outlined" color="error">
+              <Button onClick={handleCancel} variant="outlined" color="error">
                 {' '}
                 Cancel{' '}
               </Button>

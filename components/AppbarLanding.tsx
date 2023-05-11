@@ -36,13 +36,11 @@ class AppbarLanding extends React.Component <any, any> {
   render() {
     return (
       <>
-
-
         <AppBar position="static" className={styles.appbar}>
           <Box className={styles.leftside}>
             <Box>
               <Image
-                src="/logo_upscaled.png"
+                src="/logo-barangay.png"
                 alt="placeholder"
                 width={90}
                 height={90}

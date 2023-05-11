@@ -1,11 +1,10 @@
-.mainbox {
+.dashboard {
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
 
-    column-gap: 60px;
-
+    row-gap: 40px;
 
 }

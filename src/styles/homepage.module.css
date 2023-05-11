@@ -73,6 +73,15 @@
     background-color: var(--primary-blue-color);
 }
 
+.appbarDB {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px;
+
+    background-color: var(--primary-blue-color);
+}
+
 .leftside {
     display: flex;
     flex-direction: row;

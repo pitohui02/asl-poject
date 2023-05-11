@@ -42,7 +42,7 @@ class Content extends React.Component <any, any> {
 
                         <Box>
                             <Image 
-                            src = "/logo_upscaled.png"
+                            src = "/logo-barangay.png"
                             alt = "placeholder"
                             width = {500}
                             height = {500}
