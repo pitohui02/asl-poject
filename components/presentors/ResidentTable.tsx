@@ -6,18 +6,18 @@ import {
   GridCallbackDetails,
 } from '@mui/x-data-grid';
 
-import styles from '../src/styles/modals.module.css'
+import styles from '@styles/modals.module.css';
 
 import React, { useState } from 'react';
-import { Resident } from './ResidentContainer';
+import { Resident } from '../containers/ResidentContainer';
 import { Avatar, Box, Modal } from '@mui/material';
 
-import ViewModal from './modals/ViewModal';
-import ResidentRecord from './ResidentRecord';
-import UpdateModal from './modals/UpdateModal';
-import DeleteIconModal from './modals/DeleteModal';
+import ViewModal from '../modals/ViewModal';
+import ResidentRecord from '../ResidentRecord';
+import UpdateModal from '../modals/UpdateModal';
+import DeleteIconModal from '../modals/DeleteModal';
 
-import data from '../record-demo/recordData.json'
+import data from '../../record-demo/recordData.json';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -35,6 +35,7 @@ const columns = [
     field: 'id',
     headerName: 'ID',
     editable: false,
+    width: 50,
   },
   {
     field: 'profilePhotoUrl',
@@ -51,67 +52,72 @@ const columns = [
     },
   },
 
-
   {
     field: 'firstName',
     headerName: 'First Name',
     editable: false,
+    width: 100,
   },
   {
     field: 'middleName',
     headerName: 'Middle Name',
     editable: false,
+    width: 100,
   },
   {
     field: 'lastName',
     headerName: 'Last Name',
     editable: false,
+    width: 100,
   },
   {
-    field: 'maritalStatus',
+    field: 'civilStatus',
     headerName: 'Civil Status',
     editable: false,
-  },
-  {
-    field: 'homeAddress',
-    headerName: 'Address',
-    editable: false,
-  },
-  {
-    field: 'mobileNumber',
-    headerName: 'Mobile Number',
-    editable: false,
-  },
-  {
-    field: 'telephoneNumber',
-    headerName: 'Telephone Number',
-    editable: false,
+    width: 100,
   },
   {
     field: 'birthDate',
     headerName: 'Birth Date',
     editable: false,
+    width: 100,
   },
   {
     field: 'age',
     headerName: 'Age',
     editable: false,
+    width: 100,
+  },
+  {
+    field: 'homeAddress',
+    headerName: 'Address',
+    editable: false,
+    width: 400,
+  },
+  {
+    field: 'mobileNumber',
+    headerName: 'Mobile Number',
+    editable: false,
+    width: 200,
+  },
+  {
+    field: 'telephoneNumber',
+    headerName: 'Telephone Number',
+    editable: false,
+    width: 200,
   },
   {
     field: 'createdAt',
-    headerName: 'Created at',
+    headerName: 'Created At',
     editable: false,
+    width: 170,
   },
   {
     field: 'updatedAt',
-    headerName: 'Created at',
+    headerName: 'Last Modified',
     editable: false,
+    width: 170,
   },
-  // {
-  //   field: 'actions',
-  //   headerName: 'Actions',
-  //   editable: false,
-  // },
 ];
 
 type tableProps = {
@@ -135,7 +141,6 @@ function ResidentTable({ tableData }: tableProps) {
     handleOpen();
   };
 
-  
   const rows = [
     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
@@ -151,18 +156,18 @@ function ResidentTable({ tableData }: tableProps) {
   return (
     <>
       <DataGrid
-        //rows={tableData}
-        rows = {data} // Sample Data
+        rows={tableData}
+        // rows = {data} // Sample Data
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
         onRowClick={handleRowClick}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         disableRowSelectionOnClick
       />
       <Modal
@@ -171,9 +176,9 @@ function ResidentTable({ tableData }: tableProps) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className = {styles.centerscreen}>
+        <Box className={styles.centerscreen}>
           <ResidentRecord recordData={residentDetails} />
-          <Box className = {styles.buttonGroup}>
+          <Box className={styles.buttonGroup}>
             <UpdateModal
               closeParentModal={handleClose}
               residentId={residentDetails?.id}

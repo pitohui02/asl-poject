@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 // import Presenter from './table';
-import Presenter from './ResidentTable';
+import Presenter from '../presentors/ResidentTable';
 import SearchIcon from '@mui/icons-material/Search';
 import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
-import styles from '../src/styles/searchbox.module.css';
+import styles from '@styles/searchbox.module.css';
 
 export type Resident = {
   id: number;
@@ -12,7 +12,8 @@ export type Resident = {
   firstName: string;
   middleName: string;
   lastName: string;
-  maritalStatus: string;
+  civilStatus: string;
+  spouse: string;
   homeAddress: string;
   gender: string;
   postalCode: string;
@@ -31,6 +32,8 @@ export type Resident = {
 export default function ResidentContainer() {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [residentId, setResidentId] = useState(0);
+  const [certificateSearch, setCertificateSearch] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [searchOption, setSearchOption] = useState('id');
   const [fullNameSearch, setFullNameSearch] = useState({
     firstName: '',
@@ -78,6 +81,7 @@ export default function ResidentContainer() {
           setResidents([res.data]);
         })
         .catch(e => {
+          // setErrorMessage(e)
           console.log(e);
         });
     }
@@ -124,73 +128,73 @@ export default function ResidentContainer() {
             </Select>
           </Box>
 
-            <Box className = {styles.optionbox}>
-              {searchOption === 'id' && (
-                <Box className = {styles.optionId}> 
-                  <TextField
+          {/* {errorMessage && } */}
+
+          <Box className={styles.optionbox}>
+            {searchOption === 'id' && (
+              <Box className={styles.optionId}>
+                <TextField
                   label="Search"
                   size="small"
                   variant="filled"
                   onChange={handleSearchResident}
                   className={styles.idstyle}
                 />
-
-                <Box className = {styles.FNBtn}> 
-                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
-
-                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
-                </Box>
               </Box>
             )}
-
-            </Box>
-
-              {searchOption === 'name' && (
-                <Box className = {styles.optionName}>
-                  <TextField
-                    label="First Name"
-                    size="small"
-                    variant="filled"
-                    name="firstName"
-                    value={fullNameSearch.firstName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-                  <TextField
-                    label="Middle Name"
-                    size="small"
-                    variant="filled"
-                    name="middleName"
-                    value={fullNameSearch.middleName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-                  <TextField
-                    label="Last Name"
-                    size="small"
-                    variant="filled"
-                    name="lastName"
-                    value={fullNameSearch.lastName}
-                    onChange={handleFullNameSearch}
-                    
-                  />
-
-                  <Box className = {styles.FNBtn}> 
-                    <Button variant = "contained" className = {styles.searchbtn}>SEARCH</Button>
-
-                    <Button variant = "contained" className = {styles.allres}>All Residents</Button>
-                  </Box>
-                </Box>
-              )}
-            </Box>
           </Box>
-          
-          <Box>
-            <Presenter tableData={residents} />
-          </Box>
-          
 
-        
+          {searchOption === 'name' && (
+            <Box className={styles.optionName}>
+              <TextField
+                label="First Name *"
+                size="small"
+                variant="filled"
+                name="firstName"
+                value={fullNameSearch.firstName}
+                onChange={handleFullNameSearch}
+              />
+              <TextField
+                label="Middle Name *"
+                size="small"
+                variant="filled"
+                name="middleName"
+                value={fullNameSearch.middleName}
+                onChange={handleFullNameSearch}
+              />
+              <TextField
+                label="Last Name *"
+                size="small"
+                variant="filled"
+                name="lastName"
+                value={fullNameSearch.lastName}
+                onChange={handleFullNameSearch}
+              />
+            </Box>
+          )}
+          <Box className={styles.FNBtn}>
+            <Button
+              variant="contained"
+              onClick={handleSearchClick}
+              className={styles.searchbtn}
+            >
+              SEARCH
+            </Button>
+
+            <Button
+              variant="contained"
+              onClick={handleAllResidents}
+              className={styles.allres}
+            >
+              All Residents
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box>
+        <Presenter tableData={residents} />
+      </Box>
     </>
   );
 }
