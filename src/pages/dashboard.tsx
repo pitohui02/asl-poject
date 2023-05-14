@@ -2,20 +2,31 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import DrawerComponent from '../../components/drawer';
-import ResidentContainer from '../../components/ResidentContainer';
+import ResidentContainer from '../../components/containers/ResidentContainer';
 import AppbarDashboard from '../../components/AppbarDashboard';
 
-import styles from '../styles/dashboard.module.css'
+import styles from '../styles/dashboard.module.css';
+import withAuth from '../pages/api/auth/withAuth';
 
-export default class Dashboard extends React.Component<any, any> {
+class Dashboard extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError(error: any) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+  componentDidCatch(error: any, errorInfo: any) {
+    // You can also log the error to an error reporting service
+    console.log('=====>', error, errorInfo);
+  }
   render() {
     return (
       <>
-
-        <Box className = {styles.dashboard}>
-          <Box >
+        <Box className={styles.dashboard}>
+          <Box>
             <AppbarDashboard />
-            
           </Box>
 
           <Box>
@@ -26,3 +37,5 @@ export default class Dashboard extends React.Component<any, any> {
     );
   }
 }
+
+export default withAuth(Dashboard);
