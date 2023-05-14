@@ -20,6 +20,7 @@ export default function CreateModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
 
   return (
     <div>
@@ -33,7 +34,7 @@ export default function CreateModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <PrintRequestForm />
+          <PrintRequestForm closeModal={handleClose}/>
         </Box>
       </Modal>
     </div>

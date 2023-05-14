@@ -31,7 +31,7 @@ class LandingContent extends React.Component<any, any> {
           <Box className={styles.landingcontent}>
             <Box>
               <Image
-                src="/logo_upscaled.png"
+                src="/logo-barangay.png"
                 alt="placeholder"
                 width={400}
                 height={400}

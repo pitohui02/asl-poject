@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import styles from '../../src/styles/drawer.module.css';
+import styles from '../../src/styles/modals.module.css'
 import ResidentForm from '@/pages/registration';
 import { IconButton } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -55,9 +55,9 @@ export default function UpdateModal({
 
   return (
     <div>
-      <Button id={`${residentId}`} onClick={handleOpen}>
+      <Button id={`${residentId}`} onClick={handleOpen} variant = "contained" className= {styles.buttondesign}>
         {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
-        update
+        UPDATE
       </Button>
       <Modal
         open={open}

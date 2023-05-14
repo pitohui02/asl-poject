@@ -61,27 +61,32 @@
 
 /* Grid Child 2 */
 
-.dropdownDesign {
-
-    width: 200px;
-    margin-right: 20px;
-
-}
-
-.birthdatebox {
+.dropdownDesign, .spousebox{
     width: 200px;
     margin-right: 20px;
 }
 
-
+.agebox, .birthdatebox {
+    width: 200px;
+}
 /* Grid Child 3 */
+
+.gridchild3 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.gridchild3  {
+    width: 200px;
+}
+
 
 .uploadbox{
     display: flex;
     flex-direction: row;
     column-gap: 25px;
 }
-
 
 .uploadbtn {
     width: 160px;
@@ -104,13 +109,14 @@
 /* Grid Child 5 */
 
 .addressfield {
-    margin-right: 20px;
+    margin-right: 50px;
+    width: 250px;
 
-    width: 250px
 }
 
 .postalfield {
     margin-right: 50px;
+    width: 250px;
 }
 
 
@@ -120,20 +126,26 @@
 
 }
 
+.uploadbtn {
+    width: 130px;
+}
+
 .registerbtn {
 
-    width: 300px;
-    height: 40px;
     background-color: var(--primary-button-color);
     
 }
 
 .cancelbtn {
 
-    width: 300px;
+    color: var(--error-button-color);
+}
+
+.registerbtn, .cancelbtn {
+    width: 250px;
     height: 40px;
 
-    color: var(--error-button-color);
+    
 }
 
 .registerbtn:hover {
@@ -148,6 +160,8 @@
 .registerbox {
     display: flex;
     justify-content:space-between;
+
+    margin: 0 80px 0 30px;
 }  
 
 

@@ -1,20 +1,33 @@
 import React from 'react';
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 
 import styles from '../src/styles/homepage.module.css';
 
 import { withRouter } from 'next/router';
 
-class AppbarLanding extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-  }
 
-  handleLogout = () => {
-    localStorage.removeItem('jwt');
-    this.props.router.push('/login');
-  };
+interface fields  {
+    HomeButton: boolean,
+    DashboardButton: boolean
+
+
+}
+
+
+
+
+class AppbarLanding extends React.Component <any, any> {
+    constructor(props: any) {
+        super(props)
+        
+    }
+    
+    handleLogout = () => {
+        localStorage.removeItem('jwt');
+        this.props.router.push('/login')
+    }
+
 
   handleDashboard = () => {
     this.props.router.push('/dashboard');
@@ -27,7 +40,7 @@ class AppbarLanding extends React.Component<any, any> {
           <Box className={styles.leftside}>
             <Box>
               <Image
-                src="/logo_upscaled.png"
+                src="/logo-barangay.png"
                 alt="placeholder"
                 width={90}
                 height={90}
@@ -57,6 +70,7 @@ class AppbarLanding extends React.Component<any, any> {
               </Button>
             </Box>
 
+                                
             <Box>
               <Button
                 className={styles.btnstyle}
@@ -66,7 +80,7 @@ class AppbarLanding extends React.Component<any, any> {
               >
                 {' '}
                 DASHBOARD
-              </Button>
+              </Button> 
             </Box>
           </Box>
         </AppBar>

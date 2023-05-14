@@ -49,6 +49,8 @@
   display: flex;
   column-gap: 20px;
   justify-content: center;
+
+  padding-bottom: 20px;
 }
 
 .selectorbox {

@@ -69,7 +69,7 @@ class DrawerComponent extends React.Component<any, any> {
 
                   <Box>
                     <Image 
-                    src = "/logo_upscaled.png"
+                    src = "/logo-barangay.png"
                     alt = "placeholder"
                     width = {150}
                     height = {150}
@@ -84,24 +84,6 @@ class DrawerComponent extends React.Component<any, any> {
                     <PrintModal />
                   </Box>  
 
-                </Box>
-
-                <Box className = {styles.flexchild2}>
-                    <Button
-                    variant= "contained" 
-                    type = "submit"
-                    className = {styles.flexchild2_btn}
-                    onClick={this.handleBack}
-                    > BACK 
-                    </Button>
-
-                    <Button
-                    variant= "contained" 
-                    type = "submit"
-                    className = {styles.flexchild2_btn}
-                    onClick={this.handleLogout}
-                    > LOG OUT
-                    </Button>  
                 </Box>
                 
               </Box>

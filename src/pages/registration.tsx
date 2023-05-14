@@ -21,8 +21,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import styles from '../styles/registration.module.css';
 import { Resident } from '../../components/ResidentContainer';
 import axios from 'axios';
-import { Avatar, IconButton } from '@mui/material';
-import dayjs from 'dayjs';
+import { Avatar } from '@mui/material';
 
 type FormProps = {
   data?: Resident;
@@ -62,11 +61,21 @@ export default function Registration({
   );
 
 
+  const [disableSpouse, setdisableSpouse] = useState(true)
+
   function handleFieldChange(e: any) {
     setResidentFields((prev: any) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
+
+    if(residentFields.maritalStatus === "Single") {
+      setdisableSpouse(false)
+    }
+
+    else {
+      setdisableSpouse(true)
+    }
   }
 
   function handlePhotoChange(e: any) {
@@ -134,6 +143,7 @@ export default function Registration({
     }
   }
 
+  
   return (
     <>
       <Box className={styles.centerscreen}>
@@ -195,8 +205,60 @@ export default function Registration({
                   onChange={handleFieldChange}
                 />
               </Box>
+
             </Box>
             <Divider orientation="vertical" flexItem />
+            
+            <Box>
+
+              <Box>
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                    Birth Date *
+                  </Typography>
+
+                  <FormControl variant="filled">
+                    {operation === 'create' && (
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                          onChange={handleBirthDateChange}
+                          value={residentFields.birthDate}
+                          className={styles.birthdatebox}
+                          
+                        />
+                      </LocalizationProvider>
+                    )}
+                    {operation === 'update' && (
+                      <TextField
+                        disabled
+                        value={residentFields.birthDate}
+                        variant="filled"
+                        size="small"
+                        // className={styles.birthdatebox}
+                      />
+                    )}
+  
+                  </FormControl>
+                </Box>
+                
+                <Box>
+                  <Typography variant="h6" className={styles.gridchild_text}>
+                      Age *
+                    </Typography>
+                    <TextField
+                      type="number"
+                      name="age"
+                      variant = "filled"
+                      value={residentFields.age}
+                      onChange={handleFieldChange}
+                      size = "small"
+                      className = {styles.agebox}
+                    />
+              </Box>
+
+            </Box>
+
+            <Divider orientation="vertical" flexItem />
+
             <Box>
               <Box>
                 <Typography variant="h6" className={styles.gridchild_text}>
@@ -228,13 +290,14 @@ export default function Registration({
                 </Typography>
 
                 <FormControl variant="filled">
-                  <Select
-                    name="maritalStatus"
+                <Select
+                    name="civil status"
                     required
                     className={styles.dropdownDesign}
                     onChange={handleFieldChange}
                     value={residentFields.maritalStatus}
                     size="small"
+                    variant="filled"
                   >
                     <MenuItem value="">
                       <em>Select</em>
@@ -247,45 +310,25 @@ export default function Registration({
                 </FormControl>
               </Box>
 
-              <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
-                  Birth Date *
-                </Typography>
-
-                <FormControl variant="filled">
-                  {operation === 'create' && (
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        onChange={handleBirthDateChange}
-                        value={residentFields.birthDate}
-                        className={styles.birthdatebox}
-                      />
-                    </LocalizationProvider>
-                  )}
-                  {operation === 'update' && (
+                <Box>
+                    <Typography variant="h6" className={styles.gridchild_text}>
+                    Spouse *
+                    </Typography>
                     <TextField
-                      disabled
-                      value={residentFields.birthDate}
-                      variant="filled"
-                      size="small"
-                      // className={styles.birthdatebox}
+                      name="spouse"
+                      variant = "filled"
+                      // value={residentFields.age}
+                      onChange={handleFieldChange}
+                      size = "small"
+                      className = {styles.spousebox}
+                      disabled = {disableSpouse}
                     />
-                  )}
-                  <Typography variant="h6" className={styles.gridchild_text}>
-                    Age *
-                  </Typography>
-                  <TextField
-                    type="number"
-                    name="age"
-                    value={residentFields.age}
-                    onChange={handleFieldChange}
-                  />
-                </FormControl>
-              </Box>
+                </Box>
+                  
             </Box>
             <Divider orientation="vertical" flexItem />
             <Box>
-              <Box>
+              <Box className = {styles.gridchild3}>
                 <Typography variant="h6" className={styles.gridchild_text}>
                   Mobile Number
                 </Typography>
@@ -299,7 +342,7 @@ export default function Registration({
                 />
               </Box>
 
-              <Box>
+              <Box className = {styles.gridchild3}>
                 <Typography variant="h6" className={styles.gridchild_text}>
                   Telephone Number
                 </Typography>

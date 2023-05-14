@@ -79,7 +79,7 @@ class LoginPage extends React.Component<any, any >{
                                     
                                     <Box className = {styles.leftsidecontent}>
                                         <Image 
-                                        src = "/logo_upscaled.png"
+                                        src = "/logo-barangay.png"
                                         alt = "placeholder"
                                         width = {250}
                                         height = {250}
