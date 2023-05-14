@@ -11,17 +11,23 @@ import styles from '../src/styles/printmodal.module.css';
 
 type formProps = {
   closeModal: any;
-}
+};
 
-export default function PrintRequestForm({closeModal}: formProps): JSX.Element {
-  const [residentId, setResidentId] = useState<number>();
+export default function PrintRequestForm({
+  closeModal,
+}: formProps): JSX.Element {
+  // const [residentId, setResidentId] = useState<number>();
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
+    residentId: 0,
     findings: '',
     purpose: '',
   });
 
   function handleIdChange(e: any) {
-    setResidentId(parseInt(e.target.value));
+    setPrintRequestFormDetails((prev: any) => ({
+      ...prev,
+      residentId: parseInt(e.target.value),
+    }));
   }
   function handleFormFieldChange(e: any) {
     setPrintRequestFormDetails((prev: any) => ({
@@ -31,8 +37,9 @@ export default function PrintRequestForm({closeModal}: formProps): JSX.Element {
   }
 
   function handleSubmit() {
+    console.log(printRequestFormDetails);
     axios({
-      url: `${process.env.apiUrl}/cor/${residentId}`,
+      url: `${process.env.apiUrl}/residentCertificate/print`,
       data: printRequestFormDetails,
       method: 'POST',
       responseType: 'arraybuffer', // set the response type to arraybuffer
@@ -47,7 +54,10 @@ export default function PrintRequestForm({closeModal}: formProps): JSX.Element {
         // create a temporary link element to download the file
         const link = document.createElement('a');
         link.href = fileUrl;
-        link.setAttribute('download', `B15-Z1-D01-${residentId}.pdf`); // set the desired filename here
+        link.setAttribute(
+          'download',
+          `B15-Z1-D01-${printRequestFormDetails.residentId}.pdf`
+        ); // set the desired filename here
         document.body.appendChild(link);
         link.click();
       })
@@ -71,7 +81,7 @@ export default function PrintRequestForm({closeModal}: formProps): JSX.Element {
               </Typography>
               <TextField
                 name="residentId"
-                value={residentId}
+                value={printRequestFormDetails.residentId}
                 onChange={handleIdChange}
                 label="Resident ID"
                 variant="filled"

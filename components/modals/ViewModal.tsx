@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import styles from '../../src/styles/modals.module.css'
+import styles from '../../src/styles/modals.module.css';
 
 import { IconButton, Paper, Box, Modal } from '@mui/material';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import { Resident } from '../ResidentContainer';
+import { Resident } from '../containers/ResidentContainer';
 import ResidentRecord from '../ResidentRecord';
-
-
 
 type ViewProps = {
   residentDetails: Resident;
@@ -28,8 +26,7 @@ export default function ViewRecordModal({ residentDetails }: ViewProps) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-
-        className = {styles.centerscreen}
+        className={styles.centerscreen}
       >
         <Box component={Paper}>
           <ResidentRecord recordData={residentDetails} />

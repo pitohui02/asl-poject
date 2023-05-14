@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import styles from '../../src/styles/modals.module.css'
+import styles from '../../src/styles/modals.module.css';
 
 import axios from 'axios';
-import { Resident } from '../ResidentContainer';
+import { Resident } from '../containers/ResidentContainer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,7 +23,7 @@ const style = {
 type DeleteProps = {
   residentId: number;
   residentDetails: Resident;
-  closeParentModal: any;
+  closeParentModal?: any;
 };
 
 export default function DeleteIconModal({
@@ -57,9 +57,14 @@ export default function DeleteIconModal({
 
   return (
     <div>
-      <Button id={`${residentId}`} onClick={handleOpen} variant = "contained" className= {styles.buttondesign}>
+      <Button
+        id={`${residentId}`}
+        onClick={handleOpen}
+        variant="contained"
+        className={styles.buttondesign}
+      >
         {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
-        DELETE
+        DELETE RECORD
       </Button>
       <Modal
         open={open}
@@ -67,15 +72,25 @@ export default function DeleteIconModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box className = {styles.deletecenterscreen}>
-          <Typography className = {styles.deletemodaltext}>
+        <Box className={styles.deletecenterscreen}>
+          <Typography className={styles.deletemodaltext}>
             Remove{' '}
             {`${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName[0]}.`}{' '}
             from the records?
           </Typography>
-          <Box className = {styles.deleteBtngroup}>
-            <Button onClick={handleCancel} className= {styles.buttondesign}>Cancel</Button>
-            <Button onClick={handleDeleteResident} className= {styles.buttondesign}>Remove</Button>
+          <Box className={styles.deleteBtngroup}>
+            <Button onClick={handleCancel} className={styles.buttondesign}>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleDeleteResident}
+              color="error"
+              variant="contained"
+              sx={{ width: '200px' }}
+              // className={styles.buttondesign}
+            >
+              Remove
+            </Button>
           </Box>
         </Box>
       </Modal>

@@ -23,8 +23,12 @@ export default function CreateModal() {
 
   return (
     <div>
-      <Button className={styles.contentbtn} onClick={handleOpen} variant= "contained">
-        REGISTER
+      <Button
+        className={styles.contentbtn}
+        onClick={handleOpen}
+        variant="contained"
+      >
+        REGISTER A RECORD
       </Button>
       <Modal
         open={open}

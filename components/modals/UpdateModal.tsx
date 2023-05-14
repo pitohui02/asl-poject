@@ -4,11 +4,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import styles from '../../src/styles/modals.module.css'
+import styles from '../../src/styles/modals.module.css';
 import ResidentForm from '@/pages/registration';
 import { IconButton } from '@mui/material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { Resident } from '../ResidentContainer';
+import { Resident } from '../containers/ResidentContainer';
 import axios from 'axios';
 
 const style = {
@@ -22,7 +22,7 @@ const style = {
 
 type UpdateProps = {
   residentId: number;
-  closeParentModal: any;
+  closeParentModal?: any;
 };
 
 export default function UpdateModal({
@@ -55,9 +55,14 @@ export default function UpdateModal({
 
   return (
     <div>
-      <Button id={`${residentId}`} onClick={handleOpen} variant = "contained" className= {styles.buttondesign}>
+      <Button
+        id={`${residentId}`}
+        onClick={handleOpen}
+        variant="contained"
+        className={styles.buttondesign}
+      >
         {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
-        UPDATE
+        UPDATE RECORD
       </Button>
       <Modal
         open={open}
