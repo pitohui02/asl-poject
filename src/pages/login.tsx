@@ -111,7 +111,7 @@ class LoginPage extends React.Component<any, any> {
 
               <Box className={styles.gridchild2}>
                 <Box>
-                  <Typography variant="h4" className={styles.titledesign}>
+                  <Typography variant="h6" className={styles.titledesign}>
                     SIGN IN
                   </Typography>
 

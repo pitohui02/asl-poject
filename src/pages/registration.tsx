@@ -17,6 +17,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import withAuth from '../pages/api/auth/withAuth';
 
 import styles from '../styles/registration.module.css';
 import { Resident } from '../../components/containers/ResidentContainer';
@@ -30,12 +31,7 @@ type FormProps = {
   closeModal: any;
 };
 
-export default function Registration({
-  data,
-  operation,
-  residentId,
-  closeModal,
-}: FormProps) {
+function Registration({ data, operation, residentId, closeModal }: FormProps) {
   const [residentFields, setResidentFields] = useState<Resident>(
     data ?? {
       id: 0,
@@ -477,3 +473,5 @@ export default function Registration({
     </>
   );
 }
+
+export default withAuth(Registration);

@@ -5,6 +5,7 @@ import Presenter from '../presentors/ResidentTable';
 import SearchIcon from '@mui/icons-material/Search';
 import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
 import styles from '@styles/searchbox.module.css';
+import withAuth from '@/pages/api/auth/withAuth';
 
 export type Resident = {
   id: number;
@@ -29,7 +30,7 @@ export type Resident = {
   isArchived: boolean;
 };
 
-export default function ResidentContainer() {
+function ResidentContainer() {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [residentId, setResidentId] = useState(0);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
@@ -198,3 +199,5 @@ export default function ResidentContainer() {
     </>
   );
 }
+
+export default withAuth(ResidentContainer);

@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import styles from '../src/styles/printmodal.module.css';
+import withAuth from '@/pages/api/auth/withAuth';
 
 // type PrintRequestForm = {
 //   findings: string;
@@ -13,9 +14,7 @@ type formProps = {
   closeModal: any;
 };
 
-export default function PrintRequestForm({
-  closeModal,
-}: formProps): JSX.Element {
+function PrintRequestForm({ closeModal }: formProps): JSX.Element {
   // const [residentId, setResidentId] = useState<number>();
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
     residentId: 0,
@@ -41,6 +40,9 @@ export default function PrintRequestForm({
     axios({
       url: `${process.env.apiUrl}/residentCertificate/print`,
       data: printRequestFormDetails,
+      headers: {
+        Authorization: localStorage.getItem('jwt'),
+      },
       method: 'POST',
       responseType: 'arraybuffer', // set the response type to arraybuffer
     })
@@ -148,3 +150,5 @@ export default function PrintRequestForm({
     </>
   );
 }
+
+export default withAuth(PrintRequestForm);

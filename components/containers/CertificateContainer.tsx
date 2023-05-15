@@ -12,13 +12,14 @@ import {
   TextField,
 } from '@mui/material';
 import styles from '@styles/searchbox.module.css';
+import withAuth from '@/pages/api/auth/withAuth';
 
 export type ResidencyCertificate = {
   id: number;
   certificateNumber: string;
 };
 
-export default function CertificateContainer() {
+function CertificateContainer() {
   const [certificates, setCertificates] = useState<ResidencyCertificate[]>([]);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
   const [certificateId, setCertificateId] = useState<number>(0);
@@ -185,3 +186,5 @@ export default function CertificateContainer() {
     </>
   );
 }
+
+export default withAuth(CertificateContainer);

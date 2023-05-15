@@ -2,6 +2,7 @@ import React from 'react';
 
 import AppbarLanding from '../../components/AppbarLanding';
 import LandingContent from '../../components/LandingContent';
+import withAuth from './api/auth/withAuth';
 
 class Landing extends React.Component {
   render() {
@@ -14,4 +15,4 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+export default withAuth(Landing);
