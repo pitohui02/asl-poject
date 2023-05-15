@@ -43,6 +43,7 @@
 .searchbtn:hover,
 .allres:hover {
   background-color: var(--primary-button-color-hover);
+  
 }
 
 .searchbox {

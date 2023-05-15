@@ -107,16 +107,14 @@ class DrawerComponent extends React.Component<any, any> {
                   className={styles.contentbtn}
                   onClick={this.onDashboardRedirect}
                 >
-                  <Typography variant="subtitle2">ALL Residents</Typography>
+                   ALL Residents
                 </Button>
                 <Button
                   variant="contained"
                   className={styles.contentbtn}
                   onClick={this.onIssuedCertficatesRedirect}
                 >
-                  <Typography variant="subtitle2">
-                    ISSUED CERTIFICATES
-                  </Typography>
+                  ISSUED CERTIFICATES 
                 </Button>
               </Box>
 

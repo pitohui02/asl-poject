@@ -183,6 +183,7 @@ export default function ResidentContainer() {
 
             <Button
               variant="contained"
+              size = "small"
               onClick={handleAllResidents}
               className={styles.allres}
             >

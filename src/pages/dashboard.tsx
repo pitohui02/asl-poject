@@ -38,4 +38,4 @@ class Dashboard extends React.Component<any, any> {
   }
 }
 
-export default withAuth(Dashboard);
+export default withAuth(Dashboard); 
