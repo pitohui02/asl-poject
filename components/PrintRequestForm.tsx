@@ -1,5 +1,5 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import styles from '../src/styles/printmodal.module.css';
@@ -14,8 +14,17 @@ type formProps = {
   closeModal: any;
 };
 
+export const ERROR_CODES = {
+  ERR_BAD_REQUEST:
+    'There was a problem processing your request, please try again.',
+};
+
 function PrintRequestForm({ closeModal }: formProps): JSX.Element {
   // const [residentId, setResidentId] = useState<number>();
+  const [withError, setWithError] = useState<boolean>(false);
+  const [waitMessage, setWaitMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
     residentId: 0,
     findings: '',
@@ -37,6 +46,8 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
 
   function handleSubmit() {
     console.log(printRequestFormDetails);
+    setIsLoading(true);
+    setWaitMessage('Generating pdf...');
     axios({
       url: `${process.env.apiUrl}/residentCertificate/print`,
       data: printRequestFormDetails,
@@ -48,6 +59,7 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
     })
       .then((response: AxiosResponse) => {
         // convert the response data to a blob
+
         const blob = new Blob([response.data], { type: 'application/pdf' });
 
         // create a URL from the blob data
@@ -62,8 +74,11 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
         ); // set the desired filename here
         document.body.appendChild(link);
         link.click();
+        setIsLoading(false);
       })
-      .catch(error => {
+      .catch((error: AxiosError) => {
+        setWithError(true);
+        setErrorMessage(ERROR_CODES[error.code]);
         console.error(error);
       });
   }
@@ -124,6 +139,21 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
                 />
               </Box>
             </Box>
+            {isLoading && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                {withError && (
+                  <Typography color="error"> {errorMessage} </Typography>
+                )}
+                {!withError && <Typography> {waitMessage} </Typography>}
+              </Box>
+            )}
           </Box>
 
           <Box className={styles.buttonbox}>
@@ -137,6 +167,7 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
             <Box>
               <Button
                 onClick={handleSubmit}
+                disabled={isLoading}
                 variant="contained"
                 className={styles.certbtn}
               >
