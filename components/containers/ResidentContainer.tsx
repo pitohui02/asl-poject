@@ -3,7 +3,14 @@ import axios from 'axios';
 // import Presenter from './table';
 import Presenter from '../presentors/ResidentTable';
 import SearchIcon from '@mui/icons-material/Search';
-import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
+import {
+  MenuItem,
+  Box,
+  Button,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import styles from '@styles/searchbox.module.css';
 import withAuth from '@/pages/api/auth/withAuth';
 
@@ -34,6 +41,7 @@ function ResidentContainer() {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [residentId, setResidentId] = useState(0);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
+  const [withError, setWithError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [searchOption, setSearchOption] = useState('id');
   const [fullNameSearch, setFullNameSearch] = useState({
@@ -82,7 +90,8 @@ function ResidentContainer() {
           setResidents([res.data]);
         })
         .catch(e => {
-          // setErrorMessage(e)
+          setWithError(true);
+          setErrorMessage(e.response.data);
           console.log(e);
         });
     }
@@ -128,8 +137,6 @@ function ResidentContainer() {
               <MenuItem value="name">Search by Full Name</MenuItem>
             </Select>
           </Box>
-
-          {/* {errorMessage && } */}
 
           <Box className={styles.optionbox}>
             {searchOption === 'id' && (
@@ -184,7 +191,7 @@ function ResidentContainer() {
 
             <Button
               variant="contained"
-              size = "small"
+              size="small"
               onClick={handleAllResidents}
               className={styles.allres}
             >
@@ -192,6 +199,10 @@ function ResidentContainer() {
             </Button>
           </Box>
         </Box>
+      </Box>
+
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        {withError && <Typography color="error"> {errorMessage} </Typography>}
       </Box>
 
       <Box>

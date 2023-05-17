@@ -20,7 +20,7 @@ export type ResidencyCertificate = {
 };
 
 function CertificateContainer() {
-  const [certificates, setCertificates] = useState<ResidencyCertificate[]>([]);
+  const [certificates, setCertificates] = useState<any[]>([]);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
   const [certificateId, setCertificateId] = useState<number>(0);
   const [searchOption, setSearchOption] = useState('id');
@@ -95,6 +95,11 @@ function CertificateContainer() {
     }
 
     if (searchOption == 'number') {
+      if (certificateSearch === '') {
+        setWithError(true);
+        setErrorMessage('Please enter a valid certificate number');
+        return;
+      }
       return await axios
         .get(
           `${process.env.apiUrl}/residentCertificate/cert-num?val=${certificateSearch}`,
@@ -110,8 +115,9 @@ function CertificateContainer() {
           console.log(res.data);
         })
         .catch(e => {
-          setErrorMessage(e.response?.data);
+          setCertificates([]);
           setWithError(true);
+          setErrorMessage(e.response?.data);
           console.log(e);
         });
     }
@@ -178,7 +184,9 @@ function CertificateContainer() {
         </Box>
       </Box>
 
-      {withError && <Typography color="error">{errorMessage}</Typography>}
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        {withError && <Typography color="error">{errorMessage}</Typography>}
+      </Box>
 
       <Box>
         <Presentor tableData={certificates} />
