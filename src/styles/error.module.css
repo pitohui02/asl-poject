@@ -1,0 +1,14 @@
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.error h1 {
+
+        font-weight: bold;
+        text-transform: uppercase;
+
+}
