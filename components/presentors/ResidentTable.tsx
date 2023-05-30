@@ -18,6 +18,7 @@ import UpdateModal from '../modals/UpdateModal';
 import DeleteIconModal from '../modals/DeleteModal';
 
 import data from '../../record-demo/recordData.json';
+import PrintModal from '../modals/PrintModal';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -33,20 +34,25 @@ const style = {
 const columns = [
   {
     field: 'id',
-    headerName: 'ID',
+    headerName: 'Resident ID',
+    width: 100,
     editable: false,
-    width: 50,
   },
   {
     field: 'profilePhotoUrl',
     headerName: 'Photo ID',
     width: 100,
+    height: 100,
     editable: false,
     renderCell: (params: any) => {
       console.log(params);
       return (
         <>
-          <Avatar variant="square" src={params.value} />
+          <Avatar
+            variant="square"
+            src={params.value}
+            sx={{ height: '50px', width: '50px' }}
+          />
         </>
       );
     },
@@ -56,55 +62,25 @@ const columns = [
     field: 'firstName',
     headerName: 'First Name',
     editable: false,
-    width: 100,
+    width: 150,
   },
   {
     field: 'middleName',
     headerName: 'Middle Name',
     editable: false,
-    width: 100,
+    width: 150,
   },
   {
     field: 'lastName',
     headerName: 'Last Name',
     editable: false,
-    width: 100,
-  },
-  {
-    field: 'civilStatus',
-    headerName: 'Civil Status',
-    editable: false,
-    width: 100,
-  },
-  {
-    field: 'birthDate',
-    headerName: 'Birth Date',
-    editable: false,
-    width: 100,
-  },
-  {
-    field: 'age',
-    headerName: 'Age',
-    editable: false,
-    width: 100,
+    width: 150,
   },
   {
     field: 'homeAddress',
     headerName: 'Address',
     editable: false,
     width: 400,
-  },
-  {
-    field: 'mobileNumber',
-    headerName: 'Mobile Number',
-    editable: false,
-    width: 200,
-  },
-  {
-    field: 'telephoneNumber',
-    headerName: 'Telephone Number',
-    editable: false,
-    width: 200,
   },
   {
     field: 'createdAt',
@@ -122,9 +98,10 @@ const columns = [
 
 type tableProps = {
   tableData: Resident[];
+  isArchived: boolean;
 };
 
-function ResidentTable({ tableData }: tableProps) {
+function ResidentTable({ tableData, isArchived }: tableProps) {
   const [residentDetails, setResidentDetails] = useState<any>();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -141,23 +118,10 @@ function ResidentTable({ tableData }: tableProps) {
     handleOpen();
   };
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-
   return (
     <>
       <DataGrid
-        //rows={tableData}
-        rows = {data} // Sample Data
+        rows={tableData}
         columns={columns}
         initialState={{
           pagination: {
@@ -179,15 +143,20 @@ function ResidentTable({ tableData }: tableProps) {
         <Box className={styles.centerscreen}>
           <ResidentRecord recordData={residentDetails} />
           <Box className={styles.buttonGroup}>
-            <UpdateModal
-              closeParentModal={handleClose}
-              residentId={residentDetails?.id}
-            />
-            <DeleteIconModal
-              closeParentModal={handleClose}
-              residentDetails={residentDetails}
-              residentId={residentDetails?.id}
-            />
+            {!isArchived && (
+              <>
+                <UpdateModal
+                  closeParentModal={handleClose}
+                  residentId={residentDetails?.id}
+                />
+                {/* <DeleteIconModal
+                  closeParentModal={handleClose}
+                  residentDetails={residentDetails}
+                  residentId={residentDetails?.id}
+                /> */}
+                <PrintModal residentId={residentDetails?.id} />
+              </>
+            )}
           </Box>
         </Box>
       </Modal>

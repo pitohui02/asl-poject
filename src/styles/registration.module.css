@@ -1,169 +1,149 @@
 .centerscreen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
 }
 
-
 .paperdesign {
-
-    height: auto;
-    width: auto;
-    padding: 40px;
+  height: auto;
+  width: auto;
+  padding: 40px;
 }
 
 .titleDesign {
-
-    font-weight: bold;
-    margin: 30px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  margin: 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 
 .gridParent {
-    
-    height: auto;
-    width: auto;
+  height: auto;
+  width: auto;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 
-    padding: 30px;
+  padding: 30px;
 
-    column-gap: 40px;
+  column-gap: 40px;
 }
-
 
 /* Grid Child 1 */
 
-
 .gridchild_text {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 
-   font-weight: bold;
-   font-size: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
 
-   margin-bottom: 5px;
-   margin-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
-
 
 .gridChild1_TextField {
-    width: 250px;
+  width: 250px;
 }
-
 
 /* Grid Child 2 */
 
-.dropdownDesign, .spousebox{
-    width: 200px;
-    margin-right: 20px;
+.dropdownDesign,
+.spousebox {
+  width: 200px;
+  margin-right: 20px;
 }
 
-.agebox, .birthdatebox {
-    width: 200px;
+.agebox,
+.birthdatebox {
+  width: 200px;
 }
 /* Grid Child 3 */
 
 .gridchild3 {
-    display: flex;
-    flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
-.gridchild3  {
-    width: 200px;
+.gridchild3 {
+  width: 200px;
 }
 
-
-.uploadbox{
-    display: flex;
-    flex-direction: row;
-    column-gap: 25px;
+.uploadbox {
+  display: flex;
+  flex-direction: row;
+  column-gap: 25px;
 }
 
 .uploadbtn {
-    width: 160px;
+  width: 160px;
 
-    background-color: var(--primary-button-color);
+  background-color: var(--primary-button-color);
 }
 
 .uploadbtn:hover {
-    background-color: var(--primary-button-color-hover);
+  background-color: var(--primary-button-color-hover);
 }
-
 
 /* Grid Child 4 */
 
 .gridchild4_textfield {
-
-    width: 200px;
+  width: 200px;
 }
 
 /* Grid Child 5 */
 
 .addressfield {
-    margin-right: 50px;
-    width: 250px;
-
+  margin-right: 50px;
+  width: 250px;
 }
 
 .postalfield {
-    margin-right: 50px;
-    width: 250px;
+  margin-right: 50px;
+  width: 250px;
 }
 
-
-.uploadbtn, .registerbtn, .cancelbtn{
-    font-weight: bold;
-    color: #e9ecef;
-
+.uploadbtn,
+.registerbtn,
+.cancelbtn {
+  font-weight: bold;
+  color: #e9ecef;
 }
 
 .uploadbtn {
-    width: 130px;
+  width: 130px;
 }
 
 .registerbtn {
-
-    background-color: var(--primary-button-color);
-    
+  background-color: var(--primary-button-color);
 }
 
 .cancelbtn {
-
-    color: var(--error-button-color);
+  color: var(--error-button-color);
 }
 
-.registerbtn, .cancelbtn {
-    width: 250px;
-    height: 40px;
-
-    
+.registerbtn,
+.cancelbtn {
+  width: 250px;
+  height: 40px;
 }
 
 .registerbtn:hover {
-    background-color: var(--primary-button-color-hover);
+  background-color: var(--primary-button-color-hover);
 }
 
-.registerbtn:active{
-    background-color: var(--success-button-color);
-    color: var(--button-shade-1)
+.registerbtn:active {
+  background-color: var(--success-button-color);
+  color: var(--button-shade-1);
 }
 
 .registerbox {
-    display: flex;
-    justify-content:space-between;
+  display: flex;
+  justify-content: center;
 
-    margin: 0 80px 0 30px;
-}  
-
-
-
-
+  margin: 0 80px 0 30px;
+}

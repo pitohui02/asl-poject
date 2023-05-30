@@ -1,11 +1,13 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import axios from 'axios';
 
 import styles from '../../src/styles/drawer.module.css';
 import Registration from '@/pages/registration';
 import PrintRequestForm from '../PrintRequestForm';
+import { Resident } from '../containers/ResidentContainer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -16,15 +18,40 @@ const style = {
   p: 4,
 };
 
-export default function CreateModal() {
-  const [open, setOpen] = React.useState(false);
+type PrintModalProps = {
+  residentId: number;
+};
+
+export default function PrintModal({ residentId }: PrintModalProps) {
+  const [open, setOpen] = useState(false);
+  const [residentDetails, setResidentDetails] = useState<
+    Resident | undefined
+  >();
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.SERVER_URL}/resident/${residentId}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwt'),
+        },
+      })
+      .then((res: any) => {
+        console.log(res.data);
+        setResidentDetails(res.data);
+      })
+      .catch(e => console.log(e));
+  }, [residentId, open]);
 
   return (
     <div>
-      <Button className={styles.contentbtn} onClick={handleOpen} variant="contained">
+      <Button
+        className={styles.contentbtn}
+        onClick={handleOpen}
+        variant="contained"
+      >
         PRINT CERTIFICATE
       </Button>
       <Modal
@@ -34,7 +61,7 @@ export default function CreateModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <PrintRequestForm closeModal={handleClose}/>
+          <PrintRequestForm data={residentDetails} closeModal={handleClose} />
         </Box>
       </Modal>
     </div>

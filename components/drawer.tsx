@@ -17,7 +17,7 @@ import Image from 'next/image';
 import { withRouter } from 'next/router';
 // import EditModal from './modals/EditModal';
 import CreateModal from './modals/CreateModal';
-import PrintModal from './modals/PrintModal';
+import logo from '../public/logo.png'
 
 class DrawerComponent extends React.Component<any, any> {
   constructor(props: any) {
@@ -58,8 +58,12 @@ class DrawerComponent extends React.Component<any, any> {
     this.props.router.push('/certificates');
   };
 
-  onDashboardRedirect = () => {
-    this.props.router.push('/dashboard');
+  onResidentUnarchiveRedirect = () => {
+    this.props.router.push('/residents/current');
+  };
+
+  onResidentArchivedRedirect = () => {
+    this.props.router.push('/residents/archive');
   };
 
   render() {
@@ -93,7 +97,7 @@ class DrawerComponent extends React.Component<any, any> {
 
               <Box>
                 <Image
-                  src="/logo-barangay.png"
+                  src={logo}
                   alt="placeholder"
                   width={150}
                   height={150}
@@ -105,16 +109,23 @@ class DrawerComponent extends React.Component<any, any> {
                 <Button
                   variant="contained"
                   className={styles.contentbtn}
-                  onClick={this.onDashboardRedirect}
+                  onClick={this.onResidentUnarchiveRedirect}
                 >
-                   ALL Residents
+                  View Current Records
                 </Button>
+                {/* <Button
+                  variant="contained"
+                  className={styles.contentbtn}
+                  onClick={this.onResidentArchivedRedirect}
+                >
+                  View Archived Records
+                </Button> */}
                 <Button
                   variant="contained"
                   className={styles.contentbtn}
                   onClick={this.onIssuedCertficatesRedirect}
                 >
-                  ISSUED CERTIFICATES 
+                  View Issued Certificates
                 </Button>
               </Box>
 
@@ -122,7 +133,6 @@ class DrawerComponent extends React.Component<any, any> {
 
               <Box className={styles.flexchild1_btn}>
                 <CreateModal />
-                <PrintModal />
               </Box>
             </Box>
           </Box>

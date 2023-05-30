@@ -1,8 +1,9 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import styles from '../src/styles/printmodal.module.css';
+import withAuth from '../src/pages/api/auth/withAuth';
 
 // type PrintRequestForm = {
 //   findings: string;
@@ -11,14 +12,26 @@ import styles from '../src/styles/printmodal.module.css';
 
 type formProps = {
   closeModal: any;
+  data: any;
 };
 
-export default function PrintRequestForm({
-  closeModal,
-}: formProps): JSX.Element {
+export const ERROR_CODES = {
+  ERR_BAD_REQUEST:
+    'There was a problem processing your request, please try again.',
+};
+
+function PrintRequestForm({ closeModal, data }: formProps): JSX.Element {
   // const [residentId, setResidentId] = useState<number>();
+  const [withError, setWithError] = useState<boolean>(false);
+  const [waitMessage, setWaitMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
-    residentId: 0,
+    residentFullName: {
+      firstName: data.firstName,
+      middleName: data.middleName,
+      lastName: data.lastName,
+    },
     findings: '',
     purpose: '',
   });
@@ -38,14 +51,20 @@ export default function PrintRequestForm({
 
   function handleSubmit() {
     console.log(printRequestFormDetails);
+    setIsLoading(true);
+    setWaitMessage('Generating pdf...');
     axios({
-      url: `${process.env.apiUrl}/residentCertificate/print`,
+      url: `${process.env.SERVER_URL}/residentCertificate/print`,
       data: printRequestFormDetails,
+      headers: {
+        Authorization: localStorage.getItem('jwt'),
+      },
       method: 'POST',
       responseType: 'arraybuffer', // set the response type to arraybuffer
     })
       .then((response: AxiosResponse) => {
         // convert the response data to a blob
+
         const blob = new Blob([response.data], { type: 'application/pdf' });
 
         // create a URL from the blob data
@@ -53,15 +72,18 @@ export default function PrintRequestForm({
 
         // create a temporary link element to download the file
         const link = document.createElement('a');
+
+        const residentInitials = `${printRequestFormDetails.residentFullName.firstName[0]}${printRequestFormDetails.residentFullName.middleName[0]}${printRequestFormDetails.residentFullName.lastName[0]}`;
+
         link.href = fileUrl;
-        link.setAttribute(
-          'download',
-          `B15-Z1-D01-${printRequestFormDetails.residentId}.pdf`
-        ); // set the desired filename here
+        link.setAttribute('download', `B15-Z1-D01-${residentInitials}.pdf`); // set the desired filename here
         document.body.appendChild(link);
         link.click();
+        setIsLoading(false);
       })
-      .catch(error => {
+      .catch((error: AxiosError) => {
+        setWithError(true);
+        setErrorMessage(ERROR_CODES['ERR_BAD_REQUEST']);
         console.error(error);
       });
   }
@@ -77,16 +99,17 @@ export default function PrintRequestForm({
           <Box className={styles.mainbox}>
             <Box>
               <Typography variant="subtitle1" className={styles.textguides}>
-                RESIDENT ID
+                Printing Residency Certificate for {data.lastName},{' '}
+                {data.firstName} {data.middleName}
               </Typography>
-              <TextField
+              {/* <TextField
                 name="residentId"
                 value={printRequestFormDetails.residentId}
                 onChange={handleIdChange}
                 label="Resident ID"
                 variant="filled"
                 className={styles.idfield}
-              />
+              /> */}
             </Box>
 
             <Box className={styles.purposebox}>
@@ -122,6 +145,21 @@ export default function PrintRequestForm({
                 />
               </Box>
             </Box>
+            {isLoading && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                {withError && (
+                  <Typography color="error"> {errorMessage} </Typography>
+                )}
+                {!withError && <Typography> {waitMessage} </Typography>}
+              </Box>
+            )}
           </Box>
 
           <Box className={styles.buttonbox}>
@@ -135,6 +173,7 @@ export default function PrintRequestForm({
             <Box>
               <Button
                 onClick={handleSubmit}
+                disabled={isLoading}
                 variant="contained"
                 className={styles.certbtn}
               >
@@ -148,3 +187,5 @@ export default function PrintRequestForm({
     </>
   );
 }
+
+export default withAuth(PrintRequestForm);

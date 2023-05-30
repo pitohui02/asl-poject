@@ -12,17 +12,18 @@ import {
   TextField,
 } from '@mui/material';
 import styles from '@styles/searchbox.module.css';
+import withAuth from '@/pages/api/auth/withAuth';
 
 export type ResidencyCertificate = {
   id: number;
   certificateNumber: string;
 };
 
-export default function CertificateContainer() {
-  const [certificates, setCertificates] = useState<ResidencyCertificate[]>([]);
+function CertificateContainer() {
+  const [certificates, setCertificates] = useState<any[]>([]);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
   const [certificateId, setCertificateId] = useState<number>(0);
-  const [searchOption, setSearchOption] = useState('id');
+  const [searchOption, setSearchOption] = useState('number');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [withError, setWithError] = useState<boolean>(false);
   // const [residentId, setResidentId] = useState(0);
@@ -31,7 +32,7 @@ export default function CertificateContainer() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.apiUrl}/residentCertificate/all`, {
+      .get(`${process.env.SERVER_URL}/residentCertificate/all`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -50,7 +51,7 @@ export default function CertificateContainer() {
 
   function handleAllCertificates() {
     axios
-      .get(`${process.env.apiUrl}/residentCertificate/all`, {
+      .get(`${process.env.SERVER_URL}/residentCertificate/all`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -74,29 +75,7 @@ export default function CertificateContainer() {
     if (searchOption == 'id') {
       return await axios
         .get(
-          `${process.env.apiUrl}/residentCertificate/id?val=${certificateId}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem('jwt'),
-            },
-          }
-        )
-        .then((res: any) => {
-          setCertificates([res.data]);
-          setWithError(false);
-          console.log(res.data);
-        })
-        .catch((e: AxiosError) => {
-          setErrorMessage(e.response?.data);
-          setWithError(true);
-          console.log(e);
-        });
-    }
-
-    if (searchOption == 'number') {
-      return await axios
-        .get(
-          `${process.env.apiUrl}/residentCertificate/cert-num?val=${certificateSearch}`,
+          `${process.env.SERVER_URL}/residentCertificate/id?val=${certificateId}`,
           {
             headers: {
               Authorization: localStorage.getItem('jwt'),
@@ -114,13 +93,41 @@ export default function CertificateContainer() {
           console.log(e);
         });
     }
+
+    if (searchOption == 'number') {
+      if (certificateSearch === '') {
+        setWithError(true);
+        setErrorMessage('Please enter a valid certificate number');
+        return;
+      }
+      return await axios
+        .get(
+          `${process.env.SERVER_URL}/residentCertificate/cert-num?val=${certificateSearch}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem('jwt'),
+            },
+          }
+        )
+        .then((res: any) => {
+          setCertificates([res.data]);
+          setWithError(false);
+          console.log(res.data);
+        })
+        .catch(e => {
+          setCertificates([]);
+          setWithError(true);
+          setErrorMessage(e.response?.data);
+          console.log(e);
+        });
+    }
   }
 
   return (
     <>
       <Box className={styles.mainbox}>
         <Box className={styles.searchbox}>
-          <Box className={styles.selectorbox}>
+          {/* <Box className={styles.selectorbox}>
             <Select
               name="searchbox"
               required
@@ -133,9 +140,9 @@ export default function CertificateContainer() {
               <MenuItem value="id">Search by ID</MenuItem>
               <MenuItem value="number">Search by Certificate Number</MenuItem>
             </Select>
-          </Box>
+          </Box> */}
           <Box className={styles.optionbox}>
-            {searchOption == 'number' && (
+            {
               <TextField
                 label="Search by Certificate Number"
                 size="small"
@@ -144,7 +151,7 @@ export default function CertificateContainer() {
                 onChange={handleSearchCertificate}
                 className={styles.idstyle}
               />
-            )}
+            }
             {searchOption == 'id' && (
               <TextField
                 label="Search by ID"
@@ -177,7 +184,11 @@ export default function CertificateContainer() {
         </Box>
       </Box>
 
-      {withError && <Typography color="error">{errorMessage}</Typography>}
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        {withError && (
+          <Typography color="error">{errorMessage ?? ''}</Typography>
+        )}
+      </Box>
 
       <Box>
         <Presentor tableData={certificates} />
@@ -185,3 +196,5 @@ export default function CertificateContainer() {
     </>
   );
 }
+
+export default withAuth(CertificateContainer);

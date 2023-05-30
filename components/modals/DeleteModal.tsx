@@ -41,7 +41,7 @@ export default function DeleteIconModal({
   };
 
   function handleDeleteResident() {
-    axios.delete(`${process.env.apiUrl}/resident/${residentId}`, {
+    axios.delete(`${process.env.SERVER_URL}/resident/${residentId}`, {
       headers: {
         Authorization: localStorage.getItem('jwt'),
       },
@@ -64,7 +64,7 @@ export default function DeleteIconModal({
         className={styles.buttondesign}
       >
         {/* <ModeEditOutlineIcon className={styles.actionbuttons} /> */}
-        DELETE RECORD
+        ARCHIVE RECORD
       </Button>
       <Modal
         open={open}
@@ -74,9 +74,16 @@ export default function DeleteIconModal({
       >
         <Box className={styles.deletecenterscreen}>
           <Typography className={styles.deletemodaltext}>
-            Remove{' '}
-            {`${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName[0]}.`}{' '}
+            Archive
+            {` ${residentDetails?.lastName}, ${residentDetails?.firstName} ${residentDetails?.middleName} `}
             from the records?
+          </Typography>
+          <Typography
+            sx={{ fontWeight: 'bold' }}
+            color="orange"
+            className={styles.delemodaltext}
+          >
+            Warning: this action cannot be undone
           </Typography>
           <Box className={styles.deleteBtngroup}>
             <Button onClick={handleCancel} className={styles.buttondesign}>
@@ -89,7 +96,7 @@ export default function DeleteIconModal({
               sx={{ width: '200px' }}
               //className={styles.buttondesign}
             >
-              Remove
+              Confirm
             </Button>
           </Box>
         </Box>

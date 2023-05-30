@@ -57,12 +57,8 @@ function ResidentRecord({ recordData }: RecordProps) {
             )}
 
             <Box>
-              <Typography variant="subtitle1">Mother's Full Name</Typography>
-              <Typography variant="h6">{recordData?.mother}</Typography>
-            </Box>
-            <Box>
-              <Typography variant="subtitle1">Father's Full Name </Typography>
-              <Typography variant="h6">{recordData?.father}</Typography>
+              <Typography variant="subtitle1">Guardian</Typography>
+              <Typography variant="h6">{recordData?.guardian}</Typography>
             </Box>
           </Box>
           <Divider flexItem orientation="vertical" />
@@ -70,19 +66,23 @@ function ResidentRecord({ recordData }: RecordProps) {
           <Box className={styles.thirdcol}>
             <Box>
               <Typography variant="subtitle1">Address</Typography>
-              <Typography variant="h6">{`${recordData?.postalCode} - ${recordData?.homeAddress}`}</Typography>
+              <Typography variant="h6">{` ${recordData?.homeAddress}`}</Typography>
             </Box>
 
             <Box>
               <Typography variant="subtitle1">Telephone Number</Typography>
               <Typography variant="h6">
-                {recordData?.telephoneNumber ?? 'N/A'}
+                {recordData?.telephoneNumber == null
+                  ? recordData?.telephoneNumber
+                  : 'N/A'}
               </Typography>
             </Box>
             <Box>
               <Typography variant="subtitle1">Mobile Number</Typography>
               <Typography variant="h6">
-                {recordData?.mobileNumber ?? 'N/A'}
+                {recordData?.mobileNumber == null
+                  ? recordData?.mobileNumber
+                  : 'N/A'}
               </Typography>
             </Box>
           </Box>

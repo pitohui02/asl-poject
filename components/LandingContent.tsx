@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import styles from '../src/styles/landingcontent.module.css';
 import axios from 'axios';
+import brgylogo from '../public/LogoBrgy.png'
 
 class LandingContent extends React.Component<any, any> {
   constructor(props: any) {
@@ -15,7 +16,7 @@ class LandingContent extends React.Component<any, any> {
 
   componentDidMount(): void {
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -31,7 +32,7 @@ class LandingContent extends React.Component<any, any> {
           <Box className={styles.landingcontent}>
             <Box>
               <Image
-                src="/logo-barangay.png"
+                src={brgylogo}
                 alt="placeholder"
                 width={400}
                 height={400}

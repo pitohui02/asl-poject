@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 // import api from './axiosAuth';
 import axios from 'axios';
 
-const withAuth = (Component: React.Component<any, any>) => {
+const withAuth = (Component: any) => {
   return function WithAuth(props: any) {
     const router = useRouter();
 
@@ -13,7 +13,7 @@ const withAuth = (Component: React.Component<any, any>) => {
       async function checkAuth() {
         try {
           // Check if user is authenticated by sending a test request
-          await axios.get(`${process.env.apiUrl}/account/test`, {
+          await axios.get(`${process.env.SERVER_URL}/account/auth`, {
             headers: {
               Authorization: localStorage.getItem('jwt'),
             },
@@ -22,7 +22,7 @@ const withAuth = (Component: React.Component<any, any>) => {
           // If the request succeeds, the user is authenticated
         } catch (error) {
           // If the request fails, the user is not authenticated
-          router.replace('error/unauthorized');
+          router.replace('/error/unauthorized');
         }
       }
 

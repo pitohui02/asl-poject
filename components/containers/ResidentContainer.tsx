@@ -3,8 +3,17 @@ import axios from 'axios';
 // import Presenter from './table';
 import Presenter from '../presentors/ResidentTable';
 import SearchIcon from '@mui/icons-material/Search';
-import { MenuItem, Box, Button, Select, TextField } from '@mui/material';
+import {
+  MenuItem,
+  Box,
+  Button,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import styles from '@styles/searchbox.module.css';
+import withAuth from '@/pages/api/auth/withAuth';
+import Registration from '@/pages/registration';
 
 export type Resident = {
   id: number;
@@ -27,12 +36,18 @@ export type Resident = {
   createdAt: string;
   updatedAt: string;
   isArchived: boolean;
+  profilePhoto?: string;
 };
 
-export default function ResidentContainer() {
+type ContainerQueryProps = {
+  renderArchive: boolean;
+};
+
+function ResidentContainer({ renderArchive }: ContainerQueryProps) {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [residentId, setResidentId] = useState(0);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
+  const [withError, setWithError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [searchOption, setSearchOption] = useState('id');
   const [fullNameSearch, setFullNameSearch] = useState({
@@ -44,8 +59,9 @@ export default function ResidentContainer() {
   // feed residents to data prop of table
 
   useEffect(() => {
+    console.log('===> fetching archive records', renderArchive);
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident?archive=${renderArchive}`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -60,7 +76,7 @@ export default function ResidentContainer() {
 
   function handleAllResidents() {
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident?archive=${renderArchive}`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -72,26 +88,34 @@ export default function ResidentContainer() {
   async function handleSearchClick() {
     if (searchOption === 'id') {
       return await axios
-        .get(`${process.env.apiUrl}/resident/${residentId}/`, {
-          headers: {
-            Authorization: localStorage.getItem('jwt'),
-          },
-        })
+        .get(
+          `${process.env.SERVER_URL}/resident/${residentId}?archive=${renderArchive}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem('jwt'),
+            },
+          }
+        )
         .then((res: any) => {
           setResidents([res.data]);
         })
         .catch(e => {
-          // setErrorMessage(e)
+          setWithError(true);
+          setErrorMessage(e.response.data);
           console.log(e);
         });
     }
 
     return await axios
-      .post(`${process.env.apiUrl}/resident/search/full-name`, fullNameSearch, {
-        headers: {
-          Authorization: localStorage.getItem('jwt'),
-        },
-      })
+      .post(
+        `${process.env.SERVER_URL}/resident/search/full-name?archive=${renderArchive}`,
+        fullNameSearch,
+        {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        }
+      )
       .then((res: any) => {
         setResidents([res.data]);
         console.log(res.data);
@@ -128,13 +152,11 @@ export default function ResidentContainer() {
             </Select>
           </Box>
 
-          {/* {errorMessage && } */}
-
           <Box className={styles.optionbox}>
             {searchOption === 'id' && (
               <Box className={styles.optionId}>
                 <TextField
-                  label="Search"
+                  label="Search by Resident ID"
                   size="small"
                   variant="filled"
                   onChange={handleSearchResident}
@@ -183,19 +205,25 @@ export default function ResidentContainer() {
 
             <Button
               variant="contained"
-              size = "small"
+              size="small"
               onClick={handleAllResidents}
               className={styles.allres}
             >
-              All Residents
+              All Records
             </Button>
           </Box>
         </Box>
       </Box>
 
+      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+        {withError && <Typography color="error"> {errorMessage} </Typography>}
+      </Box>
+
       <Box>
-        <Presenter tableData={residents} />
+        <Presenter isArchived={renderArchive} tableData={residents} />
       </Box>
     </>
   );
 }
+
+export default withAuth(ResidentContainer);

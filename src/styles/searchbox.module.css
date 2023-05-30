@@ -30,7 +30,10 @@
 
 .searchbtn,
 .allres {
-  width: 16vh;
+  width: 12vw;
+  /* height: 2vh; */
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
   background-color: var(--primary-button-color);
   color: #e9ecef;
   font-weight: 'bold';
@@ -43,7 +46,6 @@
 .searchbtn:hover,
 .allres:hover {
   background-color: var(--primary-button-color-hover);
-  
 }
 
 .searchbox {

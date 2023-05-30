@@ -6,6 +6,8 @@ import Modal from '@mui/material/Modal';
 
 import styles from '../../src/styles/drawer.module.css';
 import ResidentForm from '@/pages/registration';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -17,29 +19,36 @@ const style = {
 };
 
 export default function CreateModal() {
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [toggleRegister, setToggleRegister] = React.useState(false);
+  const handleOpen = async () => {};
 
   return (
     <div>
-      <Button
-        className={styles.contentbtn}
-        onClick={handleOpen}
-        variant="contained"
-      >
-        REGISTER A RECORD
-      </Button>
-      <Modal
+      <Link href="/registration" target="_blank">
+        <Button
+          className={styles.contentbtn}
+          // onClick={handleOpen}
+          variant="contained"
+        >
+          REGISTER A RECORD
+        </Button>
+      </Link>
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ResidentForm closeModal={handleClose} operation="create" />
+          <ResidentForm
+            isRegister={toggleRegister}
+            closeModal={handleClose}
+            operation="create"
+          />
         </Box>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

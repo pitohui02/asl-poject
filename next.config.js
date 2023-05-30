@@ -12,9 +12,10 @@ const nextConfig = {
     ],
   },
   env: {
-    apiUrl: "https://localhost:7132"
+    SERVER_URL: 'http://localhost:5000',
   },
+  output: 'standalone',
   reactStrictMode: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

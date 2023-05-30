@@ -20,6 +20,8 @@ import axios from 'axios';
 
 import { withRouter } from 'next/router';
 
+import brgylogo from '../../public/logo.png'
+
 class LoginPage extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -28,7 +30,7 @@ class LoginPage extends React.Component<any, any> {
       username: '',
       password: '',
 
-      userCreds: new Map([['TestUser', 'MyVeryOwnTestPassword123$']]),
+      // userCreds: new Map([['TestUser', 'MyVeryOwnTestPassword123$']]),
     };
   }
 
@@ -36,12 +38,12 @@ class LoginPage extends React.Component<any, any> {
     const { username, password } = this.state;
 
     axios
-      .post(`${process.env.apiUrl}/account/login`, { username, password })
+      .post(`${process.env.SERVER_URL}/account/login`, { username, password })
       .then(res => {
         localStorage.setItem('jwt', `Bearer ${res.data}`);
         axios.interceptors.request.use(
           config => {
-            const allowedOrigins = [process.env.apiUrl];
+            const allowedOrigins = [process.env.SERVER_URL];
 
             if (allowedOrigins.includes(origin)) {
               config.headers['Authorization'] = `Bearer ${res.data}`;
@@ -87,7 +89,7 @@ class LoginPage extends React.Component<any, any> {
 
                 <Box className={styles.leftsidecontent}>
                   <Image
-                    src="/logo-barangay.png"
+                    src={brgylogo}
                     alt="placeholder"
                     width={250}
                     height={250}
@@ -111,7 +113,7 @@ class LoginPage extends React.Component<any, any> {
 
               <Box className={styles.gridchild2}>
                 <Box>
-                  <Typography variant="h4" className={styles.titledesign}>
+                  <Typography variant="h6" className={styles.titledesign}>
                     SIGN IN
                   </Typography>
 
