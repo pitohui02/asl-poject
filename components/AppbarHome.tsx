@@ -2,11 +2,12 @@ import React from 'react';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import Image from 'next/image';
 
-import styles from '../src/styles/homepage.module.css';
-
 import { withRouter } from 'next/router';
 
-import brgylogo from '../public/LogoBrgy.png'
+import brgylogo from '../public/logo.png'
+import { styled } from '@mui/system' 
+
+
 
 class Appbar extends React.Component<any, any> {
   constructor(props: any) {
@@ -17,11 +18,77 @@ class Appbar extends React.Component<any, any> {
     this.props.router.push('/login');
   };
 
+  
   render() {
+
+    const Titlebox = styled(Box)`
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    `;
+
+    const AppBartitle = styled(Typography)`
+    font-weight: bold;
+    font-size: 2rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    `;
+
+    const AppbarSub = styled(Typography) `
+    font-weight: bold;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    `;
+
+    const StyledAppbar = styled(AppBar) `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #2C74B3;
+    `;
+    
+    const Leftside = styled(Box)`
+    display: flex;
+    flex-direction: row;
+
+    column-gap: 20px;
+    `;
+
+    const Rightside = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    column-gap: 10px;
+    margin-right: 10px;
+    `;
+
+    const ButtonStyle = styled(Button) `
+    width: 20vh;
+    height: 5vh;
+  
+    color: #e9ecef;
+    font-weight: 'bold';
+  
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.25em;
+    border-radius: 10px;
+    background-color: #235D90;
+
+    &:hover {
+      background-color: #393E46;
+    }
+    `;
+
+
     return (
       <>
-        <AppBar position="static" className={styles.appbar}>
-          <Box className={styles.leftside}>
+        <StyledAppbar position='static'>
+          <Leftside>
             <Box sx={{ marginLeft: '2em ' }}>
               <Image
                 src={brgylogo}
@@ -31,32 +98,31 @@ class Appbar extends React.Component<any, any> {
               />
             </Box>
 
-            <Box className={styles.titlebox}>
-              <Typography variant="h5" className={styles.appbarsubtitle}>
+            <Titlebox>
+              
+              <AppBartitle variant = "h3">
                 Department of the Interior and Local Government
-              </Typography>
-              <Typography variant="h6" className={styles.appbarsubtitle}>
+              </AppBartitle>
+
+              <AppbarSub variant= "h6">
                 Barangay 15 Zone 01 District 01
-              </Typography>
-            </Box>
-          </Box>
+              </AppbarSub>
+            </Titlebox>
+          </Leftside>
 
-          <Box className={styles.rightside}>
+          <Rightside>
             <Box>
-              <Button
-                className={styles.btnstyle}
-                sx={{ marginRight: '2em' }}
-                variant="text"
-                type="submit"
-                onClick={this.handleLogin}
-              >
-                SIGN IN
-              </Button>
+                <ButtonStyle
+                  sx={{ marginRight: '2em' }}
+                  variant="text"
+                  type="submit"
+                  onClick={this.handleLogin}
+                >
+                  SIGN IN
+                </ButtonStyle>
             </Box>
-
-            <Box></Box>
-          </Box>
-        </AppBar>
+          </Rightside>
+        </StyledAppbar>
       </>
     );
   }

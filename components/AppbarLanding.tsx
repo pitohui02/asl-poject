@@ -6,6 +6,9 @@ import styles from '../src/styles/homepage.module.css';
 
 import { withRouter } from 'next/router';
 
+import { styled } from '@mui/system'
+import css from 'styled-jsx/css';
+
 interface fields {
   HomeButton: boolean;
   DashboardButton: boolean;
@@ -26,10 +29,79 @@ class AppbarLanding extends React.Component<any, any> {
   };
 
   render() {
+
+    const StyledAppbar = styled(AppBar) `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #2C74B3;
+    `;
+    
+    const Leftside = styled(Box)`
+    display: flex;
+    flex-direction: row;
+
+    column-gap: 20px;
+    `;
+
+    const Rightside = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    column-gap: 10px;
+    margin-right: 10px;
+    `;
+
+    const ButtonStyle = styled(Button) `
+    width: 20vh;
+    height: 5vh;
+  
+    color: #e9ecef;
+    font-weight: 'bold';
+  
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.25em;
+    border-radius: 10px;
+    background-color: #235D90;
+
+    &:hover {
+      background-color: #393E46;
+    }
+    `;
+
+    const Titlebox = styled(Box)`
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    `;
+
+    const Appbartitle = styled(Typography) `
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+
+    font-size: 2rem;
+    
+    `;
+
+    const Appbarsub = styled(Typography) `
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+
+    font-size: 20px;
+    
+    `;
+
     return (
       <>
-        <AppBar position="static" className={styles.appbar}>
-          <Box className={styles.leftside}>
+        <StyledAppbar position="static">
+          <Leftside>
             <Box>
               <Image
                 src="/logo.png"
@@ -39,42 +111,40 @@ class AppbarLanding extends React.Component<any, any> {
               />
             </Box>
 
-            <Box className={styles.titlebox}>
-              <Typography variant="h4" className={styles.appbartitle}>
+            <Titlebox>
+              <Appbartitle variant="h4">
                 BARANGAY 15 ZONE 01 DISTRICT 01{' '}
-              </Typography>
-              <Typography variant="subtitle1" className={styles.appbarsubtitle}>
+              </Appbartitle>
+              <Appbarsub variant="subtitle1">
                 Certificate Issuance System
-              </Typography>
-            </Box>
-          </Box>
+              </Appbarsub>
+            </Titlebox>
+          </Leftside>
 
-          <Box className={styles.rightside}>
+          <Rightside>
             <Box>
-              <Button
-                className={styles.btnstyle}
+              <ButtonStyle
                 variant="text"
                 type="submit"
                 onClick={this.handleLogout}
               >
                 {' '}
                 LOG OUT
-              </Button>
+              </ButtonStyle>
             </Box>
 
             <Box>
-              <Button
-                className={styles.btnstyle}
+              <ButtonStyle
                 variant="text"
                 type="submit"
                 onClick={this.handleDashboard}
               >
                 {' '}
                 DASHBOARD
-              </Button>
+              </ButtonStyle>
             </Box>
-          </Box>
-        </AppBar>
+          </Rightside>
+        </StyledAppbar>
       </>
     );
   }

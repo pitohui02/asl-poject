@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 // import Presenter from './table';
 import Presenter from '../presentors/ResidentTable';
-import SearchIcon from '@mui/icons-material/Search';
+
+import { styled } from '@mui/system';
+
 import {
   MenuItem,
   Box,
@@ -133,41 +135,124 @@ function ResidentContainer({ renderArchive }: ContainerQueryProps) {
     setFullNameSearch(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  const Mainbox = styled(Box)`
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 20px;
+
+  justify-content: center;
+  `;
+
+  const Searchbox = styled(Box)`
+  display: flex;
+  column-gap: 20px;
+  justify-content: center;
+
+  padding-bottom: 20px;
+  `;
+
+  const Selectorbox = styled(Box) `
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  `;
+
+  const Selector = styled(Select) `
+  width: 200px;
+  text-align: center;
+  `;
+
+  const Optionid = styled(Box)`
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 20px;
+  `;
+
+  const OptionName = styled(Box)`
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 20px;
+  align-items: center;
+  `;
+
+  const FNBtn = styled(Box)`
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 20px;
+  align-items: center;
+  `;
+
+  const AllresBtn = styled(Button)`
+  width: 12vw;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  background-color: #393E46;
+  color: #e9ecef;
+  font-weight: 'bold';
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #372e2fff;
+  }
+  `;
+
+  const SearchBtn = styled(Button)`
+  width: 12vw;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  background-color: #393E46;
+  color: #e9ecef;
+  font-weight: 'bold';
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #372e2fff;
+  }
+
+  `;
+
+
   return (
     <>
-      <Box className={styles.mainbox}>
-        <Box className={styles.searchbox}>
-          <Box className={styles.selectorbox}>
-            <Select
+      <Mainbox>
+        <Searchbox>
+          <Selectorbox>
+            <Selector
               name="searchbox"
               required
               onChange={handleSearchOptionChange}
               value={searchOption}
               size="small"
               variant="outlined"
-              className={styles.selector}
+              
             >
               <MenuItem value="id">Search by ID</MenuItem>
               <MenuItem value="name">Search by Full Name</MenuItem>
-            </Select>
-          </Box>
+            </Selector>
+          </Selectorbox>
 
-          <Box className={styles.optionbox}>
+          <Box>
             {searchOption === 'id' && (
-              <Box className={styles.optionId}>
+              <Optionid>
                 <TextField
                   label="Search by Resident ID"
                   size="small"
                   variant="filled"
                   onChange={handleSearchResident}
-                  className={styles.idstyle}
+                  sx = {{width: '70vh'}}
                 />
-              </Box>
+              </Optionid>
             )}
           </Box>
 
           {searchOption === 'name' && (
-            <Box className={styles.optionName}>
+            <OptionName>
               <TextField
                 label="First Name *"
                 size="small"
@@ -192,28 +277,26 @@ function ResidentContainer({ renderArchive }: ContainerQueryProps) {
                 value={fullNameSearch.lastName}
                 onChange={handleFullNameSearch}
               />
-            </Box>
+            </OptionName>
           )}
-          <Box className={styles.FNBtn}>
-            <Button
+          <FNBtn>
+            <SearchBtn
               variant="contained"
               onClick={handleSearchClick}
-              className={styles.searchbtn}
             >
               SEARCH
-            </Button>
+            </SearchBtn>
 
-            <Button
+            <AllresBtn
               variant="contained"
               size="small"
               onClick={handleAllResidents}
-              className={styles.allres}
             >
               All Records
-            </Button>
-          </Box>
-        </Box>
-      </Box>
+            </AllresBtn>
+          </FNBtn>
+        </Searchbox>
+      </Mainbox>
 
       <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
         {withError && <Typography color="error"> {errorMessage} </Typography>}

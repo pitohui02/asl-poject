@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import Image from 'next/image';
 
-import styles from '../src/styles/homepage.module.css';
+import { styled } from '@mui/system';
 
 import { withRouter } from 'next/router';
 import logo from '../public/logo.png'
@@ -18,23 +18,66 @@ class Content extends React.Component<any, any> {
   };
 
   render() {
+
+    const Centerscreen = styled(Box) `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    `;
+
+    const Flexchildone = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    `;
+
+    const ContentBox = styled(Box)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    column-gap: 20vh;
+    `;
+
+    const ContentTitle = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    `;
+
+    const HomepageTitle = styled(Typography) `
+    font-size: 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    `;
+
+    const Homepagesub = styled(Typography)`
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    `;
+
     return (
       <>
-        <Box className={styles.centerscreen}>
-          <Box className={styles.contentbox}>
-            <Box className={styles.flexchild1}>
-              <Box className={styles.contenttitlebox}>
-                <Typography variant="h5" className={styles.homepagetitle}>
+        <Centerscreen>
+          <ContentBox>
+            <Flexchildone>
+              <ContentTitle>
+                <HomepageTitle variant="h5">
                   BARANGAY 15
-                </Typography>
-                <Typography variant="h5" className={styles.homepagetitle}>
+                </HomepageTitle>
+                <HomepageTitle variant="h5">
                   ZONE 01 DISTRICT 01
-                </Typography>
-                <Typography variant="h6" className={styles.homepagesubtitle}>
+                </HomepageTitle>
+                <Homepagesub variant="h6">
                   Certificate Issuance System
-                </Typography>
-              </Box>
-            </Box>
+                </Homepagesub>
+              </ContentTitle>
+            </Flexchildone>
 
             <Box>
               <Image
@@ -44,8 +87,8 @@ class Content extends React.Component<any, any> {
                 height={500}
               />
             </Box>
-          </Box>
-        </Box>
+          </ContentBox>
+        </Centerscreen>
       </>
     );
   }

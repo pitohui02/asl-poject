@@ -31,7 +31,6 @@
 .searchbtn,
 .allres {
   width: 12vw;
-  /* height: 2vh; */
   padding-top: 0.75em;
   padding-bottom: 0.75em;
   background-color: var(--primary-button-color);
@@ -65,11 +64,6 @@
 .selector {
   width: 200px;
   text-align: center;
-}
-
-.optionName {
-  display: flex;
-  column-gap: 20px;
 }
 
 .idstyle {

@@ -68,7 +68,7 @@ class LoginPage extends React.Component<any, any> {
   };
 
   handleBack = () => {
-    this.props.router.push('/');
+    this.props.router.push('/homepage');
   };
 
   render() {
@@ -91,8 +91,8 @@ class LoginPage extends React.Component<any, any> {
                   <Image
                     src={brgylogo}
                     alt="placeholder"
-                    width={250}
-                    height={250}
+                    width={256}
+                    height={256}
                     className={styles.imageDesign}
                   />
 
