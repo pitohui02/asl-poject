@@ -4,8 +4,6 @@ import Image from 'next/image';
 
 import styles from '../src/styles/homepage.module.css';
 
-import CreateModalHome from '../components/modals/CreateModalHome';
-
 import { withRouter } from 'next/router';
 
 class Content extends React.Component<any, any> {

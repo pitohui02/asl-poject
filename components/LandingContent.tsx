@@ -15,7 +15,7 @@ class LandingContent extends React.Component<any, any> {
 
   componentDidMount(): void {
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },

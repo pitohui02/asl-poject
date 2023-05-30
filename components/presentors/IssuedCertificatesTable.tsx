@@ -32,11 +32,11 @@ const style = {
 };
 
 const columns = [
-  {
-    field: 'id',
-    headerName: 'ID',
-    editable: false,
-  },
+  // {
+  //   field: 'id',
+  //   headerName: 'Certificate ID',
+  //   width: 150,
+  // },
   {
     field: 'certificateNumber',
     headerName: 'Certificate Number',
@@ -63,12 +63,6 @@ const columns = [
   {
     field: 'expiresAt',
     headerName: 'Expires At',
-    editable: false,
-    width: 200,
-  },
-  {
-    field: 'residentId',
-    headerName: 'Resident Id (Owner)',
     editable: false,
     width: 200,
   },

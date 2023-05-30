@@ -6,31 +6,23 @@ import styles from '../src/styles/homepage.module.css';
 
 import { withRouter } from 'next/router';
 
-
-interface fields  {
-    HomeButton: boolean,
-    DashboardButton: boolean
-
-
+interface fields {
+  HomeButton: boolean;
+  DashboardButton: boolean;
 }
 
+class AppbarLanding extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+  }
 
-
-
-class AppbarLanding extends React.Component <any, any> {
-    constructor(props: any) {
-        super(props)
-        
-    }
-    
-    handleLogout = () => {
-        localStorage.removeItem('jwt');
-        this.props.router.push('/login')
-    }
-
+  handleLogout = () => {
+    localStorage.removeItem('jwt');
+    this.props.router.push('/');
+  };
 
   handleDashboard = () => {
-    this.props.router.push('/dashboard');
+    this.props.router.push('/residents/current');
   };
 
   render() {
@@ -70,7 +62,6 @@ class AppbarLanding extends React.Component <any, any> {
               </Button>
             </Box>
 
-                                
             <Box>
               <Button
                 className={styles.btnstyle}
@@ -80,7 +71,7 @@ class AppbarLanding extends React.Component <any, any> {
               >
                 {' '}
                 DASHBOARD
-              </Button> 
+              </Button>
             </Box>
           </Box>
         </AppBar>

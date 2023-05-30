@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import styles from '@styles/searchbox.module.css';
 import withAuth from '@/pages/api/auth/withAuth';
+import Registration from '@/pages/registration';
 
 export type Resident = {
   id: number;
@@ -35,9 +36,14 @@ export type Resident = {
   createdAt: string;
   updatedAt: string;
   isArchived: boolean;
+  profilePhoto?: string;
 };
 
-function ResidentContainer() {
+type ContainerQueryProps = {
+  renderArchive: boolean;
+};
+
+function ResidentContainer({ renderArchive }: ContainerQueryProps) {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [residentId, setResidentId] = useState(0);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
@@ -53,8 +59,9 @@ function ResidentContainer() {
   // feed residents to data prop of table
 
   useEffect(() => {
+    console.log('===> fetching archive records', renderArchive);
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident?archive=${renderArchive}`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -69,7 +76,7 @@ function ResidentContainer() {
 
   function handleAllResidents() {
     axios
-      .get(`${process.env.apiUrl}/resident`, {
+      .get(`${process.env.SERVER_URL}/resident?archive=${renderArchive}`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -81,11 +88,14 @@ function ResidentContainer() {
   async function handleSearchClick() {
     if (searchOption === 'id') {
       return await axios
-        .get(`${process.env.apiUrl}/resident/${residentId}/`, {
-          headers: {
-            Authorization: localStorage.getItem('jwt'),
-          },
-        })
+        .get(
+          `${process.env.SERVER_URL}/resident/${residentId}?archive=${renderArchive}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem('jwt'),
+            },
+          }
+        )
         .then((res: any) => {
           setResidents([res.data]);
         })
@@ -97,11 +107,15 @@ function ResidentContainer() {
     }
 
     return await axios
-      .post(`${process.env.apiUrl}/resident/search/full-name`, fullNameSearch, {
-        headers: {
-          Authorization: localStorage.getItem('jwt'),
-        },
-      })
+      .post(
+        `${process.env.SERVER_URL}/resident/search/full-name?archive=${renderArchive}`,
+        fullNameSearch,
+        {
+          headers: {
+            Authorization: localStorage.getItem('jwt'),
+          },
+        }
+      )
       .then((res: any) => {
         setResidents([res.data]);
         console.log(res.data);
@@ -142,7 +156,7 @@ function ResidentContainer() {
             {searchOption === 'id' && (
               <Box className={styles.optionId}>
                 <TextField
-                  label="Search"
+                  label="Search by Resident ID"
                   size="small"
                   variant="filled"
                   onChange={handleSearchResident}
@@ -195,7 +209,7 @@ function ResidentContainer() {
               onClick={handleAllResidents}
               className={styles.allres}
             >
-              All Residents
+              All Records
             </Button>
           </Box>
         </Box>
@@ -206,7 +220,7 @@ function ResidentContainer() {
       </Box>
 
       <Box>
-        <Presenter tableData={residents} />
+        <Presenter isArchived={renderArchive} tableData={residents} />
       </Box>
     </>
   );

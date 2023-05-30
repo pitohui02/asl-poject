@@ -23,7 +23,7 @@ function CertificateContainer() {
   const [certificates, setCertificates] = useState<any[]>([]);
   const [certificateSearch, setCertificateSearch] = useState<string>('');
   const [certificateId, setCertificateId] = useState<number>(0);
-  const [searchOption, setSearchOption] = useState('id');
+  const [searchOption, setSearchOption] = useState('number');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [withError, setWithError] = useState<boolean>(false);
   // const [residentId, setResidentId] = useState(0);
@@ -32,7 +32,7 @@ function CertificateContainer() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.apiUrl}/residentCertificate/all`, {
+      .get(`${process.env.SERVER_URL}/residentCertificate/all`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -51,7 +51,7 @@ function CertificateContainer() {
 
   function handleAllCertificates() {
     axios
-      .get(`${process.env.apiUrl}/residentCertificate/all`, {
+      .get(`${process.env.SERVER_URL}/residentCertificate/all`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -75,7 +75,7 @@ function CertificateContainer() {
     if (searchOption == 'id') {
       return await axios
         .get(
-          `${process.env.apiUrl}/residentCertificate/id?val=${certificateId}`,
+          `${process.env.SERVER_URL}/residentCertificate/id?val=${certificateId}`,
           {
             headers: {
               Authorization: localStorage.getItem('jwt'),
@@ -87,7 +87,7 @@ function CertificateContainer() {
           setWithError(false);
           console.log(res.data);
         })
-        .catch((e: AxiosError) => {
+        .catch(e => {
           setErrorMessage(e.response?.data);
           setWithError(true);
           console.log(e);
@@ -102,7 +102,7 @@ function CertificateContainer() {
       }
       return await axios
         .get(
-          `${process.env.apiUrl}/residentCertificate/cert-num?val=${certificateSearch}`,
+          `${process.env.SERVER_URL}/residentCertificate/cert-num?val=${certificateSearch}`,
           {
             headers: {
               Authorization: localStorage.getItem('jwt'),
@@ -127,7 +127,7 @@ function CertificateContainer() {
     <>
       <Box className={styles.mainbox}>
         <Box className={styles.searchbox}>
-          <Box className={styles.selectorbox}>
+          {/* <Box className={styles.selectorbox}>
             <Select
               name="searchbox"
               required
@@ -140,9 +140,9 @@ function CertificateContainer() {
               <MenuItem value="id">Search by ID</MenuItem>
               <MenuItem value="number">Search by Certificate Number</MenuItem>
             </Select>
-          </Box>
+          </Box> */}
           <Box className={styles.optionbox}>
-            {searchOption == 'number' && (
+            {
               <TextField
                 label="Search by Certificate Number"
                 size="small"
@@ -151,7 +151,7 @@ function CertificateContainer() {
                 onChange={handleSearchCertificate}
                 className={styles.idstyle}
               />
-            )}
+            }
             {searchOption == 'id' && (
               <TextField
                 label="Search by ID"
@@ -185,7 +185,9 @@ function CertificateContainer() {
       </Box>
 
       <Box sx={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-        {withError && <Typography color="error">{errorMessage}</Typography>}
+        {withError && (
+          <Typography color="error">{errorMessage ?? ''}</Typography>
+        )}
       </Box>
 
       <Box>

@@ -13,7 +13,7 @@ const withAuth = (Component: any) => {
       async function checkAuth() {
         try {
           // Check if user is authenticated by sending a test request
-          await axios.get(`${process.env.apiUrl}/account/auth`, {
+          await axios.get(`${process.env.SERVER_URL}/account/auth`, {
             headers: {
               Authorization: localStorage.getItem('jwt'),
             },
@@ -22,7 +22,7 @@ const withAuth = (Component: any) => {
           // If the request succeeds, the user is authenticated
         } catch (error) {
           // If the request fails, the user is not authenticated
-          router.replace('error/unauthorized');
+          router.replace('/error/unauthorized');
         }
       }
 

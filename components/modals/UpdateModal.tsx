@@ -41,7 +41,7 @@ export default function UpdateModal({
   };
   useEffect(() => {
     axios
-      .get(`${process.env.apiUrl}/resident/${residentId}`, {
+      .get(`${process.env.SERVER_URL}/resident/${residentId}`, {
         headers: {
           Authorization: localStorage.getItem('jwt'),
         },
@@ -55,6 +55,7 @@ export default function UpdateModal({
 
   return (
     <div>
+
       <Button
         id={`${residentId}`}
         onClick={handleOpen}

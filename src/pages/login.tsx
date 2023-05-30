@@ -28,7 +28,7 @@ class LoginPage extends React.Component<any, any> {
       username: '',
       password: '',
 
-      userCreds: new Map([['TestUser', 'MyVeryOwnTestPassword123$']]),
+      // userCreds: new Map([['TestUser', 'MyVeryOwnTestPassword123$']]),
     };
   }
 
@@ -36,12 +36,12 @@ class LoginPage extends React.Component<any, any> {
     const { username, password } = this.state;
 
     axios
-      .post(`${process.env.apiUrl}/account/login`, { username, password })
+      .post(`${process.env.SERVER_URL}/account/login`, { username, password })
       .then(res => {
         localStorage.setItem('jwt', `Bearer ${res.data}`);
         axios.interceptors.request.use(
           config => {
-            const allowedOrigins = [process.env.apiUrl];
+            const allowedOrigins = [process.env.SERVER_URL];
 
             if (allowedOrigins.includes(origin)) {
               config.headers['Authorization'] = `Bearer ${res.data}`;

@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import styles from '../src/styles/printmodal.module.css';
-import withAuth from '@/pages/api/auth/withAuth';
+import withAuth from '../src/pages/api/auth/withAuth';
 
 // type PrintRequestForm = {
 //   findings: string;
@@ -12,6 +12,7 @@ import withAuth from '@/pages/api/auth/withAuth';
 
 type formProps = {
   closeModal: any;
+  data: any;
 };
 
 export const ERROR_CODES = {
@@ -19,14 +20,18 @@ export const ERROR_CODES = {
     'There was a problem processing your request, please try again.',
 };
 
-function PrintRequestForm({ closeModal }: formProps): JSX.Element {
+function PrintRequestForm({ closeModal, data }: formProps): JSX.Element {
   // const [residentId, setResidentId] = useState<number>();
   const [withError, setWithError] = useState<boolean>(false);
   const [waitMessage, setWaitMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [printRequestFormDetails, setPrintRequestFormDetails] = useState({
-    residentId: 0,
+    residentFullName: {
+      firstName: data.firstName,
+      middleName: data.middleName,
+      lastName: data.lastName,
+    },
     findings: '',
     purpose: '',
   });
@@ -49,7 +54,7 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
     setIsLoading(true);
     setWaitMessage('Generating pdf...');
     axios({
-      url: `${process.env.apiUrl}/residentCertificate/print`,
+      url: `${process.env.SERVER_URL}/residentCertificate/print`,
       data: printRequestFormDetails,
       headers: {
         Authorization: localStorage.getItem('jwt'),
@@ -67,18 +72,18 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
 
         // create a temporary link element to download the file
         const link = document.createElement('a');
+
+        const residentInitials = `${printRequestFormDetails.residentFullName.firstName[0]}${printRequestFormDetails.residentFullName.middleName[0]}${printRequestFormDetails.residentFullName.lastName[0]}`;
+
         link.href = fileUrl;
-        link.setAttribute(
-          'download',
-          `B15-Z1-D01-${printRequestFormDetails.residentId}.pdf`
-        ); // set the desired filename here
+        link.setAttribute('download', `B15-Z1-D01-${residentInitials}.pdf`); // set the desired filename here
         document.body.appendChild(link);
         link.click();
         setIsLoading(false);
       })
       .catch((error: AxiosError) => {
         setWithError(true);
-        setErrorMessage(ERROR_CODES[error.code]);
+        setErrorMessage(ERROR_CODES['ERR_BAD_REQUEST']);
         console.error(error);
       });
   }
@@ -94,16 +99,17 @@ function PrintRequestForm({ closeModal }: formProps): JSX.Element {
           <Box className={styles.mainbox}>
             <Box>
               <Typography variant="subtitle1" className={styles.textguides}>
-                RESIDENT ID
+                Printing Residency Certificate for {data.lastName},{' '}
+                {data.firstName} {data.middleName}
               </Typography>
-              <TextField
+              {/* <TextField
                 name="residentId"
                 value={printRequestFormDetails.residentId}
                 onChange={handleIdChange}
                 label="Resident ID"
                 variant="filled"
                 className={styles.idfield}
-              />
+              /> */}
             </Box>
 
             <Box className={styles.purposebox}>
