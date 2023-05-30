@@ -156,8 +156,8 @@ function ResidentTable({ tableData }: tableProps) {
   return (
     <>
       <DataGrid
-        rows={tableData}
-        // rows = {data} // Sample Data
+        //rows={tableData}
+        rows = {data} // Sample Data
         columns={columns}
         initialState={{
           pagination: {

@@ -32,10 +32,6 @@ class Content extends React.Component <any, any> {
                                 <Typography variant = "subtitle1" className = {styles.homepagesubtitle}>Certificate Issuance System</Typography>
                             </Box>
 
-                            <Box>
-                                <CreateModalHome />
-                            </Box>
-
                         </Box>
 
                         

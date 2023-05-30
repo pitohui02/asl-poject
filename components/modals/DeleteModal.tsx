@@ -87,7 +87,7 @@ export default function DeleteIconModal({
               color="error"
               variant="contained"
               sx={{ width: '200px' }}
-              // className={styles.buttondesign}
+              //className={styles.buttondesign}
             >
               Remove
             </Button>
