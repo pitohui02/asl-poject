@@ -113,13 +113,7 @@ class DrawerComponent extends React.Component<any, any> {
                 >
                   View Current Records
                 </Button>
-                {/* <Button
-                  variant="contained"
-                  className={styles.contentbtn}
-                  onClick={this.onResidentArchivedRedirect}
-                >
-                  View Archived Records
-                </Button> */}
+                
                 <Button
                   variant="contained"
                   className={styles.contentbtn}
