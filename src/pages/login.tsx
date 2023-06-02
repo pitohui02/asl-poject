@@ -13,8 +13,9 @@ import Image from 'next/image';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { styled } from '@mui/system'
 
-import styles from '../styles/login.module.css';
+
 
 import axios from 'axios';
 
@@ -72,56 +73,158 @@ class LoginPage extends React.Component<any, any> {
   };
 
   render() {
+
+    const Centerscreen = styled(Box) `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 99vh;
+    `
+    const Paperdesign = styled(Paper)`
+    height: 500px;
+    width: 100vh;
+    `
+    const Mainbox = styled(Box)`
+    height: 500px;
+    width: auto;
+
+    display: flex;
+    flex-flow: row nowrap;
+    `
+
+    const Gridchild1 = styled(Box)`
+    display: flex;
+
+    flex-grow: 2;
+    flex-flow: column nowrap;
+    background-color: #2C74B3;;
+    `
+
+    const Iconbox = styled(Box)`
+    display: flex;
+    justify-content: flex-start;
+    `
+
+    const Leftsidecontent = styled(Box)`
+    display: flex;
+    flex-flow: column nowrap;
+
+    align-items: center;
+
+    margin-top: 50px;
+    `
+    const Titletext = styled(Typography)`
+    color: #2C74B3;
+    margin-top: 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    `
+
+    const Subtext = styled(Typography)`
+    color: #2C74B3;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    `
+
+    const Gridchild2 = styled(Box)`
+    flex-grow: 1;
+    align-content: center;
+    `
+    
+    const Titledesign = styled(Typography)`
+    
+    font-weight: bold;
+
+    font-size: 2.5rem;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    `
+
+    const FieldDesign = styled(Box)`
+    margin-top: 90px;
+    margin-bottom: 25px;
+    `
+
+    const PersonStyle = styled(PersonIcon)`
+    font-size: 35px;
+    margin-right: 10px;
+    text-align: center;
+    `
+
+    const LockStyle = styled(LockIcon)`
+    font-size: 35px;
+    margin-right: 10px;
+    text-align: center;
+    `
+
+    const Buttonstyle = styled(Button)`
+    width: 32vh;
+    background-color: #495057;
+    color: #e9ecef;
+    font-weight: 'bold';
+    align-items: center;
+
+    margin-top: 30px;
+
+    &:hover {
+      background-color: #343a40;
+    }
+    `
+
     return (
       <>
-        <Box className={styles.centerscreen}>
-          <Paper className={styles.paperdesign} elevation={12}>
-            <Box className={styles.mainbox}>
-              <Box className={styles.gridchild1}>
-                <Box className={styles.iconbox}>
+        <Centerscreen>
+          <Paperdesign elevation={12}>
+            <Mainbox>
+              <Gridchild1>
+                <Iconbox>
                   <IconButton
-                    className={styles.removeraduis}
+                    sx = {{borderRadius: "0"}}
                     onClick={this.handleBack}
                   >
-                    <ArrowBackIcon className={styles.backIcon} />
+                    <ArrowBackIcon sx = {{color: "#e9ecef", padding: "5px"}} />
                   </IconButton>
-                </Box>
+                </Iconbox>
 
-                <Box className={styles.leftsidecontent}>
+                <Leftsidecontent>
                   <Image
                     src={brgylogo}
                     alt="placeholder"
                     width={256}
                     height={256}
-                    className={styles.imageDesign}
                   />
 
                   <Box>
-                    <Typography variant="h6" className={styles.titletext}>
+                    <Titletext variant="h6" >
                       Barangay 15 Zone 01 District 01
-                    </Typography>
-                    <Typography
+                    </Titletext>
+                    <Subtext
                       variant="subtitle1"
-                      className={styles.subtext}
                       gutterBottom
                     >
                       Certificate Issuance System
-                    </Typography>
+                    </Subtext>
                   </Box>
-                </Box>
-              </Box>
+                </Leftsidecontent>
+              </Gridchild1>
 
-              <Box className={styles.gridchild2}>
+              <Gridchild2>
                 <Box>
-                  <Typography variant="h6" className={styles.titledesign}>
+                  <Titledesign variant="h6" >
                     SIGN IN
-                  </Typography>
+                  </Titledesign>
 
                   <Divider variant="middle" />
                 </Box>
 
-                <Box className={styles.fieldDesign}>
-                  <PersonIcon fontSize="medium" className={styles.iconstyle} />
+                <FieldDesign>
+                  <PersonStyle fontSize="medium" />
 
                   <TextField
                     id="username"
@@ -130,10 +233,10 @@ class LoginPage extends React.Component<any, any> {
                     onChange={this.handleUsernameData}
                     size="small"
                   />
-                </Box>
+                </FieldDesign>
 
                 <Box>
-                  <LockIcon fontSize="medium" className={styles.iconstyle} />
+                  <LockStyle fontSize="medium" />
 
                   <TextField
                     id="password"
@@ -146,20 +249,20 @@ class LoginPage extends React.Component<any, any> {
                 </Box>
 
                 <Box>
-                  <Button
+                  <Buttonstyle
                     variant="contained"
                     type="submit"
-                    className={styles.buttonstyle}
+                    
                     onClick={this.handleLogin}
                   >
                     {' '}
                     LOG IN
-                  </Button>
+                  </Buttonstyle>
                 </Box>
-              </Box>
-            </Box>
-          </Paper>
-        </Box>
+              </Gridchild2>
+            </Mainbox>
+          </Paperdesign>
+        </Centerscreen>
       </>
     );
   }

@@ -25,6 +25,8 @@ import axios from 'axios';
 import { Avatar } from '@mui/material';
 import { Blob } from 'node:buffer';
 
+import { styled } from '@mui/system'
+
 type FormProps = {
   data?: Resident;
   operation: string;
@@ -162,24 +164,104 @@ function Registration({
       });
   }
 
+  // styles //
+
+  const Centerscreen = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  `
+  const Paperdesign = styled(Paper)`
+  height: auto;
+  width: auto;
+  padding: 40px;
+  `
+
+  const Titledesign = styled(Typography)`
+  font-weight: bold;
+  margin: 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  `
+
+  const Gridparent = styled(Box)`
+  height: auto;
+  width: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  padding: 30px;
+
+  column-gap: 40px;
+  `
+
+  const GridChildText = styled(Typography)`
+  display: flex;
+  justify-content: flex-start;
+
+  font-weight: bold;
+  font-size: 1rem;
+
+  margin-bottom: 5px;
+  margin-top: 5px;
+  `
+
+  const Dropdowndesign = styled(Select)`
+  width: 200px;
+  margin-right: 20px;
+  
+  `
+
+  const Spousebox = styled(TextField)`
+  width: 200px;
+  margin-right: 20px;
+  `
+  
+  const Addressfield = styled(TextField)`
+  margin-right: 50px;
+  width: 250px;
+  `
+  const Uploadbox = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  column-gap: 25px;
+  align-items: center;
+  `
+
+  const Uploadbutton = styled(Button)`
+  width: 160px;
+  height: 50px;
+  
+  background-color: #393E46;
+
+  &:hover {
+    background-color: #372e2fff
+  }
+  `
+
   return (
     <>
-      <Box className={styles.centerscreen}>
-        <Paper className={styles.paperdesign} elevation={24}>
-          <Box className={styles.gridTitle}>
-            <Typography variant="h4" className={styles.titleDesign}>
+      <Centerscreen>
+        <Paperdesign elevation={24}>
+          <Box>
+            <Titledesign variant="h4">
               RESIDENT FORM{' '}
-            </Typography>
+            </Titledesign>
           </Box>
 
           <Divider orientation="horizontal" flexItem />
 
-          <Box className={styles.gridParent}>
+          <Gridparent>
             <Box>
               <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6">
                   First Name *
-                </Typography>
+                </GridChildText>
 
                 <TextField
                   name="firstName"
@@ -188,14 +270,14 @@ function Registration({
                   size="small"
                   value={residentFields.firstName}
                   onChange={handleFieldChange}
-                  className={styles.gridChild1_TextField}
+                  sx = {{width: "250px"}}
                 />
               </Box>
 
               <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6" >
                   Middle Name *
-                </Typography>
+                </GridChildText>
 
                 <TextField
                   name="middleName"
@@ -203,15 +285,15 @@ function Registration({
                   variant="filled"
                   size="small"
                   value={residentFields.middleName}
-                  className={styles.gridChild1_TextField}
+                  sx = {{width: "250px"}}
                   onChange={handleFieldChange}
                 />
               </Box>
 
               <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6">
                   Last Name *
-                </Typography>
+                </GridChildText>
 
                 <TextField
                   name="lastName"
@@ -219,7 +301,7 @@ function Registration({
                   variant="filled"
                   size="small"
                   value={residentFields.lastName}
-                  className={styles.gridChild1_TextField}
+                  sx = {{width: "250px"}}
                   onChange={handleFieldChange}
                 />
               </Box>
@@ -228,9 +310,9 @@ function Registration({
 
             <Box>
               <Box>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6">
                   Birth Date *
-                </Typography>
+                </GridChildText>
 
                 <FormControl variant="filled">
                   {operation === 'create' && (
@@ -238,7 +320,7 @@ function Registration({
                       <DatePicker
                         onChange={handleBirthDateChange}
                         value={residentFields.birthDate}
-                        className={styles.birthdatebox}
+                        sx = {{width: "200px"}}
                       />
                     </LocalizationProvider>
                   )}
@@ -252,14 +334,13 @@ function Registration({
                     />
                   )}
                   <Box>
-                    <Typography variant="h6" className={styles.gridchild_text}>
+                    <GridChildText variant="h6">
                       Sex *
-                    </Typography>
+                    </GridChildText>
                     <FormControl variant="filled">
-                      <Select
+                      <Dropdowndesign
                         name="gender"
                         required
-                        className={styles.dropdownDesign}
                         onChange={handleFieldChange}
                         value={residentFields.gender}
                         size="small"
@@ -270,20 +351,19 @@ function Registration({
                         </MenuItem>
                         <MenuItem value="Male">Male</MenuItem>
                         <MenuItem value="Female">Female</MenuItem>
-                      </Select>
+                      </Dropdowndesign>
                     </FormControl>
                   </Box>
 
                   <Box>
-                    <Typography variant="h6" className={styles.gridchild_text}>
+                    <GridChildText variant="h6" >
                       Civil Status *
-                    </Typography>
+                    </GridChildText>
 
                     <FormControl variant="filled">
-                      <Select
+                      <Dropdowndesign
                         name="civilStatus"
                         required
-                        className={styles.dropdownDesign}
                         onChange={handleFieldChange}
                         value={residentFields.civilStatus}
                         defaultValue=""
@@ -296,7 +376,7 @@ function Registration({
                         <MenuItem value="Single">Single</MenuItem>
                         <MenuItem value="Married">Married</MenuItem>
                         <MenuItem value="Widowed">Widowed</MenuItem>
-                      </Select>
+                      </Dropdowndesign>
                     </FormControl>
                   </Box>
                 </FormControl>
@@ -308,43 +388,41 @@ function Registration({
             <Box>
               {residentFields.civilStatus !== 'Single' && (
                 <Box>
-                  <Typography variant="h6" className={styles.gridchild_text}>
+                  <GridChildText variant="h6">
                     Spouse *
-                  </Typography>
-                  <TextField
+                  </GridChildText>
+                  <Spousebox
                     name="spouse"
                     variant="filled"
                     value={residentFields.spouse}
                     onChange={handleFieldChange}
                     size="small"
-                    className={styles.spousebox}
                   />
                 </Box>
               )}
               <Box sx={{ marginRight: '1em' }}>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6">
                   {`Guardian\'s`} Full Name
-                </Typography>
+                </GridChildText>
                 <TextField
                   name="guardian"
                   value={residentFields.guardian}
                   onChange={handleFieldChange}
                   variant="filled"
                   size="small"
-                  className={styles.gridchild4_textfield}
+                  sx = {{width: "200px"}}
                 />
               </Box>
               <Box className={styles.gridchild3}>
-                <Typography variant="h6" className={styles.gridchild_text}>
+                <GridChildText variant="h6">
                   Mobile Number
-                </Typography>
+                </GridChildText>
                 <TextField
                   name="mobileNumber"
                   variant="filled"
                   value={residentFields.mobileNumber}
                   onChange={handleFieldChange}
                   size="small"
-                  className={styles.gridChild3_Numberfields}
                 />
               </Box>
             </Box>
@@ -352,10 +430,10 @@ function Registration({
             <Box>
               <Box>
                 <Box>
-                  <Typography variant="h6" className={styles.gridchild_text}>
+                  <GridChildText variant="h6">
                     ADDRESS *
-                  </Typography>
-                  <TextField
+                  </GridChildText>
+                  <Addressfield
                     name="homeAddress"
                     required
                     variant="filled"
@@ -364,16 +442,15 @@ function Registration({
                     size="small"
                     multiline
                     rows={5}
-                    className={styles.addressfield}
                   />
                 </Box>
 
                 <Box>
-                  <Typography variant="h6" className={styles.gridchild_text}>
+                  <GridChildText variant="h6">
                     Upload Photo *
-                  </Typography>
+                  </GridChildText>
 
-                  <Box className={styles.uploadbox}>
+                  <Uploadbox>
                     <Avatar
                       variant="square"
                       src={
@@ -384,10 +461,10 @@ function Registration({
                       sx={{ width: '70px', height: '70px' }}
                     />
 
-                    <Button
+                    <Uploadbutton
                       variant="contained"
                       component="label"
-                      className={styles.uploadbtn}
+                      sx = {{width: "160px", height: "50px"}}
                       startIcon={<CameraAltIcon />}
                     >
                       Upload
@@ -398,12 +475,12 @@ function Registration({
                         multiple
                         type="file"
                       />
-                    </Button>
-                  </Box>
+                    </Uploadbutton>
+                  </Uploadbox>
                 </Box>
               </Box>
             </Box>
-          </Box>
+          </Gridparent>
 
           {isLoading && (
             <Box
@@ -459,10 +536,10 @@ function Registration({
               </Button>
             </Box>
           </Box>
-        </Paper>
-      </Box>
+        </Paperdesign>
+      </Centerscreen>
     </>
   );
 }
 
-export default withAuth(Registration);
+export default Registration;
